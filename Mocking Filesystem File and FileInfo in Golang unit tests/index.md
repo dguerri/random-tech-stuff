@@ -200,8 +200,8 @@ func TestOpen(t *testing.T) {
 	mFI = mockFileInfo{}
 	mFI.On("Sys").Return(&syscall.Stat_t{Mode: 0660, Nlink: 2, ...})
 	mFile.On("Fd").Return(uintptr(29))
-	mFile.On("Stat").Return(mFI, nil)
-	mFS.On("OpenFile", "/test/openfile_reg", syscall.O_RDWR, fs.FileMode(0640)).Return(mFile, nil)
+	mFile.On("Stat").Return(&mFI, nil)
+	mFS.On("OpenFile", "/test/openfile_reg", syscall.O_RDWR, fs.FileMode(0640)).Return(&mFile, nil)
 	mFS.On("Readlink", "/test/openfile_reg").Return("", nil)
 
 	reply = rpc_common.OpenReply{}
