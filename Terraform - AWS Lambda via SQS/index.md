@@ -36,7 +36,7 @@ One question I had when I started experimenting with server-less computing in AW
 
 The answer really depends on what you are trying to achieve.
 
-For a scenario in which we want to minimize the probability of loosing messages, one nice feature of SQS is the persistence: on well-designed systems, this allows an easier debugging and recover from outages and bugs pushed to production.
+For a scenario in which we want to minimize the probability of losing messages, one nice feature of SQS is the persistence: on well-designed systems, this allows an easier debugging and recover from outages and bugs pushed to production.
 
 Going into details about these systems is beyond the scope of this post. Several resources are explaining the pros and cons of SQS vs SNS. Here are some links:
 
