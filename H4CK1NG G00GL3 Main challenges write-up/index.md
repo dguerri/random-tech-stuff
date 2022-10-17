@@ -2,7 +2,7 @@
 
 ## Intro
 
-Hacking Google is a *sui generis* CTF and, hands down, my favourite CTF so far.
+[Hacking Google](https://h4ck1ng.google/home) is a *sui generis* CTF and, hands down, my favourite CTF so far.
 
 According to the authors:
 
