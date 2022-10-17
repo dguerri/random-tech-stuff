@@ -18,34 +18,52 @@ Where applicable, I provide the source code of the scripts I have been using.
 
 Note: the reader should keep in mind that there are multiple ways to crack each challenge. Sometimes probably more efficient and elegant than what I am showing here :)
 
-
 ## TOC
 
-  * [Intro](#intro)
-  * [EP000 - Operation Aurora](#ep000---operation-aurora)
-    + [CHALLENGE 01](#challenge-01)
-    + [CHALLENGE 02](#challenge-02)
-  * [EP001 - T.A.G.](#ep001---tag)
-    + [CHALLENGE 01](#challenge-01-1)
-    + [CHALLENGE 02](#challenge-02-1)
-    + [CHALLENGE 03](#challenge-03)
-  * [EP002 - Detection and Response](#ep002---detection-and-response)
-    + [CHALLENGE 01](#challenge-01-2)
-    + [CHALLENGE 02](#challenge-02-2)
-    + [CHALLENGE 03](#challenge-03-1)
-  * [EP003 - Red Team](#ep003---red-team)
-    + [CHALLENGE 01](#challenge-01-3)
-    + [CHALLENGE 02](#challenge-02-3)
-    + [CHALLENGE 03](#challenge-03-2)
-  * [EP004 - Bug Hunters](#ep004---bug-hunters)
-    + [CHALLENGE 01](#challenge-01-4)
-    + [CHALLENGE 02](#challenge-02-4)
-    + [CHALLENGE 03](#challenge-03-3)
-  * [EP005 - Project Zero](#ep005---project-zero)
-    + [CHALLENGE 01](#challenge-01-5)
-    + [CHALLENGE 02](#challenge-02-5)
-    + [CHALLENGE 03](#challenge-03-4)
-
+- [H4CK1NG G00GL3 - Main challenges write-up](#h4ck1ng-g00gl3---main-challenges-write-up)
+  - [Intro](#intro)
+  - [TOC](#toc)
+  - [EP000 - Operation Aurora](#ep000---operation-aurora)
+    - [CHALLENGE 01](#challenge-01)
+      - [Solution](#solution)
+    - [CHALLENGE 02](#challenge-02)
+      - [Solution](#solution-1)
+  - [EP001 - T.A.G](#ep001---tag)
+    - [CHALLENGE 01](#challenge-01-1)
+      - [Solution](#solution-2)
+    - [CHALLENGE 02](#challenge-02-1)
+      - [Solution](#solution-3)
+      - [Random ideas on how to so solve this challenge in a more elegant way](#random-ideas-on-how-to-so-solve-this-challenge-in-a-more-elegant-way)
+    - [CHALLENGE 03](#challenge-03)
+      - [Solution](#solution-4)
+  - [EP002 - Detection and Response](#ep002---detection-and-response)
+    - [CHALLENGE 01](#challenge-01-2)
+      - [Solution](#solution-5)
+    - [CHALLENGE 02](#challenge-02-2)
+      - [Solution](#solution-6)
+    - [CHALLENGE 03](#challenge-03-1)
+      - [Solution](#solution-7)
+  - [EP003 - Red Team](#ep003---red-team)
+    - [CHALLENGE 01](#challenge-01-3)
+      - [Solution](#solution-8)
+    - [CHALLENGE 02](#challenge-02-3)
+      - [Solution](#solution-9)
+    - [CHALLENGE 03](#challenge-03-2)
+      - [Solution](#solution-10)
+  - [EP004 - Bug Hunters](#ep004---bug-hunters)
+    - [CHALLENGE 01](#challenge-01-4)
+      - [Solution](#solution-11)
+    - [CHALLENGE 02](#challenge-02-4)
+      - [Solution](#solution-12)
+    - [CHALLENGE 03](#challenge-03-3)
+      - [Solution](#solution-13)
+  - [EP005 - Project Zero](#ep005---project-zero)
+    - [CHALLENGE 01](#challenge-01-5)
+      - [Solution](#solution-14)
+    - [CHALLENGE 02](#challenge-02-5)
+      - [Solution](#solution-15)
+    - [CHALLENGE 03](#challenge-03-4)
+      - [Solution](#solution-16)
 
 ## EP000 - Operation Aurora
 
@@ -168,7 +186,7 @@ And here is my flag! Along with it, we get the DB password, and some juicy infor
 >
 > Hint: Always search deeper.
 
-[This log search ](https://aurora-web.h4ck.ctfcompetition.com)tool looks very basic.
+[This log search](https://aurora-web.h4ck.ctfcompetition.com) tool looks very basic.
 
 #### Solution
 
@@ -281,7 +299,7 @@ Here is our flag! We can retrieve it by either a `cat /flag` or, since we know h
 https://h4ck1ng.google/solve/***REDACTED***
 ```
 
-## EP001 - T.A.G.
+## EP001 - T.A.G
 
 This episode is about Threat Analysis and being vigilant on cyberattacks, preventing them :)
 
@@ -439,7 +457,6 @@ This information has not been useful in this occasion but, as it turned out, it 
 > Can you find a way to stop the hackers that encrypted your data?
 >
 > Hint: Find a way to switch it off.
-
 
 Again, we are given a file, named `wannacry`. This time, we have a dynamically linked executable.
 
@@ -696,7 +713,7 @@ if (isset($_GET['restart'])) {
 
 I opened the code in my favourite editor and found few interesting facts:
 
-- this web application is a wrapper around the CLI game `/usr/games/stockfish`;
+* this web application is a wrapper around the CLI game `/usr/games/stockfish`;
 
 ```php
 [...]
@@ -728,8 +745,8 @@ class Stockfish
 [...]
 ```
 
-- the executable path is stored in a variable named `$binary`;
-- commands are sent to the game via a pipe;
+* the executable path is stored in a variable named `$binary`;
+* commands are sent to the game via a pipe;
 
 ```php
 public function passPosition(string $fen)
@@ -739,7 +756,7 @@ public function passPosition(string $fen)
 }
 ```
 
-- finally, I searched for any `$_GET` or `$_POST` use… and this showed up!
+* finally, I searched for any `$_GET` or `$_POST` use… and this showed up!
 
 ```php
 $output = new MyHtmlOutput();
@@ -1215,9 +1232,9 @@ Searching the Internet, I found this great write-up: [The Craziest Python Sandbo
 
 This article contains everything we need, but we can’t use the proposed exploit as it is because:
 
-- we have a limit on the length of each line of code we can input in this "shell";
-- we don’t need to use creativity to “compose” any strings;
-- our sandbox doesn’t appear to have any persistence, besides the `config` object used by the game.
+* we have a limit on the length of each line of code we can input in this "shell";
+* we don’t need to use creativity to “compose” any strings;
+* our sandbox doesn’t appear to have any persistence, besides the `config` object used by the game.
 
 After few iterations, also after 1 hour spent on printing available methods and attributes in `config`, I came up with this exploit. The first part just activates the shell entering the cheat code, while the second part escapes the sandbox:
 
@@ -1282,16 +1299,16 @@ The important bits are in `google/ h4ck1ng / secretcorgis`. Specifically, `Netwo
 
 The application crafts an HTTP GET request to `https://corgis-web.h4ck.ctfcompetition.com/corgi`, using the following headers:
 
-- X-Document-ID
-  - The most straightforward choice here seems to be `flag`, as it’s in the above b64-encoded URL
-- X-Request-Nonce
-  - The application just throws 32 bytes of random data in here, presumably to prevent replay attacks
-- X-User-Subscribed
-  - This is a boolean. I suspected immediately that we need to set it to `true`
-- X-Timestamp
-  - The application just uses the current Unix timestamp, in seconds, presumably to enforce some freshness of the message
-- X-Auth-MAC
-  - This is a HMAC-SHA256 of a string obtained from all the above headers and values (see code below), using the shared secret I mentioned above.
+* X-Document-ID
+  * The most straightforward choice here seems to be `flag`, as it’s in the above b64-encoded URL
+* X-Request-Nonce
+  * The application just throws 32 bytes of random data in here, presumably to prevent replay attacks
+* X-User-Subscribed
+  * This is a boolean. I suspected immediately that we need to set it to `true`
+* X-Timestamp
+  * The application just uses the current Unix timestamp, in seconds, presumably to enforce some freshness of the message
+* X-Auth-MAC
+  * This is a HMAC-SHA256 of a string obtained from all the above headers and values (see code below), using the shared secret I mentioned above.
 
 Here is the relevant part of the decompiled code (edited for clarity):
 
@@ -1432,8 +1449,8 @@ Q: Why did my attachment fail to upload?
 A: To debug, you should call the /import endpoint manually and look at the detailed error message in the response. The same applies to the /export endpoint for downloading attachments from a submission.
 ```
 
-- [https://path-less-traversed-web.h4ck.ctfcompetition.com/import](https://path-less-traversed-web.h4ck.ctfcompetition.com/import) throws immediately an error: `only POST allowed`;
-- [https://path-less-traversed-web.h4ck.ctfcompetition.com/export](https://path-less-traversed-web.h4ck.ctfcompetition.com/export) returns: `missing submission parameter`.
+* [https://path-less-traversed-web.h4ck.ctfcompetition.com/import](https://path-less-traversed-web.h4ck.ctfcompetition.com/import) throws immediately an error: `only POST allowed`;
+* [https://path-less-traversed-web.h4ck.ctfcompetition.com/export](https://path-less-traversed-web.h4ck.ctfcompetition.com/export) returns: `missing submission parameter`.
 
 Playing with the export endpoint I got:
 
@@ -1872,9 +1889,9 @@ The hint seems to suggest that this file is something related to toys from the 9
 
 Searching the internet, I found a Tamagotchi P1 emulator which looked promising: [TamaTool](https://github.com/jcrona/tamatool). At first, I thought that the image was a ROM, but I abandoned that lead as:
 
-- it didn’t work out-of-the-box with the emulator;
-- wrt the “original” ROM (available, for instance, [here](https://www.planetemu.net/rom/mame-roms/tama)), our file is too small and sparse;
-- Tamagotchi’s ROMs are protected by copyright, so Google couldn’t realistically hack and redistribute one (also writing one from scratch looked pretty overkill by me).
+* it didn’t work out-of-the-box with the emulator;
+* wrt the “original” ROM (available, for instance, [here](https://www.planetemu.net/rom/mame-roms/tama)), our file is too small and sparse;
+* Tamagotchi’s ROMs are protected by copyright, so Google couldn’t realistically hack and redistribute one (also writing one from scratch looked pretty overkill by me).
 
 While playing with the TamaTool, I noticed that it can extract images from the ROM. That, together with the challenge hint, was a strong indication I was dealing with an image file.
 
@@ -1971,12 +1988,12 @@ The article talks about a variant of “Bleichenbacher'06 attack against RSA sig
 
 The high-level concepts of this exploit are related to the maths behind RSA (refer to the article linked above for a great, clear, explanation):
 
-- An RSA signature for a message `m` is calculated as `c = m^d mod N`;
-- An RSA signature on `m` is verified with `c^e mod N = m`;
-- We can trick the receiver into accepting the message `c`, if:
-  - we have some degree of control on the signed message;
-  - `e`  is small, so it likely won’t cause the `mod N`  part to be involved during verification;
-  - the receiver is not performing an accurate verification on all parts of the message (e.g., the padding).
+* An RSA signature for a message `m` is calculated as `c = m^d mod N`;
+* An RSA signature on `m` is verified with `c^e mod N = m`;
+* We can trick the receiver into accepting the message `c`, if:
+  * we have some degree of control on the signed message;
+  * `e`  is small, so it likely won’t cause the `mod N`  part to be involved during verification;
+  * the receiver is not performing an accurate verification on all parts of the message (e.g., the padding).
 
 How? By submitting a signature calculated as `m’^(-e) mod N` (this is `= m’^(-e)^e mod N = m’` under our assumptions 🙂). We don't need to know `p`, `q` or `d`.
 
