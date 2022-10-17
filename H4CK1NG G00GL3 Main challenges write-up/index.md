@@ -1,6 +1,6 @@
 # H4CK1NG G00GL3 - Main challenges write-up
 
-# Intro
+## Intro
 
 Hacking Google is a *sui generis* CTF and, hands down, my favourite CTF so far.
 
@@ -18,13 +18,42 @@ Where applicable, I provide the source code of the scripts I have been using.
 
 Note: the reader should keep in mind that there are multiple ways to crack each challenge. Sometimes probably more efficient and elegant than what I am showing here :)
 
-# EP000 - Operation Aurora
+
+## TOC
+
+  * [Intro](#intro)
+  * [EP000 - Operation Aurora](#ep000---operation-aurora)
+    + [CHALLENGE 01](#challenge-01)
+    + [CHALLENGE 02](#challenge-02)
+  * [EP001 - T.A.G.](#ep001---tag)
+    + [CHALLENGE 01](#challenge-01-1)
+    + [CHALLENGE 02](#challenge-02-1)
+    + [CHALLENGE 03](#challenge-03)
+  * [EP002 - Detection and Response](#ep002---detection-and-response)
+    + [CHALLENGE 01](#challenge-01-2)
+    + [CHALLENGE 02](#challenge-02-2)
+    + [CHALLENGE 03](#challenge-03-1)
+  * [EP003 - Red Team](#ep003---red-team)
+    + [CHALLENGE 01](#challenge-01-3)
+    + [CHALLENGE 02](#challenge-02-3)
+    + [CHALLENGE 03](#challenge-03-2)
+  * [EP004 - Bug Hunters](#ep004---bug-hunters)
+    + [CHALLENGE 01](#challenge-01-4)
+    + [CHALLENGE 02](#challenge-02-4)
+    + [CHALLENGE 03](#challenge-03-3)
+  * [EP005 - Project Zero](#ep005---project-zero)
+    + [CHALLENGE 01](#challenge-01-5)
+    + [CHALLENGE 02](#challenge-02-5)
+    + [CHALLENGE 03](#challenge-03-4)
+
+
+## EP000 - Operation Aurora
 
 The theme for this episode is the historical series of cyberattacks conducted by advanced persistent threats such as the Elderwood Group based in Beijing, China, with ties to the People's Liberation Army.
 
 The attack was aimed at dozens of other organizations, including Google, between mid-2009 and Jan 2010.
 
-## CHALLENGE 01
+### CHALLENGE 01
 
 > A clean and fair game of chess. Careful though, this is not a game for grandmasters to win.
 >
@@ -34,7 +63,7 @@ As the description states, you need to “win” a chess game. Unfortunately, th
 
 Clicking on the link, we get to [the check board](https://hackerchess-web.h4ck.ctfcompetition.com).
 
-### Solution
+#### Solution
 
 This game is full of bugs. Moreover, changing the difficulty won’t have any noticeable effect :)
 
@@ -73,7 +102,7 @@ Logged in successfully!</body>
 
 You can use this panel to turn off cheats, but that is not how you are going to win properly the game 🙂(i.e., you don't need to leverage this SQL injection to solve the challenge).
 
-#### Never forget to look at the source!
+***Never forget to look at the source!***
 
 Looking at the game main HTML page, I noticed a weird script:
 
@@ -133,7 +162,7 @@ DOCUMENT_ROOT=/web-apps/php
 
 And here is my flag! Along with it, we get the DB password, and some juicy information about the technology used on the system… how cool is that?! >:D
 
-## CHALLENGE 02
+### CHALLENGE 02
 
 > After recent attacks, we’ve developed a search tool. Search the logs and discover what the attackers were after.
 >
@@ -141,7 +170,7 @@ And here is my flag! Along with it, we get the DB password, and some juicy infor
 
 [This log search ](https://aurora-web.h4ck.ctfcompetition.com)tool looks very basic.
 
-### Solution
+#### Solution
 
 We have a dropdown menu with a selection of files and a text box where we can put the search term. Looking at the source, we learn that clicking on the search button, the browser will issue a GET to the server, using this JavaScript:
 
@@ -252,11 +281,11 @@ Here is our flag! We can retrieve it by either a `cat /flag` or, since we know h
 https://h4ck1ng.google/solve/***REDACTED***
 ```
 
-# EP001 - T.A.G.
+## EP001 - T.A.G.
 
 This episode is about Threat Analysis and being vigilant on cyberattacks, preventing them :)
 
-## CHALLENGE 01
+### CHALLENGE 01
 
 > Your files have been compromised, get them back.
 >
@@ -291,6 +320,8 @@ wannacry: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linke
 000000e0: beb9 b170 e2fc abe9 1132 26cc 4af1 7f75  ...p.....2&.J..u
 000000f0: a8b6 da0b 11ba a45b 6d24 2353 e500 5350  .......[m$#S..SP
 ```
+
+#### Solution
 
 Given the topic (ransomware) and the name of our executable, chances are that `flag` is encrypted.
 
@@ -403,17 +434,20 @@ Apparently, the program voluntarily gives you the above URL if that function ret
 
 This information has not been useful in this occasion but, as it turned out, it was useful later :)
 
-## CHALLENGE 02
+### CHALLENGE 02
 
 > Can you find a way to stop the hackers that encrypted your data?
 >
 > Hint: Find a way to switch it off.
+
 
 Again, we are given a file, named `wannacry`. This time, we have a dynamically linked executable.
 
 ```shell
 wannacry: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=0c23340ab6c6d0c158f0ee356a1deb0253d8cf4c, for GNU/Linux 3.2.0, not stripped
 ```
+
+#### Solution
 
 Let’s fire up Radare 2 and analyse the binary:
 
@@ -595,7 +629,7 @@ Note: the server-side code probably shares client’s logic, as the “right” 
 </html>
 ```
 
-### Random ideas on how to so solve this challenge in a more elegant way
+#### Random ideas on how to so solve this challenge in a more elegant way
 
 1. complete the understanding of `wannacry` logic and simulate it;
 2. patch the executable in memory, and make it call `sym.print`;
@@ -604,7 +638,7 @@ Note: the server-side code probably shares client’s logic, as the “right” 
 
 Solutions 2-4 requires running the binary, of course. In general, this is not a good idea (unless you are using a well isolated sandbox, with no access to the Internet), but in this particular case you know exactly what you are running :)
 
-## CHALLENGE 03
+### CHALLENGE 03
 
 > Your opponents are always learning. They’ll keep coming back stronger.
 >
@@ -622,7 +656,7 @@ Moreover, although the JavaScript code we came across in EP000CH01 is still in t
 unsupported board
 ```
 
-### Solution
+#### Solution
 
 Getting back to the game, I noticed that the first time you click on one of your pieces, the browser will load the page passing the clicked coordinates. For instance:
 
@@ -776,11 +810,11 @@ And our flag is right there 😊
 https://h4ck1ng.google/solve/**REDACTED**
 ```
 
-# EP002 - Detection and Response
+## EP002 - Detection and Response
 
 Unfortunately, vigilance is not always enough. So, a company should have detection and response measure in place, to be ready to face cyber-fires.
 
-## CHALLENGE 01
+### CHALLENGE 01
 
 > This image might look familiar. But where have you seen it before?
 >
@@ -792,7 +826,7 @@ I was pretty confident that this was all about [steganography](https://en.wikipe
 
 > Steganography is the practice of concealing a message within another message or a physical object. In computing/electronic contexts, a computer file, message, image, or video is concealed within another file, message, image, or video.
 
-### Solution
+#### Solution
 
 To analyse the image, I used [Aperisolve](https://www.aperisolve.com). This didn't solve the puzzle, but in the Zsteg box, I saw something interesting:
 
@@ -826,7 +860,7 @@ Certificate:
 
 … which contained the flag! Easy one.
 
-## CHALLENGE 02
+### CHALLENGE 02
 
 > After recent attacks, we’ve developed a search tool. Search the logs and discover what the attackers were after.
 >
@@ -853,7 +887,7 @@ We suspect that a number of reconnaissance activities have taken place using pow
 [...]
 ```
 
-### Solution
+#### Solution
 
 Installing Timesketch turned out to be a pain for me. I have a M1 Mac and a Docker server with limited resources, so I decided to look online for a demo.
 
@@ -870,7 +904,7 @@ PROCESS_LAUNCH by entity tech01 on asset kiosk.detectorsprotectors.biz : powersh
 
 Another easy success.
 
-## CHALLENGE 03
+### CHALLENGE 03
 
 > Welcome to the shell. See if you can leave. ``socat FILE:`tty`,raw,echo=0 TCP:quarantine-shell.h4ck.ctfcompetition.com:1337``
 >
@@ -894,7 +928,7 @@ The D&R team has detected some suspicious activity on your account and has quara
 948 days stuck at ~
 ```
 
-### Solution
+#### Solution
 
 Pressing <tab> twice, we can see the list of available commands:
 
@@ -986,13 +1020,13 @@ user@NSJAIL:/home/user$ cat /flag
 https://h4ck1ng.google/solve/**REDACTED**
 ```
 
-# EP003 - Red Team
+## EP003 - Red Team
 
 “To make sure things are safe, sometimes, you need someone to break them.”
 
 Red Team emulate attackers’ behaviour and try to hack you before they will do it.
 
-## CHALLENGE 01
+### CHALLENGE 01
 
 > Can you hunt down the secret corporate documents? ``socat FILE:`tty`,raw,echo=0 TCP:multivision.h4ck.ctfcompetition.com:1337``
 >
@@ -1008,7 +1042,7 @@ And if we execute the socat command, we are asked for a password:
 Password:
 ```
 
-### Solution
+#### Solution
 
 The first part of the challenge is to find the password… There is a nice hint in the into:
 
@@ -1128,7 +1162,7 @@ Activated service account credentials for: [backup-tool@project-multivision.iam.
 [...]
 ```
 
-## CHALLENGE 02
+### CHALLENGE 02
 
 > You got in, but can you get out? Better run fast. ``socat FILE:`tty`,raw,echo=0 TCP:shell-sprinter.h4ck.ctfcompetition.com:1337`` (Shift+Q to quit)
 >
@@ -1138,7 +1172,7 @@ Yet another game. Yet another hint suggesting you should be cheating, somehow.
 
 This is a sort of CLI RPG game. You need to find the password to use the access point. The password is split in 3 parts, and you need to collect them, opening key-locked doors and dodging enemies.
 
-### Solution
+#### Solution
 
 The first time I tackled this challenge, I had no clue about how to cheat. I tried several keys and key-combos, without joy.
 
@@ -1210,7 +1244,7 @@ Basically, I leveraged `config.logger` to maintain some persistence and I starte
 
 The last step is to call `os.system(“sh”)` to get a shell.
 
-## CHALLENGE 03
+### CHALLENGE 03
 
 > This corgi made a mess, clean it up.
 >
@@ -1218,7 +1252,7 @@ The last step is to call `os.system(“sh”)` to get a shell.
 
 We are given an apk and a qr code image.
 
-### Solution
+#### Solution
 
 The qr code contains a reference to the following site:
 
@@ -1376,9 +1410,9 @@ And got the flag!
 {"subscriberOnly":true,"text":"Secret message","title":"Secret flag data","url":"https://h4ck1ng.google/solve/**REDACTED**"}
 ```
 
-# EP004 - Bug Hunters
+## EP004 - Bug Hunters
 
-## CHALLENGE 01
+### CHALLENGE 01
 
 > This endpoint is used by the VRP website to download attachments. It also has a rarely-used endpoint for importing bulk attachments, probably used for backups or migrations. Maybe it contains some bugs?
 >
@@ -1386,7 +1420,7 @@ And got the flag!
 
 The link brings us to a website: [https://vrp-website-web.h4ck.ctfcompetition.com](https://vrp-website-web.h4ck.ctfcompetition.com)
 
-### Solution
+#### Solution
 
 The first thing I did is explore the site. As suggested, some pages are different from the “real” [Google’s bug bounty website](https://bughunters.google.com).
 
@@ -1527,7 +1561,7 @@ showing existing and new contents:
 =====
 ```
 
-## CHALLENGE 02
+### CHALLENGE 02
 
 > You are the researcher. Follow the hints, find a vulnerability in the platform.
 >
@@ -1535,7 +1569,7 @@ showing existing and new contents:
 
 We are given a NodeJS app. As it turns out, this is the same app used in challenge 1, which is available at [https://vrp-website-web.h4ck.ctfcompetition.com](https://vrp-website-web.h4ck.ctfcompetition.com).
 
-### Solution
+#### Solution
 
 The theme for this challenge is bug hunting. So, let’s find some bugs.
 
@@ -1668,7 +1702,7 @@ using password '**REDACTED**' (hash: b'zNjBWTgIHKVvhWRBUSKrADRwqDM=')
 https://h4ck1ng.google/solve/**REDACTED**
 ```
 
-## CHALLENGE 03
+### CHALLENGE 03
 
 > The VRP platform is proudly open-source, and encourages submissions. Let's try to change something and see if we can find some bugs.
 >
@@ -1676,7 +1710,7 @@ https://h4ck1ng.google/solve/**REDACTED**
 
 There is no link for this challenge.
 
-### Solution
+#### Solution
 
 It took me quite a while to realize what I should do for this challenge. Looking back at the source code for the bug bounty website, I noticed a NodeJS route for `/contributing` page.
 
@@ -1816,13 +1850,13 @@ To git://dont-trust-your-sources.h4ck.ctfcompetition.com:1337/tmp/vrp_repo
 error: failed to push some refs to 'git://dont-trust-your-sources.h4ck.ctfcompetition.com:1337/tmp/vrp_repo'
 ```
 
-# EP005 - Project Zero
+## EP005 - Project Zero
 
 Zero-day vulnerabilities are vulnerabilities that are known to attackers before defender learned about it.
 
 Google Project Zero aims to find those vulnerabilities before the bad guys do!
 
-## CHALLENGE 01
+### CHALLENGE 01
 
 > Piece together the images to get a clearer picture.
 >
@@ -1830,7 +1864,7 @@ Google Project Zero aims to find those vulnerabilities before the bad guys do!
 
 You are given a mysterious `challenge.bin` file.
 
-### Solution
+#### Solution
 
 The bin file doesn’t have any obvious signature, and it is a sparse file.
 
@@ -1876,7 +1910,7 @@ img = Image.frombytes(mode, (48, 230), bytes(newData), 'raw')
 img.save(f"out.png")
 ```
 
-## CHALLENGE 02
+### CHALLENGE 02
 
 Note: this is the best challenge of the series. My absolute favourite :)
 
@@ -1888,7 +1922,7 @@ The URL brings you to a nice horizontal scrolling jumping game. The game has som
 
 The challenge also has a link to the source code of the game, which is written in JS (front end) and Python/Flask (API).
 
-### Solution
+#### Solution
 
 You can’t “win” this game just playing, of course. The point of the challenge is to submit (somehow) a negative score and get the flag. The source code agrees with that statement :)
 
@@ -2205,7 +2239,7 @@ And got the (super rewarding) flag!
 {"message":"You performed so well so that you triggered an integer overflow! This is your flag: https://h4ck1ng.google/solve/**REDACTED**"}
 ```
 
-## CHALLENGE 03
+### CHALLENGE 03
 
 > Look back at all the episodes and piece together a secret message.
 >
@@ -2213,7 +2247,7 @@ And got the (super rewarding) flag!
 
 This is all we get for the last challenge!
 
-### Solution
+#### Solution
 
 I must admit that without some help on Discord, I probably wouldn’t be able to solve this one (thanks `anton_` for helping me without spoiling it!). I watched all the videos several times, finding no hidden “message”…
 
