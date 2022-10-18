@@ -1,28 +1,10 @@
 # H4CK1NG G00GL3 - Main challenges write-up
 
-## Intro
-
-[Hacking Google](https://h4ck1ng.google/home) is a *sui generis* CTF and, hands down, my favourite CTF so far.
-
-According to the authors:
-
-> This is a game, of sorts. H4CKING GOOGL3 is a series of "capture the flag" (CTF) challenges based on the HACKING GOOGLE series. The only way to beat this game designed for hackers, is to think like one.
-
-The [series of videos](https://www.youtube.com/watch?v=aOGFY1R4QQ4&) introducing the challenges are real documentaries, professionally filmed and directed. Each video introduces a cybersecurity topic. Each episode has an introductory challenge and 2 or 3 CTF challenges, plus a bonus one.
-
-The challenges are non-trivial and, typically, not solvable with readily available tools (e.g., using frameworks, or exploits for known vulnerabilities). The best part is that they are all designed to teach you something. In fact, you will have to build your own tools, understand thoroughly the systems you are dealing with, and the properties and vulnerabilities of security mechanisms at play.
-
-In the following write-up, I am summarizing how I, personally, solved the 17 main challenges. While doing so, I will try, as much as possible, to explain my reasoning and mental processes that led me to each exploitation.
-
-Where applicable, I provide the source code of the scripts I have been using.
-
-Note: the reader should keep in mind that there are multiple ways to crack each challenge. Sometimes probably more efficient and elegant than what I am showing here :)
-
-## TOC
+## Table Of Contents
 
 - [H4CK1NG G00GL3 - Main challenges write-up](#h4ck1ng-g00gl3---main-challenges-write-up)
+  - [Table Of Contents](#table-of-contents)
   - [Intro](#intro)
-  - [TOC](#toc)
   - [EP000 - Operation Aurora](#ep000---operation-aurora)
     - [CHALLENGE 01](#challenge-01)
       - [Solution](#solution)
@@ -64,6 +46,24 @@ Note: the reader should keep in mind that there are multiple ways to crack each 
       - [Solution](#solution-15)
     - [CHALLENGE 03](#challenge-03-4)
       - [Solution](#solution-16)
+
+## Intro
+
+[Hacking Google](https://h4ck1ng.google/home) is a *sui generis* CTF and, hands down, my favourite CTF so far.
+
+According to the authors:
+
+> This is a game, of sorts. H4CKING GOOGL3 is a series of "capture the flag" (CTF) challenges based on the HACKING GOOGLE series. The only way to beat this game designed for hackers, is to think like one.
+
+The [series of videos](https://www.youtube.com/watch?v=aOGFY1R4QQ4&) introducing the challenges are real documentaries, professionally filmed and directed. Each video introduces a cybersecurity topic. Each episode has an introductory challenge and 2 or 3 CTF challenges, plus a bonus one.
+
+The challenges are non-trivial and, typically, not solvable with readily available tools (e.g., using frameworks, or exploits for known vulnerabilities). The best part is that they are all designed to teach you something. In fact, you will have to build your own tools, understand thoroughly the systems you are dealing with, and the properties and vulnerabilities of security mechanisms at play.
+
+In the following write-up, I am summarizing how I, personally, solved the 17 main challenges. While doing so, I will try, as much as possible, to explain my reasoning and mental processes that led me to each exploitation.
+
+Where applicable, I provide the source code of the scripts I have been using.
+
+Note: the reader should keep in mind that there are multiple ways to crack each challenge. Sometimes probably more efficient and elegant than what I am showing here :)
 
 ## EP000 - Operation Aurora
 
@@ -290,9 +290,9 @@ How can we exploit this? Just by using some creativity… and, after few trial-e
 **** drwxr-xr-x   1 nobody nogroup 4096 Sep 30 09:00 web-apps
 ```
 
-Note the 4 asterisks (‘****’). These are only useful to make sure each line of the output is matched.
+Note the 4 asterisks (`****`). These are only useful to make sure each line of the output is matched.
 
-Here is our flag! We can retrieve it by either a `cat /flag` or, since we know how it looks like, just by fully leverage the power of our search engine! 🤣
+Here is our flag! We can retrieve either with a `cat /flag` or, since we know how it looks like, just by fully leverage the power of our search engine! 🤣
 
 ```shell
 ❯ curl 'https://aurora-web.h4ck.ctfcompetition.com/?file=../../flag&term=http'
@@ -309,7 +309,7 @@ This episode is about Threat Analysis and being vigilant on cyberattacks, preven
 >
 > Hint: Find a way to make sense of it.
 
-The link downloads a tar file with an executable and a data file, presumably containing our flag:
+The link downloads a tar file with a statically-linked executable and a data file, presumably containing our flag:
 
 ```shell
 ❯ ls -la
@@ -341,7 +341,7 @@ wannacry: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linke
 
 #### Solution
 
-Given the topic (ransomware) and the name of our executable, chances are that `flag` is encrypted.
+Given the topic of this episode and the name of our executable ([WannaCry](https://en.wikipedia.org/wiki/WannaCry_ransomware_attack) was a ransomware attack), chances are that `flag` is encrypted.
 
 So, in this case, we need to analyse `wannacry`. Since you don't want to actually cry, *always run untrusted stuff in an isolated sandbox*.
 
@@ -458,7 +458,7 @@ This information has not been useful in this occasion but, as it turned out, it 
 >
 > Hint: Find a way to switch it off.
 
-Again, we are given a file, named `wannacry`. This time, we have a dynamically linked executable.
+Again, we are given a file, named `wannacry`. This time, we have a dynamically-linked executable.
 
 ```shell
 wannacry: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=0c23340ab6c6d0c158f0ee356a1deb0253d8cf4c, for GNU/Linux 3.2.0, not stripped
@@ -554,21 +554,27 @@ sym.print 0x2f824 [CALL:--x] call sym.correct_code
 ╰           0x0002f875      c3             ret
 ```
 
-The code seems to refer to some sort of kill-switch...
+The code seems to refer to some sort of kill-switch. The hint provided is also suggesting that we need to 'switch it off'.
+
+Note that this challenge is clearly inspired to the real WannaCry story, and [its kill switch feature](https://en.wikipedia.org/wiki/WannaCry_ransomware_attack#Defensive_response):
+
+> [the attack] was halted a few hours later at 15:03 UTC by the registration of a kill switch discovered by Marcus Hutchins.
+
+Anyway, let's get back to work:
 
 ```shell
 [0x0002f0b0]> ps @ 0x3f2c8
 https://wannacry-killswitch-dot-**REDACTED**//
 ```
 
-Too easy 😀
+Too easy 😀 or so I though...
 
 ```shell
 ❯ curl https://wannacry-killswitch-dot-**REDACTED**/
 Our princess is in another castle.#
 ```
 
-oh, noes!!!
+Oh, noes!!!
 
 BUT! As we can see in the code, the output of `sym.correct_code` (presumably a pointer) is put in `[var_8h]`, which seems to be later used by `write()` to add a suffix to our kill-switch URL.
 
@@ -595,7 +601,7 @@ I decided to stop my investigation, dump the dictionary, and use the brute force
 [0x5601d49e2876]> izz | grep -e '^[0-9]*\s0x000[a-f0-9]*\s[0-9]*\s*[0-9]*.*\.rodata\s*ascii'|awk '{print $NF}' > dictionary.txt
 ```
 
-and then I wrote a simple python script using [requests](https://pypi.org/project/requests/) and a thread pool to search for the flag 🙂
+and then I wrote a simple Python script using [Requests](https://pypi.org/project/requests/) and a thread pool to search for the flag 🙂
 
 ```python
 #!/usr/bin/env python3
@@ -624,7 +630,7 @@ for ar in async_results:
         print(result.text)
 ```
 
-Note: the server-side code probably shares client’s logic, as the “right” code changes in time. Thus, the script might fail if the flag changes while it’s running.
+The server-side code probably shares client’s logic, as the “right” code changes in time. Thus, the script might fail if the flag changes while it’s running.
 
 ```python
 ❯ ./ep001ch02.py
@@ -713,7 +719,7 @@ if (isset($_GET['restart'])) {
 
 I opened the code in my favourite editor and found few interesting facts:
 
-* this web application is a wrapper around the CLI game `/usr/games/stockfish`;
+- this web application is a wrapper around the CLI game `/usr/games/stockfish`;
 
 ```php
 [...]
@@ -745,8 +751,8 @@ class Stockfish
 [...]
 ```
 
-* the executable path is stored in a variable named `$binary`;
-* commands are sent to the game via a pipe;
+- the executable path is stored in a variable named `$binary`;
+- commands are sent to the game via a pipe;
 
 ```php
 public function passPosition(string $fen)
@@ -756,7 +762,7 @@ public function passPosition(string $fen)
 }
 ```
 
-* finally, I searched for any `$_GET` or `$_POST` use… and this showed up!
+- finally, I searched for any `$_GET` or `$_POST` use… and this showed up!
 
 ```php
 $output = new MyHtmlOutput();
@@ -769,7 +775,7 @@ if (isset($_GET['move_start'])) {
 
 In general, it’s a bad idea to deserialize data straight from user input. Although I didn’t have any direct experience with PHP deserialization, I played with a Python deserialization vulnerability in the past, so this immediately rang a bell.
 
-What if we deserialize our `Stockfish` class instead of the expected move? In particular, the `$binary` attribute of that class looks a great candidate: we could replace the executable with anything we want to run: boom, RCE.
+What if I deserialize our `Stockfish` class instead of the expected move? In particular, the `$binary` attribute of that class looks a great candidate: I could replace the executable with anything we want to run: BOOM, RCE.
 
 Unfortunately, deserialization alone won’t work in this case, as we need something to actually use our object. After a brief Google investigation, I learned about PHP magic methods!
 
@@ -947,7 +953,7 @@ The D&R team has detected some suspicious activity on your account and has quara
 
 #### Solution
 
-Pressing <tab> twice, we can see the list of available commands:
+Pressing `<tab>` twice, we can see the list of available commands:
 
 ```shell
 ~ $
@@ -1093,7 +1099,7 @@ Tomorrow
 
 There is also a backup script, `backup.py`, that uses Google Cloud API, to make a backup of some document:
 
-```shell
+```python
 developer@googlequanta.com:/home/developer$ cat backup.py
 """
 [WIP]
@@ -1205,7 +1211,7 @@ My favourite cheat code is IDDQD, but unfortunately, it wasn’t this one 🙂 I
 
 Using this code in the game (after pressing enter) you are presented with a prompt and a sort of console
 
-```shell
+```python
 \ help                                                \
 \ name 'help' is not defined                          \
 \                                                     \
@@ -1218,9 +1224,9 @@ Using this code in the game (after pressing enter) you are presented with a prom
 
 Soon enough, I realized that this thing accepted *some* Python command:
 
-```shell
-\ print('dg')                                         \
-\ dg                                                  \
+```python
+\ print('dguerri')                                    \
+\ dguerri                                             \
 \
 ```
 
@@ -1232,13 +1238,13 @@ Searching the Internet, I found this great write-up: [The Craziest Python Sandbo
 
 This article contains everything we need, but we can’t use the proposed exploit as it is because:
 
-* we have a limit on the length of each line of code we can input in this "shell";
-* we don’t need to use creativity to “compose” any strings;
-* our sandbox doesn’t appear to have any persistence, besides the `config` object used by the game.
+- we have a limit on the length of each line of code we can input in this "shell";
+- we don’t need to use creativity to “compose” any strings;
+- our sandbox doesn’t appear to have any persistence, besides the `config` object used by the game.
 
 After few iterations, also after 1 hour spent on printing available methods and attributes in `config`, I came up with this exploit. The first part just activates the shell entering the cheat code, while the second part escapes the sandbox:
 
-```shell
+```python
 ❯ echo -e '..wwssadadba
 config.logger = str.__base__.__subclasses__()[84]()\n
 config.logger = config.logger.load_module("builtins")\n
@@ -1299,16 +1305,16 @@ The important bits are in `google/ h4ck1ng / secretcorgis`. Specifically, `Netwo
 
 The application crafts an HTTP GET request to `https://corgis-web.h4ck.ctfcompetition.com/corgi`, using the following headers:
 
-* X-Document-ID
-  * The most straightforward choice here seems to be `flag`, as it’s in the above b64-encoded URL
-* X-Request-Nonce
-  * The application just throws 32 bytes of random data in here, presumably to prevent replay attacks
-* X-User-Subscribed
-  * This is a boolean. I suspected immediately that we need to set it to `true`
-* X-Timestamp
-  * The application just uses the current Unix timestamp, in seconds, presumably to enforce some freshness of the message
-* X-Auth-MAC
-  * This is a HMAC-SHA256 of a string obtained from all the above headers and values (see code below), using the shared secret I mentioned above.
+- X-Document-ID
+  - The most straightforward choice here seems to be `flag`, as it’s in the above b64-encoded URL
+- X-Request-Nonce
+  - The application just throws 32 bytes of random data in here, presumably to prevent replay attacks
+- X-User-Subscribed
+  - This is a boolean. I suspected immediately that we need to set it to `true`
+- X-Timestamp
+  - The application just uses the current Unix timestamp, in seconds, presumably to enforce some freshness of the message
+- X-Auth-MAC
+  - This is a HMAC-SHA256 of a string obtained from all the above headers and values (see code below), using the shared secret I mentioned above.
 
 Here is the relevant part of the decompiled code (edited for clarity):
 
@@ -1449,12 +1455,12 @@ Q: Why did my attachment fail to upload?
 A: To debug, you should call the /import endpoint manually and look at the detailed error message in the response. The same applies to the /export endpoint for downloading attachments from a submission.
 ```
 
-* [https://path-less-traversed-web.h4ck.ctfcompetition.com/import](https://path-less-traversed-web.h4ck.ctfcompetition.com/import) throws immediately an error: `only POST allowed`;
-* [https://path-less-traversed-web.h4ck.ctfcompetition.com/export](https://path-less-traversed-web.h4ck.ctfcompetition.com/export) returns: `missing submission parameter`.
+- [https://path-less-traversed-web.h4ck.ctfcompetition.com/import](https://path-less-traversed-web.h4ck.ctfcompetition.com/import) throws immediately an error: `only POST allowed`;
+- [https://path-less-traversed-web.h4ck.ctfcompetition.com/export](https://path-less-traversed-web.h4ck.ctfcompetition.com/export) returns: `missing submission parameter`.
 
 Playing with the export endpoint I got:
 
-```java
+```shell
 ❯ curl -s -G https://path-less-traversed-web.h4ck.ctfcompetition.com/export --data-urlencode 'submission=1'
 missing attachment parameter
 
@@ -1889,9 +1895,9 @@ The hint seems to suggest that this file is something related to toys from the 9
 
 Searching the internet, I found a Tamagotchi P1 emulator which looked promising: [TamaTool](https://github.com/jcrona/tamatool). At first, I thought that the image was a ROM, but I abandoned that lead as:
 
-* it didn’t work out-of-the-box with the emulator;
-* wrt the “original” ROM (available, for instance, [here](https://www.planetemu.net/rom/mame-roms/tama)), our file is too small and sparse;
-* Tamagotchi’s ROMs are protected by copyright, so Google couldn’t realistically hack and redistribute one (also writing one from scratch looked pretty overkill by me).
+- it didn’t work out-of-the-box with the emulator;
+- wrt the “original” ROM (available, for instance, [here](https://www.planetemu.net/rom/mame-roms/tama)), our file is too small and sparse;
+- Tamagotchi’s ROMs are protected by copyright, so Google couldn’t realistically hack and redistribute one (also writing one from scratch looked pretty overkill by me).
 
 While playing with the TamaTool, I noticed that it can extract images from the ROM. That, together with the challenge hint, was a strong indication I was dealing with an image file.
 
@@ -1988,12 +1994,12 @@ The article talks about a variant of “Bleichenbacher'06 attack against RSA sig
 
 The high-level concepts of this exploit are related to the maths behind RSA (refer to the article linked above for a great, clear, explanation):
 
-* An RSA signature for a message `m` is calculated as `c = m^d mod N`;
-* An RSA signature on `m` is verified with `c^e mod N = m`;
-* We can trick the receiver into accepting the message `c`, if:
-  * we have some degree of control on the signed message;
-  * `e`  is small, so it likely won’t cause the `mod N`  part to be involved during verification;
-  * the receiver is not performing an accurate verification on all parts of the message (e.g., the padding).
+- An RSA signature for a message `m` is calculated as `c = m^d mod N`;
+- An RSA signature on `m` is verified with `c^e mod N = m`;
+- We can trick the receiver into accepting the message `c`, if:
+  - we have some degree of control on the signed message;
+  - `e`  is small, so it likely won’t cause the `mod N`  part to be involved during verification;
+  - the receiver is not performing an accurate verification on all parts of the message (e.g., the padding).
 
 How? By submitting a signature calculated as `m’^(-e) mod N` (this is `= m’^(-e)^e mod N = m’` under our assumptions 🙂). We don't need to know `p`, `q` or `d`.
 

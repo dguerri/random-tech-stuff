@@ -2,10 +2,14 @@
 
 # Mocking Filesystem, File and FileInfo in Golang unit tests
 
-## Table of content
-  * [Abstract your code and make it testable](#abstract-your-code-and-make-it-testable)
-  * [Write unit tests](#write-unit-tests)
-    + [Define the mock filesystem](#define-the-mock-filesystem)
+## Table of contents
+
+- [Mocking Filesystem, File and FileInfo in Golang unit tests](#mocking-filesystem-file-and-fileinfo-in-golang-unit-tests)
+	- [Table of contents](#table-of-contents)
+	- [Abstract your code and make it testable](#abstract-your-code-and-make-it-testable)
+	- [Write unit tests](#write-unit-tests)
+		- [Define the mock filesystem](#define-the-mock-filesystem)
+- [That's all](#thats-all)
 
 ---
 
@@ -27,26 +31,26 @@ Define interfaces to abstract filesystem operations (from [Andrew Gerrand's 10 t
 
 ```go
 import (
-	"io"
-	"os"
+ "io"
+ "os"
 )
 
 type fileSystem interface { // Just an example, add all the functions you need
-	Lstat(name string) (os.FileInfo, error)
-	OpenFile(name string, flag int, perm os.FileMode) (file, error)
-	ReadDir(name string) ([]os.DirEntry, error)
-	Readlink(name string) (string, error)
-	Remove(name string) error
+ Lstat(name string) (os.FileInfo, error)
+ OpenFile(name string, flag int, perm os.FileMode) (file, error)
+ ReadDir(name string) ([]os.DirEntry, error)
+ Readlink(name string) (string, error)
+ Remove(name string) error
 }
 
 type file interface { // Just an example, add all the functions you need
-	Fd() uintptr
-	io.Closer
-	io.ReaderAt
-	io.Seeker
-	io.WriterAt
-	Stat() (os.FileInfo, error)
-	Sync() error
+ Fd() uintptr
+ io.Closer
+ io.ReaderAt
+ io.Seeker
+ io.WriterAt
+ Stat() (os.FileInfo, error)
+ Sync() error
 }
 ```
 
@@ -75,13 +79,13 @@ In your code, replace every `os.` call with the correspondent method of dfFS. Fo
 
 ```go
 func (fso *DockerFuseFSOps) Unlink(request rpc_common.UnlinkRequest, reply *rpc_common.UnlinkReply) error {
-	log.Printf("Unlink called: %v", request)
+ log.Printf("Unlink called: %v", request)
 
-	err := os.Remove(request.FullPath)
-	if err != nil {
-		return rpc_common.ErrnoToRPCErrorString(err)
-	}
-	return nil
+ err := os.Remove(request.FullPath)
+ if err != nil {
+  return rpc_common.ErrnoToRPCErrorString(err)
+ }
+ return nil
 }
 ```
 
@@ -89,13 +93,13 @@ becomes:
 
 ```go
 func (fso *DockerFuseFSOps) Unlink(request rpc_common.UnlinkRequest, reply *rpc_common.UnlinkReply) error {
-	log.Printf("Unlink called: %v", request)
+ log.Printf("Unlink called: %v", request)
 
-	err := dfFS.Remove(request.FullPath)
-	if err != nil {
-		return rpc_common.ErrnoToRPCErrorString(err)
-	}
-	return nil
+ err := dfFS.Remove(request.FullPath)
+ if err != nil {
+  return rpc_common.ErrnoToRPCErrorString(err)
+ }
+ return nil
 }
 ```
 
@@ -128,9 +132,9 @@ In each test, instantiate the mock filesystem and assign it to the `dfFS` global
 
 ```go
 func TestWhatever(t *testing.T) {
-	// *** Setup
-	mFS := new(mockFS)
-	dfFS = mFS
+ // *** Setup
+ mFS := new(mockFS)
+ dfFS = mFS
 ...
 ```
 
@@ -140,38 +144,38 @@ A complete example for the `Unlink()` function above:
 
 ```go
 func TestUnlink(t *testing.T) {
-	// *** Setup
-	var (
-		mFS   mockFS
-		reply rpc_common.UnlinkReply
-		err   error
-	)
-	dfFS = &mFS // Set mock filesystem
-	dfFSOps := NewDockerFuseFSOps() // The object we want to test Unlink() method
+ // *** Setup
+ var (
+  mFS   mockFS
+  reply rpc_common.UnlinkReply
+  err   error
+ )
+ dfFS = &mFS // Set mock filesystem
+ dfFSOps := NewDockerFuseFSOps() // The object we want to test Unlink() method
 
-	// *** Testing error on Remove
-	mFS = mockFS{}
-	mFS.On("Remove", "/test/error_on_openfile").Return(syscall.ENOENT)
+ // *** Testing error on Remove
+ mFS = mockFS{}
+ mFS.On("Remove", "/test/error_on_openfile").Return(syscall.ENOENT)
 
-	reply = rpc_common.UnlinkReply{}
-	err = dfFSOps.Unlink(rpc_common.UnlinkRequest{FullPath: "/test/error_on_openfile"}, &reply)
+ reply = rpc_common.UnlinkReply{}
+ err = dfFSOps.Unlink(rpc_common.UnlinkRequest{FullPath: "/test/error_on_openfile"}, &reply)
 
-	assert.Equal(t, rpc_common.UnlinkReply{}, reply)
-	if assert.Error(t, err) {
-		assert.Equal(t, fmt.Errorf("errno: ENOENT"), err)
-	}
-	mFS.AssertExpectations(t)
+ assert.Equal(t, rpc_common.UnlinkReply{}, reply)
+ if assert.Error(t, err) {
+  assert.Equal(t, fmt.Errorf("errno: ENOENT"), err)
+ }
+ mFS.AssertExpectations(t)
 
-	// *** Testing happy path
-	mFS = mockFS{}
-	mFS.On("Remove", "/test/happy_path").Return(nil)
+ // *** Testing happy path
+ mFS = mockFS{}
+ mFS.On("Remove", "/test/happy_path").Return(nil)
 
-	reply = rpc_common.UnlinkReply{}
-	err = dfFSOps.Unlink(rpc_common.UnlinkRequest{FullPath: "/test/happy_path"}, &reply)
+ reply = rpc_common.UnlinkReply{}
+ err = dfFSOps.Unlink(rpc_common.UnlinkRequest{FullPath: "/test/happy_path"}, &reply)
 
-	assert.Equal(t, rpc_common.UnlinkReply{}, reply)
-	assert.NoError(t, err)
-	mFS.AssertExpectations(t)
+ assert.Equal(t, rpc_common.UnlinkReply{}, reply)
+ assert.NoError(t, err)
+ mFS.AssertExpectations(t)
 }
 ```
 
@@ -183,35 +187,35 @@ The mock file implements `Stat()` which returns a mock `os.FileInfo` object, nam
 
 ```go
 func TestOpen(t *testing.T) {
-	// *** Setup
-	var (
-		mFS   mockFS
-		mFI   mockFileInfo
-		mFile mockFile
-		reply rpc_common.OpenReply
-		err   error
-	)
-	dfFS = &mFS // Set mock filesystem
-	dfFSOps := NewDockerFuseFSOps()
+ // *** Setup
+ var (
+  mFS   mockFS
+  mFI   mockFileInfo
+  mFile mockFile
+  reply rpc_common.OpenReply
+  err   error
+ )
+ dfFS = &mFS // Set mock filesystem
+ dfFSOps := NewDockerFuseFSOps()
 
-	// *** Testing Open on a regular existing file
-	mFS = mockFS{}
-	mFile = mockFile{}
-	mFI = mockFileInfo{}
-	mFI.On("Sys").Return(&syscall.Stat_t{Mode: 0660, Nlink: 2, ...})
-	mFile.On("Fd").Return(uintptr(29))
-	mFile.On("Stat").Return(&mFI, nil)
-	mFS.On("OpenFile", "/test/openfile_reg", syscall.O_RDWR, fs.FileMode(0640)).Return(&mFile, nil)
-	mFS.On("Readlink", "/test/openfile_reg").Return("", nil)
+ // *** Testing Open on a regular existing file
+ mFS = mockFS{}
+ mFile = mockFile{}
+ mFI = mockFileInfo{}
+ mFI.On("Sys").Return(&syscall.Stat_t{Mode: 0660, Nlink: 2, ...})
+ mFile.On("Fd").Return(uintptr(29))
+ mFile.On("Stat").Return(&mFI, nil)
+ mFS.On("OpenFile", "/test/openfile_reg", syscall.O_RDWR, fs.FileMode(0640)).Return(&mFile, nil)
+ mFS.On("Readlink", "/test/openfile_reg").Return("", nil)
 
-	reply = rpc_common.OpenReply{}
-	err = dfFSOps.Open(rpc_common.OpenRequest{FullPath: "/test/openfile_reg", ...}, &reply)
+ reply = rpc_common.OpenReply{}
+ err = dfFSOps.Open(rpc_common.OpenRequest{FullPath: "/test/openfile_reg", ...}, &reply)
 
-	assert.Equal(t, rpc_common.OpenReply{FD: 29, StatReply: rpc_common.StatReply{Mode: 0660, Nlink: 2, ...}, reply)
-	assert.NoError(t, err)
-	mFI.AssertExpectations(t)
-	mFile.AssertExpectations(t)
-	mFS.AssertExpectations(t)
+ assert.Equal(t, rpc_common.OpenReply{FD: 29, StatReply: rpc_common.StatReply{Mode: 0660, Nlink: 2, ...}, reply)
+ assert.NoError(t, err)
+ mFI.AssertExpectations(t)
+ mFile.AssertExpectations(t)
+ mFS.AssertExpectations(t)
 ...
 ```
 
