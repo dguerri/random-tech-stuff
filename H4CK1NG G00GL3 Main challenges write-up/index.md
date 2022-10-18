@@ -47,6 +47,8 @@
     - [CHALLENGE 03](#challenge-03-4)
       - [Solution](#solution-16)
 
+---
+
 ## Intro
 
 [Hacking Google](https://h4ck1ng.google/home) is a *sui generis* CTF and, hands down, my favourite CTF so far.
