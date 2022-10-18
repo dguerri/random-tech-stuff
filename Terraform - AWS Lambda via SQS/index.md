@@ -1,9 +1,9 @@
 # Terraform - AWS Lambda via SQS
 
-## Table of content
+## Table of contents
 
 - [Terraform - AWS Lambda via SQS](#terraform---aws-lambda-via-sqs)
-  - [Table of content](#table-of-content)
+  - [Table of contents](#table-of-contents)
   - [Architecture](#architecture)
     - [Why SQS?](#why-sqs)
   - [AWS user and permissions](#aws-user-and-permissions)
