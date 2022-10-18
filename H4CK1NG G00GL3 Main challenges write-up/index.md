@@ -347,7 +347,7 @@ Given the topic of this episode and the name of our executable ([WannaCry](https
 
 So, in this case, we need to analyse `wannacry`. Since you don't want to actually cry, *always run untrusted stuff in an isolated sandbox*.
 
-Personally, I use Docker, with an image, I built specifically for CTFs. You can find it [here](https://gist.github.com/dguerri/020830af10b274ca4eeada2fc320e3fb). Note that the software I install there is overkill for the challenge at hand.
+Personally, I use Docker, with an image I built specifically for CTFs. You can find it [here](https://gist.github.com/dguerri/020830af10b274ca4eeada2fc320e3fb). Note that the software installed there is overkill for the challenge at hand.
 
 ```shell
 ❯ ./wannacry
@@ -2280,7 +2280,7 @@ As it turned out, I should have listened more than watched… and with a good he
 
 So, the message is Morse code, “hidden” right before the first person’s introduction of each episode.
 
-When I finally heard it, I downloaded each episode’s audio tract, and with FFmpeg, I isolated the ~6 seconds of each chunk, also filtering out everything but the frequency range used to transmit the code.
+When I finally heard it, I downloaded each episode’s audio tract, and with FFmpeg, I isolated ~6 seconds of each chunk, also filtering out everything but the frequency range used to transmit the code.
 
 I could find the approximate frequency, after few iterations, thanks to this website: [https://morsecode.world/international/decoder/audio-decoder-adaptive.html](https://morsecode.world/international/decoder/audio-decoder-adaptive.html)
 
