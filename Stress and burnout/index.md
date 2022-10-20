@@ -25,7 +25,7 @@ With this note, I would like to share some of my learnings, in the humblest poss
 You probably have heard of good and bad stress.
 Good stress is beneficial and motivating. Bad stress can cause anxiety and can lead to burnout and even severe health issues, when underestimated.
 
-It's important to mention that our cognitive resources and our energy is limited, so even good stress can be overwhelming and can mutate into bad stress without us noticing. **_Everyone has a limit, unfortunately we generally don't know it._** But our body knows when it's surpassed.
+It's important to mention that our cognitive resources and our energy are limited, so even good stress can be overwhelming and can mutate into bad stress without us noticing. **_Everyone has a limit, unfortunately we generally don't know it._** But our body knows when it's surpassed.
 
 > One big lesson I learned is that when it comes to stress, it's of uttermost importance to separate _stress itself_ from the _stressors_.
 
@@ -71,7 +71,7 @@ According to experts, there are several complementary or alternative ways we can
 * **_Social Interactions_** - friendly, casual, social interaction is the first external sign that the world is a safe place;
 * **_Laughter_** - genuine, deep, helpless laughter triggers a primordial system that mammals have evolved to make and maintain social bonds and regulate emotions;
 * **_Cultivate affections_** - this is another way to tell your body that it is safe now, that you can relax. Physical contact with your loved ones, or even your pet, can be of great help.
-* **_Crying_** - "crying solves nothing" it's a lie. It might not eliminate the stressors, but it does help to complete the stress-response cycle;
+* **_Crying_** - "crying solves nothing" is a lie. It might not eliminate the stressors, but it does help to complete the stress-response cycle;
 * **_Creative Expressions_** - creativity can unleash big emotions. In turn, those emotions release a physical, chemical, response in your body which helps lower the stress level.
 
 ### How do I know when it's complete?
@@ -123,9 +123,8 @@ My monitor kicked in, telling my unconscious self that my efforts-to-progress ra
 Since I am an optimist, I nevertheless started to see value even in my failures to progress. I, unconsciously, reframed difficulties as opportunities for growth and learning.
 
 Anyway, guess what? I worked for that company 7 years. Promotions came, ratings came, when I grew enough to deserve them.
-
-To be honest, I didn't get where I wanted to be in that company. Life goals are moving targets anyway. But I learned to appreciate every milestone reached.
-Now I can say I even like bigger challenges and stress coming with them, once I cracked my own stressors and refined my stress detectors. (Challenges like moving to Google and almost start over!)
+I am nowhere near where I wanted to be. Life goals are moving targets anyway. But I learned to appreciate every milestone reached.
+Once I cracked my own stressors and refined my stress detectors, I am more confident in taking bigger challenges, and the stress coming with them.
 
 Of course, not everyone is a natural optimist. Pessimists tend to view bad situations as signs of larger-scale problems that could have lasting impact.
 For them, as for the optimists, my best advice is to think rationally about stressful situations, close the stress-response cycle to get lucidity, and reframe failures as opportunities.
@@ -165,7 +164,7 @@ Or that X-rays were discovered by chance while testing whether cathode rays coul
 > This kind of positive reframing is by far the hardest, and we rarely can take away the pain of failure or loss.
 It often requires a recovery, during which you can endure by completing the stress-response cycle and, most importantly, **_using kindness and compassion for yourself_**.
 
---
+---
 
 References
 
