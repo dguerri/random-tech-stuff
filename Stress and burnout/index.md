@@ -10,8 +10,8 @@ _London, October 2022_
   - [Stressors vs stress](#stressors-vs-stress)
   - [First, deal with stress itself](#first-deal-with-stress-itself)
     - [Physical activity is the most effective way](#physical-activity-is-the-most-effective-way)
-    - [Other ways to manage stress](#other-ways-to-manage-stress)
-    - [How do I know when it's complete?](#how-do-i-know-when-its-complete)
+    - [When physical activity doesn't cut it](#when-physical-activity-doesnt-cut-it)
+    - [How do I know when to stop?](#how-do-i-know-when-to-stop)
   - [Dealing with stressors](#dealing-with-stressors)
     - [Dealing with stressor you can control: Planful Problem-Solving](#dealing-with-stressor-you-can-control-planful-problem-solving)
     - [Dealing with stressor you can't control: Positive Reframing](#dealing-with-stressor-you-cant-control-positive-reframing)
@@ -29,8 +29,8 @@ Yeah, I am definitely no psychologist. But I have been around for some time, and
 
 I didn't realize how lucky I have been until later in my life.
 
-When I started supporting people, moving from engineering to management, I witnessed how much stress and burnout can be common and what they can lead to.
-To do my job in the best possible way - by detecting burnout before it happens, or by being able to give good advice - I started researching these topics.
+When I started supporting people, moving from engineering to management, I started to see how stress and burnout can be common, and what they can lead to. 
+To do my job in the best possible way, detecting burnout before it happens, and by being able to give good advice, I started researching these topics.
 
 I stumbled upon a couple of great books. So, I learned that some of the things I have been doing in my life were, incidentally, good to manage stress and avoid burnout.
 I have also discovered that thinking rationally about stress, stressors, and ways to manage them, helps recognize burnout and helps prevent it.
@@ -46,15 +46,14 @@ It's important to mention that our cognitive resources and our energy are limite
 
 > One big lesson I learned is that when it comes to stress, it's of uttermost importance to separate _stress itself_ from the _stressors_.
 
-Stressors are the cause of stress but, surprisingly enough, most of the time are not the first thing we need to tackle.
+Stressors are the cause of stress, but most of the time are not the first thing we need to tackle. This may sound strange, but let me explain.
 
 One reason is that managing stress first will make us more lucid, and will allow us to be better at identifying the root causes for it.
 
 Another reason is that sometimes stressors cannot be eliminated. We might be just stuck in stress-activating situations.
 
-Think about your work, where you have recurrent challenges: presentations, performance reviews, some hard cross-functional relationships... Maybe all that adds to other stressful situations we live outside the office.
-
-Trying to adjust to a post-pandemic lockdown, or having a baby to raise, come immediately to my mind...
+Think about your work, where you have recurrent challenges: presentations, performance reviews, some hard cross-functional relationships.
+I'm pretty sure all of that adds to the stress we face outside the office. Trying to adjust to a post-pandemic lockdown, or having a baby to raise, come immediately to my mind.
 
 ## First, deal with stress itself
 
@@ -64,25 +63,25 @@ Not surprisingly, your body doesn't know about performance reviews, hard meeting
 > In the past, not even that far, our body used to react in a primordial way to stress caused by primordial situations. You saw a treat, you ran, or maybe you fought. Simple as that.
 
 Today, we cannot run from meetings or fight random people on a _bad day_.
-So, we ignore the stress. Leaving incomplete what the expert calls the **_stress-response cycle_**.
 
+So, we ignore the stress. Leaving incomplete what the expert calls the **_stress-response cycle_**.
 Your body, your brain, is not designed for that, so stress piles up. Until it's overwhelming. Until you burn out.
 
 Fortunately, there are several ways we can fight stress, keeping it under control.
 
 ### Physical activity is the most effective way
 
-OK, you probably heard that far too many times.
+OK, you probably heard that "physical activity helps" far too many times.
 
 > But think about this: your body has no idea what "resolving an interpersonal conflict through rational problem-solving" means. But it knows what a run, a swim or a bike ride mean.
 
 Engaging in physical activity is the most straightforward and effective way to complete the stress-response cycle and, thus, reduce your stress level.
 
-### Other ways to manage stress
+### When physical activity doesn't cut it
 
 Sure, running helps. But not everyone likes doing physical activity. Or maybe, for someone, it's genuinely hard to have enough of it.
 
-According to experts, there are several complementary or alternative ways we can use to reduce stress. Some examples are:
+Experts say there are a few ways we can use to reduce stress that work well together or alone. Some examples are:
 
 - **_Breathing_** - you know the thing you have on your Apple Watch and you always thought it was BS? Focusing on deep, long, breathes sends to your brain a "message" to calm down and relax;
 - **_Social Interactions_** - friendly, casual, social interaction is the first external sign that the world is a safe place;
@@ -91,9 +90,10 @@ According to experts, there are several complementary or alternative ways we can
 - **_Crying_** - "crying solves nothing" is a lie. It might not eliminate the stressors, but it does help to complete the stress-response cycle;
 - **_Creative Expressions_** - creativity can unleash big emotions. In turn, those emotions release a physical, chemical, response in your body which helps lower the stress level.
 
-### How do I know when it's complete?
+### How do I know when to stop?
 
 That is the easiest part. You don't have to stop any of the above activities, of course, but your body and your mind will know when they had a positive effect. It's easier for some people to recognize than others.
+
 It could manifest itself as a mood shift or physical tension going away. Your thoughts are more lucid, and you are now ready to deal with stressors.
 
 ## Dealing with stressors
