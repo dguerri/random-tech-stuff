@@ -1,5 +1,7 @@
 # Terraform - AWS Lambda via SQS
 
+_London, June 2022_
+
 ## Table of contents
 
 - [Terraform - AWS Lambda via SQS](#terraform---aws-lambda-via-sqs)

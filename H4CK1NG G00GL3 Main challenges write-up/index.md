@@ -1,5 +1,7 @@
 # H4CK1NG G00GL3 - Main challenges write-up
 
+_London, October 2022_
+
 ## Table Of Contents
 
 - [H4CK1NG G00GL3 - Main challenges write-up](#h4ck1ng-g00gl3---main-challenges-write-up)
@@ -51,7 +53,7 @@
 
 ## Intro
 
-[Hacking Google](https://h4ck1ng.google/home) is a *sui generis* CTF and, hands down, my favourite CTF so far.
+[Hacking Google](https://h4ck1ng.google/home) is a _sui generis_ CTF and, hands down, my favourite CTF so far.
 
 According to the authors:
 

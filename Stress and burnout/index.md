@@ -1,5 +1,7 @@
 # Stress and burnout
 
+_London, October 2022_
+
 ## Intro
 
 I have been thinking about writing this note for a long time.

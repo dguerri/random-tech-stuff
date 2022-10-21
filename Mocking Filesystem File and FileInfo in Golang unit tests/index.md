@@ -2,13 +2,15 @@
 
 # Mocking Filesystem, File and FileInfo in Golang unit tests
 
+_London, August 2022_
+
 ## Table of contents
 
 - [Mocking Filesystem, File and FileInfo in Golang unit tests](#mocking-filesystem-file-and-fileinfo-in-golang-unit-tests)
-	- [Table of contents](#table-of-contents)
-	- [Abstract your code and make it testable](#abstract-your-code-and-make-it-testable)
-	- [Write unit tests](#write-unit-tests)
-		- [Define the mock filesystem](#define-the-mock-filesystem)
+  - [Table of contents](#table-of-contents)
+  - [Abstract your code and make it testable](#abstract-your-code-and-make-it-testable)
+  - [Write unit tests](#write-unit-tests)
+    - [Define the mock filesystem](#define-the-mock-filesystem)
 - [That's all](#thats-all)
 
 ---
