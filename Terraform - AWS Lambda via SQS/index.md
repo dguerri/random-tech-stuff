@@ -24,7 +24,7 @@ While playing around with Terraform, I realized how hard it is to find a simple 
 
 As a way to consolidate my learnings, I decided to write this small document.
 
-You can find the [source](https://github.com/dguerri/terraform-aws-lambda)[code for this post here.](https://github.com/dguerri/terraform-sqs-lambda)
+You can find the [source code for this post here.](https://github.com/dguerri/terraform-sqs-lambda)
 
 Note that the design is intentionally simple. It doesn’t consider important bits that should be used in a production context, like the use of Terraform cloud connected to a VCS; timeout and memory limits for the lambda function; monitoring and alerting; or encryption of data at rest.
 
@@ -60,11 +60,11 @@ I am not going to explain this step in details, but one way of doing this is via
 
 For our scenario, this user should have the following permissions.
 
-- AmazonSQSFullAccess
-- IAMFullAccess
-- CloudWatchLogsFullAccess
-- AmazonSNSFullAccess
-- AWSLambda_FullAccess
+- `AmazonSQSFullAccess`
+- `IAMFullAccess`
+- `CloudWatchLogsFullAccess`
+- `AmazonSNSFullAccess`
+- `AWSLambda_FullAccess`
 
 Note that these permissions are too much for what we are doing. In a hypothetical production environment, we might want to be more restrictive and only add actions we actually need Terraform to perform.
 

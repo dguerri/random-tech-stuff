@@ -2,7 +2,22 @@
 
 _London, October 2022_
 
-## Intro
+## Table of contents
+
+- [Stress and burnout](#stress-and-burnout)
+  - [Table of contents](#table-of-contents)
+  - [Foreword](#foreword)
+  - [Stressors vs stress](#stressors-vs-stress)
+  - [First, deal with stress itself](#first-deal-with-stress-itself)
+    - [Physical activity is the most effective way](#physical-activity-is-the-most-effective-way)
+    - [Other ways to manage stress](#other-ways-to-manage-stress)
+    - [How do I know when it's complete?](#how-do-i-know-when-its-complete)
+  - [Dealing with stressors](#dealing-with-stressors)
+    - [Dealing with stressor you can control: Planful Problem-Solving](#dealing-with-stressor-you-can-control-planful-problem-solving)
+    - [Dealing with stressor you can't control: Positive Reframing](#dealing-with-stressor-you-cant-control-positive-reframing)
+  - [References](#references)
+
+## Foreword
 
 I have been thinking about writing this note for a long time.
 
@@ -69,12 +84,12 @@ Sure, running helps. But not everyone likes doing physical activity. Or maybe, f
 
 According to experts, there are several complementary or alternative ways we can use to reduce stress. Some examples are:
 
-* **_Breathing_** - you know the thing you have on your Apple Watch and you always thought it was BS? Focusing on deep, long, breathes sends to your brain a "message" to calm down and relax;
-* **_Social Interactions_** - friendly, casual, social interaction is the first external sign that the world is a safe place;
-* **_Laughter_** - genuine, deep, helpless laughter triggers a primordial system that mammals have evolved to make and maintain social bonds and regulate emotions;
-* **_Cultivate affections_** - this is another way to tell your body that it is safe now, that you can relax. Physical contact with your loved ones, or even your pet, can be of great help.
-* **_Crying_** - "crying solves nothing" is a lie. It might not eliminate the stressors, but it does help to complete the stress-response cycle;
-* **_Creative Expressions_** - creativity can unleash big emotions. In turn, those emotions release a physical, chemical, response in your body which helps lower the stress level.
+- **_Breathing_** - you know the thing you have on your Apple Watch and you always thought it was BS? Focusing on deep, long, breathes sends to your brain a "message" to calm down and relax;
+- **_Social Interactions_** - friendly, casual, social interaction is the first external sign that the world is a safe place;
+- **_Laughter_** - genuine, deep, helpless laughter triggers a primordial system that mammals have evolved to make and maintain social bonds and regulate emotions;
+- **_Cultivate affections_** - this is another way to tell your body that it is safe now, that you can relax. Physical contact with your loved ones, or even your pet, can be of great help.
+- **_Crying_** - "crying solves nothing" is a lie. It might not eliminate the stressors, but it does help to complete the stress-response cycle;
+- **_Creative Expressions_** - creativity can unleash big emotions. In turn, those emotions release a physical, chemical, response in your body which helps lower the stress level.
 
 ### How do I know when it's complete?
 
@@ -98,15 +113,15 @@ When things don't work as per your expectations, "_Monitor switches its assessme
 Of course not all sources of stress can be controlled, but when you can, you are in luck.
 
 The trick here is to detect rationally when lots of effort won't lead to progress we thought we could or would make.
-When that happens, we can re-focus our effort, trying different strategies. Substantially, we analyse the problem, we plan, and we execute on that plan.
+When that happens, we can re-focus our effort, trying different strategies. Substantially, we analyze the problem, we plan, and we execute on that plan.
 
 This doesn't have to be formal or written down in steps to follow, although sometimes that does help.
 
 There are trivial cases. For instance:
 
-* Do you keep procrastinating an important task? Take a look at the 20 minutes rule. It really works.
-* Do you get distracted easily while programming? For me, personally, classical music helps.
-* You spent hours trying to find that f*%$ing bug? Use the rubber duck debugging.
+- Do you keep procrastinating an important task? Take a look at the 20 minutes rule. It really works.
+- Do you get distracted easily while programming? For me, personally, classical music helps.
+- You spent hours trying to find that f*%$ing bug? Use the rubber duck debugging.
 
 > For non-trivial cases, introspection and rationalization help. But, most of the time, the plan you develop must include completing the stress-response cycle, because we rarely make good decisions when we are "upset" or stressed.
 
@@ -139,7 +154,7 @@ You might think that there is something wrong with you. That you are a failure.
 
 > In reality, **_you unconsciously just set a wrong, ruthless, unrealistic, expectation for yourself_**.
 
-Keep in mind that "a smooth sea never makes a skilful sailor". Human nature is so that we grow and become better when we survive struggles. You just need to hit some additional milestones before getting where you want to be, while growing and becoming a better version of yourself.
+Keep in mind that "a smooth sea never makes a skillful sailor". Human nature is so that we grow and become better when we survive struggles. You just need to hit some additional milestones before getting where you want to be, while growing and becoming a better version of yourself.
 
 **_Building Purpose_**
 
@@ -168,6 +183,6 @@ It often requires a recovery, during which you can endure by completing the stre
 
 ---
 
-References
+## References
 
-* [1] Burnout: The Secret to Unlocking the Stress Cycle - Emily and Amelia Nagoski - ISBN 1785042084
+- [1] Burnout: The Secret to Unlocking the Stress Cycle - Emily and Amelia Nagoski - ISBN 1785042084

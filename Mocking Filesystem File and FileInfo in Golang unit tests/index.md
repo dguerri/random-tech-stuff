@@ -8,12 +8,13 @@ _London, August 2022_
 
 - [Mocking Filesystem, File and FileInfo in Golang unit tests](#mocking-filesystem-file-and-fileinfo-in-golang-unit-tests)
   - [Table of contents](#table-of-contents)
+  - [Foreword](#foreword)
   - [Abstract your code and make it testable](#abstract-your-code-and-make-it-testable)
   - [Write unit tests](#write-unit-tests)
     - [Define the mock filesystem](#define-the-mock-filesystem)
 - [That's all](#thats-all)
 
----
+## Foreword
 
 As a beginner, I found it difficult to write unit tests in GoLang for anything that use actual production resources, like filesystems, APIs, or databases. In this post, I put together my findings in the hope I will save you some time.
 
