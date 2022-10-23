@@ -1,0 +1,24 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+
+.page-header {
+  padding-bottom: 20px !important;
+  padding-top: 20px !important;
+}
+
+.main-content p {
+  margin-bottom: 1em;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.project-tagline a {
+  color: #fff;
+}
+
+.main-content {
+  max-width: 70rem;
+}

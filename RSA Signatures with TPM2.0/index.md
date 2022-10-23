@@ -83,7 +83,7 @@ The DER key is then defined as `<header><modulus><mid-header><exponent>`. We can
 ~$ echo -en '\x02\x03' > mid-header.bin
 ```
 
-4. Exponent is always `65537` (`2^16+1`) as we have already seen
+4. Exponent is always `65537` ($2^{16}+1$) as we have already seen
 
 ```shell
 ~$ echo -ne '\x01\x00\x01' > exponent.bin
