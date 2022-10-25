@@ -1989,7 +1989,7 @@ If there is one thing I learned in security, it's that you should never ever wri
 
 I also found that the public key is available at the `/api/keys` endpoint, so I carefully inspected the algorithms used for signing and verifying the message. Unfortunately, nothing obvious came up on RSA usage.
 
-But, while doing the maths, I noticed that the exponent used for the public key was 3 (i.e., $e=3$). Some time ago, for my job, I had to [deal with RSA "internals"](https://dguerriblog.wordpress.com/2016/03/03/tpm2-0-and-openssl-on-linux-2/) a bit, so I remembered that $e=3$ wasn't considered safe.
+But, while doing the maths, I noticed that the exponent used for the public key was 3 (i.e., $e=3$). Some time ago, for my job, I had to [deal with RSA "internals"](https://dguerri.github.io/random-tech-stuff/RSA%20Signatures%20with%20TPM2.0/) a bit, so I remembered that $e=3$ wasn't considered safe.
 
 More investigation made me realize that using a low exponent is not in general a mistake, but it can lead to issues under certain circumstances. I fired up some automated tool to identify known weakness on the key, but no joy.
 
