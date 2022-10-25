@@ -2006,9 +2006,9 @@ The high-level concepts of this exploit are related to the maths behind RSA (ref
   - $e$ is small, so it likely won't cause the $\bmod{N}$ part to be involved during verification;
   - the receiver is not performing an accurate verification on all parts of the message (e.g., the padding).
 
-How? By submitting a signature calculated as $m{'}^{\frac{1}{e}} \bmod{N}$. Under our assumptions, this signature will be verified as:
+How? By submitting a signature calculated as $m'^{\frac{1}{e}} \bmod{N}$. Under our assumptions, this signature will be verified as:
 
-${(m{'}^{\frac{1}{e}})}^e \bmod{N} = m{'}^{\frac{1}{e} * e} \bmod{N} = m{'}$
+$${(m'^{\frac{1}{e}})}^e \bmod{N} = m'^{\frac{1}{e} * e} \bmod{N} = m'$$
 
 We don't need to know $p$, $q$ or $d$.
 
