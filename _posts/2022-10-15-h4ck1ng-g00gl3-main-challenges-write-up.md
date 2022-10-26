@@ -1,12 +1,37 @@
-# H4CK1NG G00GL3 - Main challenges write-up
+---
+layout: post
+description: H4CK1NG G00GL3 - Main challenges write-up
+comments: true
+redirect_from:
+  - /H4CK1NG%20G00GL3%20Main%20challenges%20write-up/
+date: 2022-10-15
+last-update: 2022-10-26
+---
 
-_London, October 2022_
+This is my write-up of H4CK1NG G00GL3's main challenges. [Hacking Google](https://h4ck1ng.google/home) is a _sui generis_ CTF and, hands down, my favourite CTF so far.
+
+According to the authors:
+
+> This is a game, of sorts. H4CKING GOOGL3 is a series of "capture the flag" (CTF) challenges based on the HACKING GOOGLE series. The only way to beat this game designed for hackers, is to think like one.
+
+The [series of videos](https://www.youtube.com/watch?v=aOGFY1R4QQ4&) introducing the challenges are real documentaries, professionally filmed and directed. Each video introduces a cybersecurity topic. Each episode has an introductory challenge and 2 or 3 CTF challenges, plus a bonus one.
+
+The challenges are non-trivial and, typically, not solvable with readily available tools (e.g., using frameworks, or exploits for known vulnerabilities). The best part is that they are all designed to teach you something. In fact, you will have to build your own tools, understand thoroughly the systems you are dealing with, and the properties and vulnerabilities of security mechanisms at play.
+
+In the following write-up, I am summarizing how I, personally, solved the 17 main challenges. While doing so, I will try, as much as possible, to explain my reasoning and mental processes that led me to each exploitation.
+
+Where applicable, I provide the source code of the scripts I have been using.
+
+Note: the reader should keep in mind that there are multiple ways to crack each challenge. Sometimes probably more efficient and elegant than what I am showing here :)
+
+[Go to the Home Page]({{ '/' | absolute_url }})
+
+# H4CK1NG G00GL3 - Main challenges write-up
 
 ## Table Of Contents
 
 - [H4CK1NG G00GL3 - Main challenges write-up](#h4ck1ng-g00gl3---main-challenges-write-up)
   - [Table Of Contents](#table-of-contents)
-  - [Intro](#intro)
   - [EP000 - Operation Aurora](#ep000---operation-aurora)
     - [CHALLENGE 01](#challenge-01)
       - [Solution](#solution)
@@ -50,24 +75,6 @@ _London, October 2022_
       - [Solution](#solution-16)
 
 ---
-
-## Intro
-
-[Hacking Google](https://h4ck1ng.google/home) is a _sui generis_ CTF and, hands down, my favourite CTF so far.
-
-According to the authors:
-
-> This is a game, of sorts. H4CKING GOOGL3 is a series of "capture the flag" (CTF) challenges based on the HACKING GOOGLE series. The only way to beat this game designed for hackers, is to think like one.
-
-The [series of videos](https://www.youtube.com/watch?v=aOGFY1R4QQ4&) introducing the challenges are real documentaries, professionally filmed and directed. Each video introduces a cybersecurity topic. Each episode has an introductory challenge and 2 or 3 CTF challenges, plus a bonus one.
-
-The challenges are non-trivial and, typically, not solvable with readily available tools (e.g., using frameworks, or exploits for known vulnerabilities). The best part is that they are all designed to teach you something. In fact, you will have to build your own tools, understand thoroughly the systems you are dealing with, and the properties and vulnerabilities of security mechanisms at play.
-
-In the following write-up, I am summarizing how I, personally, solved the 17 main challenges. While doing so, I will try, as much as possible, to explain my reasoning and mental processes that led me to each exploitation.
-
-Where applicable, I provide the source code of the scripts I have been using.
-
-Note: the reader should keep in mind that there are multiple ways to crack each challenge. Sometimes probably more efficient and elegant than what I am showing here :)
 
 ## EP000 - Operation Aurora
 
@@ -348,7 +355,7 @@ wannacry: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linke
 
 Given the topic of this episode and the name of our executable ([WannaCry](https://en.wikipedia.org/wiki/WannaCry_ransomware_attack) was a ransomware attack), chances are that `flag` is encrypted.
 
-So, in this case, we need to analyse `wannacry`. Since you don't want to actually cry, *always run untrusted stuff in an isolated sandbox*.
+So, in this case, we need to analyse `wannacry`. Since you don't want to actually cry, _always run untrusted stuff in an isolated sandbox_.
 
 Personally, I use Docker, with an image I built specifically for CTFs. You can find it [here](https://gist.github.com/dguerri/020830af10b274ca4eeada2fc320e3fb). Note that the software installed there is overkill for the challenge at hand.
 
@@ -1227,7 +1234,7 @@ Using this code in the game (after pressing enter) you are presented with a prom
  >>> [Enter - continue, r - return to game]
 ```
 
-Soon enough, I realized that this thing accepted *some* Python command:
+Soon enough, I realized that this thing accepted _some_ Python command:
 
 ```python
 \ print('dguerri')                                    \
@@ -2334,3 +2341,7 @@ I had to use a bit of imagination to guess the right chunk: it's basically the s
 GG
 
 EOF
+
+[Go to the Home Page]({{ '/' | absolute_url }})
+
+![thats-all-folks.png]({{ '/' | absolute_url }}assets/images/thats-all-folks.png)

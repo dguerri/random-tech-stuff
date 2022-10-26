@@ -2,6 +2,29 @@ title: Random Tech Stuff
 author: Davide Guerri
 description: Hi. This is my blog with random technical (and sometimes non-technical) stuff.
 
+twitter:
+  username: dguerri
+
+baseurl: "/random-tech-stuff"
+url: "https://dguerri.github.io"
+
+disqus:
+  shortname: random-tech-stuff
+
 remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-remote-theme
+  - jekyll-target-blank
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+
+target-blank:
+  rel: nofollow
+
+header_page_refs: ["about", "contact"]
+
+cayman-blog:
+  date_format: "%Y-%m-%d"
+
+whitelist:
+  - jekyll-redirect-from

@@ -3,7 +3,14 @@
   <head>
     <meta charset="UTF-8">
 
-{% seo %}
+    {% if site.plugins contains "jekyll-seo-tag" %}
+    {% seo %}
+    {% else %}
+    {% include social-metatags.html %}
+    {% endif %}
+
+    {% include head-custom.html %}
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,13 +29,12 @@
       };
     </script>
 
-    {% include head-custom.html %}
   </head>
   <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     <header class="page-header" role="banner">
-      <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+      <h1 class="project-name">{{ page.description | default: site.title | default: site.github.repository_name }}</h1>
       <h2 class="project-tagline">
         <a href="https://dguerri.github.io/random-tech-stuff/">{{ site.github.repository_name }}</a> by <a href="https://www.linkedin.com/in/{{ site.github.owner_name }}" targer="_blank">{{ site.github.owner_name }}</a>
       </h2>

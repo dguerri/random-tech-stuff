@@ -1,12 +1,38 @@
-# Stress and burnout
+---
+layout: post
+description: Stress and Burnout
+comments: true
+redirect_from:
+  - /Stress%20and%20burnout/
+date: 2022-10-20
+last-update: 2022-10-26
+---
 
-_London, October 2022_
+I have been thinking about writing this note for a long time.
+I went through busy times, writer's block, and some sort of impostor syndrome which told me "why would people read it and would they consider it useful?".
+
+Yeah, I am definitely no psychologist. But I have been around for some time, and I went through stellar highs and frightening lows. I have questioned myself several times, I was about to give up on so many things that I would have regretted for the rest of my life.
+
+> But I am lucky. I am an optimist, so I persisted.
+
+I didn't realize how lucky I have been until later in my life.
+
+When I started supporting people, moving from engineering to management, I started to see how stress and burnout can be common, and what they can lead to.
+To do my job in the best possible way, detecting burnout before it happens, and by being able to give good advice, I started researching these topics.
+
+I stumbled upon a couple of great books. So, I learned that some of the things I have been doing in my life were, incidentally, good to manage stress and avoid burnout.
+I have also discovered that thinking rationally about stress, stressors, and ways to manage them, helps recognize burnout and helps prevent it.
+
+With this note, I would like to share some of my learnings, in the humblest possible way. With the hope that they will be useful in these challenging times and later, when things will get back to the "normal", challenging, life.
+
+[Go to the Home Page]({{ '/' | absolute_url }})
+
+# Stress and burnout
 
 ## Table of contents
 
 - [Stress and burnout](#stress-and-burnout)
   - [Table of contents](#table-of-contents)
-  - [Foreword](#foreword)
   - [Stressors vs stress](#stressors-vs-stress)
   - [First, deal with stress itself](#first-deal-with-stress-itself)
     - [Physical activity is the most effective way](#physical-activity-is-the-most-effective-way)
@@ -17,25 +43,7 @@ _London, October 2022_
     - [Dealing with stressor you can't control: Positive Reframing](#dealing-with-stressor-you-cant-control-positive-reframing)
   - [References](#references)
 
-## Foreword
-
-I have been thinking about writing this note for a long time.
-
-I went through busy times, writer's block, and some sort of impostor syndrome which told me "why would people read it and would they consider it useful?".
-
-Yeah, I am definitely no psychologist. But I have been around for some time, and I went through stellar highs and frightening lows. I have questioned myself several times, I was about to give up on so many things that I would have regretted for the rest of my life.
-
-> But I am lucky. I am an optimist, so I persisted.
-
-I didn't realize how lucky I have been until later in my life.
-
-When I started supporting people, moving from engineering to management, I started to see how stress and burnout can be common, and what they can lead to. 
-To do my job in the best possible way, detecting burnout before it happens, and by being able to give good advice, I started researching these topics.
-
-I stumbled upon a couple of great books. So, I learned that some of the things I have been doing in my life were, incidentally, good to manage stress and avoid burnout.
-I have also discovered that thinking rationally about stress, stressors, and ways to manage them, helps recognize burnout and helps prevent it.
-
-With this note, I would like to share some of my learnings, in the humblest possible way. With the hope that they will be useful in these challenging times and later, when things will get back to the "normal", challenging, life.
+---
 
 ## Stressors vs stress
 
@@ -182,6 +190,8 @@ Or that X-rays were discovered by chance while testing whether cathode rays coul
 It often requires a recovery, during which you can endure by completing the stress-response cycle and, most importantly, **_using kindness and compassion for yourself_**.
 
 ---
+
+[Go to the Home Page]({{ '/' | absolute_url }})
 
 ## References
 

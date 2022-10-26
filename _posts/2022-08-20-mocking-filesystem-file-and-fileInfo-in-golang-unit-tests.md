@@ -1,20 +1,12 @@
-![header.jpeg](assets/header.jpeg)
-
-# Mocking Filesystem, File and FileInfo in Golang unit tests
-
-_London, August 2022_
-
-## Table of contents
-
-- [Mocking Filesystem, File and FileInfo in Golang unit tests](#mocking-filesystem-file-and-fileinfo-in-golang-unit-tests)
-  - [Table of contents](#table-of-contents)
-  - [Foreword](#foreword)
-  - [Abstract your code and make it testable](#abstract-your-code-and-make-it-testable)
-  - [Write unit tests](#write-unit-tests)
-    - [Define the mock filesystem](#define-the-mock-filesystem)
-- [That's all](#thats-all)
-
-## Foreword
+---
+layout: post
+description: Mocking Filesystem, File and FileInfo in Golang unit tests
+comments: true
+redirect_from:
+  - /Mocking%20Filesystem%20File%20and%20FileInfo%20in%20Golang%20unit%20tests/
+date: 2016-08-20
+last-update: 2022-10-26
+---
 
 As a beginner, I found it difficult to write unit tests in GoLang for anything that use actual production resources, like filesystems, APIs, or databases. In this post, I put together my findings in the hope I will save you some time.
 
@@ -27,6 +19,23 @@ Note that the concepts and strategies used here apply to other scenarios:
 3. Write mock implementation for those interfaces not using the actual calls, and use them in your testing.
 
 The code I am using below is taken from a project I am working on [here](https://github.com/dguerri/dockerfuse).
+
+[Go to the Home Page]({{ '/' | absolute_url }})
+
+# Mocking Filesystem, File and FileInfo in Golang unit tests
+
+![mockingfs-header.jpeg]({{ '/' | absolute_url }}assets/images/mockingfs-header.jpeg)
+
+## Table of contents
+
+- [Mocking Filesystem, File and FileInfo in Golang unit tests](#mocking-filesystem-file-and-fileinfo-in-golang-unit-tests)
+  - [Table of contents](#table-of-contents)
+  - [Abstract your code and make it testable](#abstract-your-code-and-make-it-testable)
+  - [Write unit tests](#write-unit-tests)
+    - [Define the mock filesystem](#define-the-mock-filesystem)
+- [That's all](#thats-all)
+
+---
 
 ## Abstract your code and make it testable
 
@@ -226,4 +235,6 @@ func TestOpen(t *testing.T) {
 
 Thanks for reading
 
-![Image copy.png](assets/Image%20copy.png)
+[Go to the Home Page]({{ '/' | absolute_url }})
+
+![thats-all-folks.png]({{ '/' | absolute_url }}assets/images/thats-all-folks.png)

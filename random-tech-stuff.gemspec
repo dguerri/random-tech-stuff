@@ -10,15 +10,17 @@ Gem::Specification.new do |s|
   s.summary       = "This is my blog with random technical (and sometimes non-technical) stuff."
 
   s.files         = `git ls-files -z`.split("\x0").select do |f|
-    f.match(%r{^((_includes|_layouts|_sass|assets)/|(LICENSE|README)((\.(txt|md|markdown)|$)))}i)
+    f.match(%r{^((_includes|_layouts|_sass|assets)/|(LICENSE|README|index|about|contact|now|404)((\.(txt|md|markdown)|$)))}i)
   end
 
   s.required_ruby_version = ">= 2.4.0"
 
   s.platform = Gem::Platform::RUBY
-  s.add_runtime_dependency "jekyll", "> 3.5", "< 5.0"
-  s.add_runtime_dependency "jekyll-seo-tag", "~> 2.0"
   s.add_development_dependency "html-proofer", "~> 3.0"
   s.add_development_dependency "rubocop-github", "~> 0.16"
   s.add_development_dependency "w3c_validators", "~> 1.3"
+  s.add_runtime_dependency "jekyll-redirect-from", '>= 0'
+  s.add_runtime_dependency "jekyll-seo-tag", "~> 2.0"
+  s.add_runtime_dependency "jekyll-target-blank", '>= 0'
+  s.add_runtime_dependency "jekyll", "~> 3.8", "< 5.0"
 end

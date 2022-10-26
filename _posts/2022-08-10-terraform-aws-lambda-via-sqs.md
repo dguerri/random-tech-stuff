@@ -1,6 +1,23 @@
-# Terraform - AWS Lambda via SQS
+---
+layout: post
+description: Terraform - AWS Lambda via SQS
+comments: true
+redirect_from:
+  - /Terraform%20-%20AWS%20Lambda%20via%20SQS/
+date: 2022-08-10
+last-update: 2022-10-26
+---
 
-_London, June 2022_
+While playing around with Terraform, I realized how hard it is to find a simple working example for spinning up a Lambda function triggered by SQS messages.
+As a way to consolidate my learnings, I decided to write this small document.
+
+You can find the [source code for this post here.](https://github.com/dguerri/terraform-sqs-lambda)
+
+Note that the design is intentionally simple. It doesn’t consider important bits that should be used in a production context, like the use of Terraform cloud connected to a VCS; timeout and memory limits for the lambda function; monitoring and alerting; or encryption of data at rest.
+
+[Go to the Home Page]({{ '/' | absolute_url }})
+
+# Terraform - AWS Lambda via SQS
 
 ## Table of contents
 
@@ -20,19 +37,11 @@ _London, June 2022_
 
 ---
 
-While playing around with Terraform, I realized how hard it is to find a simple working example for spinning up a Lambda function triggered by SQS messages.
-
-As a way to consolidate my learnings, I decided to write this small document.
-
-You can find the [source code for this post here.](https://github.com/dguerri/terraform-sqs-lambda)
-
-Note that the design is intentionally simple. It doesn’t consider important bits that should be used in a production context, like the use of Terraform cloud connected to a VCS; timeout and memory limits for the lambda function; monitoring and alerting; or encryption of data at rest.
-
 ## Architecture
 
 The architecture I want to create with IaC (Infra as Code) is super simple: we have a Lambda function triggered by SQS (Simple Queue Service) messages. We log messages to CloudWatch Logs, just by writing their content on the standard output.
 
-![Image.png](assets/Image.png)
+![lambda-sqs-architecture.png]({{ '/' | absolute_url }}assets/images/lambda-sqs-architecture.png)
 
 Despite its simplicity, this kind of architecture is at the core of high-performance and large-scale systems. For instance, the amazing [BinaryAlert](https://github.com/airbnb/binaryalert) released by AirBnB uses the same principle to scan with Yara every single object uploaded in S3.
 
@@ -398,9 +407,9 @@ if __name__ == '__main__':
 
 After running this script, you should be able to see messages in CloudWatch logs:
 
-![Image.png](assets/Image%20(2).png)
+![lambda-sqs-log-streams.png]({{ '/' | absolute_url }}assets/images/lambda-sqs-log-streams.png)
 
-![Image.png](assets/Image%20(3).png)
+![lambda-sqs-log-streams.png]({{ '/' | absolute_url }}assets/images/lambda-sqs-log-streams-2.png)
 
 ---
 
@@ -408,4 +417,6 @@ After running this script, you should be able to see messages in CloudWatch logs
 
 Thanks for reading
 
-![Image copy.png](assets/Image%20copy.png)
+[Go to the Home Page]({{ '/' | absolute_url }})
+
+![thats-all-folks.png]({{ '/' | absolute_url }}assets/images/thats-all-folks.png)
