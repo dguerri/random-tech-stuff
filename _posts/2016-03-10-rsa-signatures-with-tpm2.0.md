@@ -101,7 +101,7 @@ The DER key is then defined as `<header><modulus><mid-header><exponent>`. We can
 ~$ cat header.bin modulus.bin mid-header.bin exponent.bin > key.der
 ```
 
-6. If needed, you can easily convert the DER encoded key to PEM
+- If needed, you can easily convert the DER encoded key to PEM
 
 ```shell
 ~$ openssl pkey -inform der -outform pem -pubin -in key.der -out key.pem
