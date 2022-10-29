@@ -8,9 +8,8 @@ twitter:
 baseurl: "/random-tech-stuff"
 url: "https://dguerri.github.io"
 
-fbcomments:
-  appid: 886478268951212
-  nonce: hE0UtsU3
+# disqus:
+#  shortname: random-tech-stuff
 
 new_google_analytics: G-M9Z323FVQ2
 
