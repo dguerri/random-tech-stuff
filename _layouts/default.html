@@ -11,6 +11,10 @@
 
     {% include head-custom.html %}
 
+    {% if site.new_google_analytics and jekyll.environment == 'production' %}
+    {% include google-analytics.html %}
+    {% endif %}
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,7 +43,7 @@
       <span id="dark-mode-button" style="float: right;" onclick="darkmode();"></span>
       <h1 class="project-name">{{ page.description | default: site.title | default: site.github.repository_name }}</h1>
       <h2 class="project-tagline">
-        <a href="https://dguerri.github.io/random-tech-stuff/">{{ site.github.repository_name }}</a> by <a href="https://www.linkedin.com/in/{{ site.github.owner_name }}" targer="_blank">{{ site.github.owner_name }}</a>
+        <a href="{{ '/' | absolute_url }}">{{ site.github.repository_name }}</a> by <a href="https://www.linkedin.com/in/{{ site.github.owner_name }}" targer="_blank">{{ site.github.owner_name }}</a>
       </h2>
     </header>
 
