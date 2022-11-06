@@ -15,9 +15,13 @@ You can find the [source code for this post here.](https://github.com/dguerri/te
 
 Note that the design is intentionally simple. It doesn’t consider important bits that should be used in a production context, like the use of Terraform cloud connected to a VCS; timeout and memory limits for the lambda function; monitoring and alerting; or encryption of data at rest.
 
+---
+
 _**I would love to hear your feedback!**_
 
 Should you come across any mistake or if you want to leave a comment, please use the GitHub Discussion at the end of the document, or the Issue tracker available [here](https://github.com/dguerri/random-tech-stuff/issues).
+
+---
 
 ## Table of contents
 
