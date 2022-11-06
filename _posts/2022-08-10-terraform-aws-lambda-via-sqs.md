@@ -15,14 +15,13 @@ You can find the [source code for this post here.](https://github.com/dguerri/te
 
 Note that the design is intentionally simple. It doesn’t consider important bits that should be used in a production context, like the use of Terraform cloud connected to a VCS; timeout and memory limits for the lambda function; monitoring and alerting; or encryption of data at rest.
 
-[Go to the Home Page]({{ '/' | absolute_url }})
+_**I would love to hear your feedback!**_
 
-# Terraform - AWS Lambda via SQS
+Should you come across any mistake or if you want to leave a comment, please use the GitHub Discussion at the end of the document, or the Issue tracker available [here](https://github.com/dguerri/random-tech-stuff/issues).
 
 ## Table of contents
 
 - [Terraform - AWS Lambda via SQS](#terraform---aws-lambda-via-sqs)
-  - [Table of contents](#table-of-contents)
   - [Architecture](#architecture)
     - [Why SQS?](#why-sqs)
   - [AWS user and permissions](#aws-user-and-permissions)
@@ -36,6 +35,8 @@ Note that the design is intentionally simple. It doesn’t consider important bi
 - [That's all](#thats-all)
 
 ---
+
+# Terraform - AWS Lambda via SQS
 
 ## Architecture
 

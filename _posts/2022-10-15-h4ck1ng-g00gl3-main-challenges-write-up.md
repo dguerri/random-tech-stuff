@@ -24,14 +24,13 @@ Where applicable, I provide the source code of the scripts I have been using.
 
 Note: the reader should keep in mind that there are multiple ways to crack each challenge. Sometimes probably more efficient and elegant than what I am showing here :)
 
-[Go to the Home Page]({{ '/' | absolute_url }})
+_**I would love to hear your feedback!**_
 
-# H4CK1NG G00GL3 - Main challenges write-up
+Should you come across any mistake or if you want to leave a comment, please use the GitHub Discussion at the end of the document, or the Issue tracker available [here](https://github.com/dguerri/random-tech-stuff/issues).
 
 ## Table Of Contents
 
 - [H4CK1NG G00GL3 - Main challenges write-up](#h4ck1ng-g00gl3---main-challenges-write-up)
-  - [Table Of Contents](#table-of-contents)
   - [EP000 - Operation Aurora](#ep000---operation-aurora)
     - [CHALLENGE 01](#challenge-01)
       - [Solution](#solution)
@@ -75,6 +74,8 @@ Note: the reader should keep in mind that there are multiple ways to crack each 
       - [Solution](#solution-16)
 
 ---
+
+# H4CK1NG G00GL3 - Main challenges write-up
 
 ## EP000 - Operation Aurora
 

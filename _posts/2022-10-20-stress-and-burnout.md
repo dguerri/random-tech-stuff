@@ -25,14 +25,13 @@ I have also discovered that thinking rationally about stress, stressors, and way
 
 With this note, I would like to share some of my learnings, in the humblest possible way. With the hope that they will be useful in these challenging times and later, when things will get back to the "normal", challenging, life.
 
-[Go to the Home Page]({{ '/' | absolute_url }})
+_**I would love to hear your feedback!**_
 
-# Stress and burnout
+Should you come across any mistake or if you want to leave a comment, please use the GitHub Discussion at the end of the document, or the Issue tracker available [here](https://github.com/dguerri/random-tech-stuff/issues).
 
 ## Table of contents
 
 - [Stress and burnout](#stress-and-burnout)
-  - [Table of contents](#table-of-contents)
   - [Stressors vs stress](#stressors-vs-stress)
   - [First, deal with stress itself](#first-deal-with-stress-itself)
     - [Physical activity is the most effective way](#physical-activity-is-the-most-effective-way)
@@ -44,6 +43,8 @@ With this note, I would like to share some of my learnings, in the humblest poss
   - [References](#references)
 
 ---
+
+# Stress and burnout
 
 ## Stressors vs stress
 

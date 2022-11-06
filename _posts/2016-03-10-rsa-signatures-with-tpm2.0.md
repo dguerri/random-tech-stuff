@@ -10,7 +10,10 @@ last-update: 2022-10-26
 
 What I am going to show applies to any Trusted Platform Module (TPM) implementing TPM2.0 specs. However, I wrote this article after spending two days trying to use the Minnowboard MAX firmware TPM (fTPM) for something useful in real life... I hope I can save you some time and many troubles [1].
 
-[Go to the Home Page]({{ '/' | absolute_url }})
+_**I would love to hear your feedback!**_
+
+Should you come across any mistake or if you want to leave a comment, please use the GitHub Discussion at the end of the document, or the Issue tracker available [here](https://github.com/dguerri/random-tech-stuff/issues)
+
 
 ## Table of contents
 
