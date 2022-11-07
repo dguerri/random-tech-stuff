@@ -4,7 +4,7 @@ description: Mocking Filesystem, File and FileInfo in Golang unit tests
 comments: true
 redirect_from:
   - /Mocking%20Filesystem%20File%20and%20FileInfo%20in%20Golang%20unit%20tests/
-date: 2016-08-20
+date: 2022-08-20
 last-update: 2022-10-26
 ---
 
@@ -12,7 +12,7 @@ As a beginner, I found it difficult to write unit tests in GoLang for anything t
 
 I will show you how to abstract calls to functions using the filesystem through the Go `os` core library, which (at least up to Go version 1.19) is not particularly test-friendly. We will also see how to define unit tests on the relative mock functions.
 
-Note that the concepts and strategies used here apply to other scenarios:
+Note that the concepts and strategies used here apply to other scenarios. This is commonly called _dependency injection_:
 
 1. Abstract the actual callsites in the functions you want to test using interfaces;
 2. Define an implementation of those interfaces wrapping the “actual” calls (OS, APIs, DBs, …);
