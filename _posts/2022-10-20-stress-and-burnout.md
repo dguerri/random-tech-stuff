@@ -25,14 +25,6 @@ I have also discovered that thinking rationally about stress, stressors, and way
 
 With this note, I would like to share some of my learnings, in the humblest possible way. With the hope that they will be useful in these challenging times and later, when things will get back to the "normal", challenging, life.
 
----
-
-_**I would love to hear your feedback!**_
-
-Should you come across any mistake or if you want to leave a comment, please use the GitHub Discussion at the end of the document, or the Issue tracker available [here](https://github.com/dguerri/random-tech-stuff/issues).
-
----
-
 ## Table of contents
 
 - [Stress and burnout](#stress-and-burnout)

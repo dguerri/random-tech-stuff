@@ -20,14 +20,6 @@ Note that the concepts and strategies used here apply to other scenarios. This i
 
 The code I am using below is taken from a project I am working on [here](https://github.com/dguerri/dockerfuse).
 
----
-
-_**I would love to hear your feedback!**_
-
-Should you come across any mistake or if you want to leave a comment, please use the GitHub Discussion at the end of the document, or the Issue tracker available [here](https://github.com/dguerri/random-tech-stuff/issues).
-
----
-
 ## Table of contents
 
 - [Mocking Filesystem, File and FileInfo in Golang unit tests](#mocking-filesystem-file-and-fileinfo-in-golang-unit-tests)

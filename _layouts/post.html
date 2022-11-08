@@ -2,21 +2,48 @@
 layout: default
 ---
 
-<article itemscope itemtype="http://schema.org/BlogPosting">
-  <!-- <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>
+<article id="article_begin" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <hr />
+    <p>
+      <em><strong>I would love to hear your feedback!</strong></em>
+    </p>
+    <p>
+      Should you come across any mistake in this article, or if you want to
+      leave a comment, please use the GitHub Discussion
+      <a href="#article_end">at the end of the document</a>. Alternatively,
+      please use the Issue tracker available
+      <a href="{{ site.github.repository_url }}/issues">here</a>.
+    </p>
+    <hr />
+
+    <a href="{{ '/' | absolute_url }}"> Read more articles</a>
+    <h1 class="post-title" itemprop="name headline">
+      {{ page.title | escape }}
+    </h1>
     <p class="post-meta">
-      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {% assign date_format = site.cayman-blog.date_format | default: "%b %-d, %Y" %}
-        {{ page.date | date: date_format }}
+      <time
+        datetime="{{ page.date | date_to_xmlschema }}"
+        itemprop="datePublished"
+      >
+        {% assign date_format = site.cayman-blog.date_format | default: "%b %-d,
+        %Y" %} {{ page.date | date: date_format }}
       </time>
-      {% if page.author %}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
-      {% endif %}</p>
-  </header> -->
+      {% if page.author %} •
+      <span itemprop="author" itemscope itemtype="http://schema.org/Person"
+        ><span itemprop="name">{{ page.author }}</span></span
+      >
+      {% endif %}
+    </p>
+  </header>
 
   <div itemprop="articleBody">{{ content }}</div>
 
   {% if jekyll.environment == 'production' %} {% include giscus.html %} {% endif
   %}
 </article>
+<div id="article_end">
+  <hr />
+  <a href="#article_begin">Back to top</a> or read
+  <a href="{{ '/' | absolute_url }}">more articles</a>
+</div>
