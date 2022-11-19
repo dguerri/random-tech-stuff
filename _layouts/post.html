@@ -39,11 +39,10 @@ layout: default
 
   <div itemprop="articleBody">{{ content }}</div>
 
-  {% if jekyll.environment == 'production' %} {% include giscus.html %} {% endif
-  %}
+  {% include giscus.html %}
 </article>
 <div id="article_end">
   <hr />
-  <a href="#article_begin">Back to top</a> or read
-  <a href="{{ '/' | absolute_url }}">more articles</a>
+  <a href="#article_begin">Back to top</a> or
+  <a href="{{ '/' | absolute_url }}">read more posts</a>
 </div>

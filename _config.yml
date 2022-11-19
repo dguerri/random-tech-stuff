@@ -8,8 +8,16 @@ twitter:
 baseurl: "/random-tech-stuff"
 url: "https://dguerri.github.io"
 
-# disqus:
-#  shortname: random-tech-stuff
+giscus:
+  category-id: "DIC_kwDOH2jvhM4CSROQ"
+  category: "General"
+  crossorigin: "anonymous"
+  lang: "en"
+  mapping: "og:title"
+  reaction-enabled: "1"
+  repo-id: "R_kgDOH2jvhA"
+  repo: "dguerri/random-tech-stuff"
+  theme: "dark_dimmed"
 
 new_google_analytics: G-M9Z323FVQ2
 

@@ -3,6 +3,14 @@
 
 @import "{{ site.theme }}";
 
+.giscus,
+.giscus-frame {
+  width: 100%;
+}
+
+.giscus-frame {
+  border: none;
+}
 
 .page-header {
   padding-bottom: 20px !important;

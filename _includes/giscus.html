@@ -1,18 +1,19 @@
 <br />
-<script
-  src="https://giscus.app/client.js"
-  data-repo="dguerri/random-tech-stuff"
-  data-repo-id="R_kgDOH2jvhA"
-  data-category="General"
-  data-category-id="DIC_kwDOH2jvhM4CSROQ"
-  data-mapping="og:title"
-  data-strict="0"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="dark"
-  data-lang="en"
-  data-loading="lazy"
-  crossorigin="anonymous"
-  async
-></script>
+{% assign giscus = site.giscus %}
+{% if jekyll.environment == 'production' and giscus.repo %}
+  <script src="https://giscus.app/client.js"
+          crossorigin={{ giscus.crossorigin }}
+          data-category-id={{ giscus.category-id }}
+          data-category={{ giscus.category }}
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-lang={{ giscus.lang }}
+          data-mapping={{ giscus.mapping }}
+          data-reactions-enabled={{ giscus.reaction-enabled }}
+          data-repo-id={{ giscus.repo-id }}
+          data-repo={{ giscus.repo }}
+          data-strict="0"
+          data-theme={{ giscus.theme }}
+          async>
+  </script>
+{% endif %}
