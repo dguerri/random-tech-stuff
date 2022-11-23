@@ -1,13 +1,12 @@
 ---
 layout: page
 title: About
-tagline: A few more words about me
+tagline: About me
 permalink: /about.html
 ref: about
 order: 0
 ---
 
-WiP!
+# About me
 
-
-[Go to the Home Page]({{ '/' | absolute_url }})
+TBW
