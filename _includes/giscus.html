@@ -1,6 +1,7 @@
-<br />
+<!-- giscus -->
 {% assign giscus = site.giscus %}
 {% if jekyll.environment == 'production' and giscus.repo %}
+  <br />
   <script src="https://giscus.app/client.js"
           crossorigin={{ giscus.crossorigin }}
           data-category-id={{ giscus.category-id }}

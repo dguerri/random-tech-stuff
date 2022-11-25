@@ -39,7 +39,7 @@ layout: default
 
   <div itemprop="articleBody">{{ content }}</div>
 
-  {% include giscus.html %}
+  {% if page.comments %} {% include giscus.html %} {% endif %}
 </article>
 <div id="article_end">
   <hr />
