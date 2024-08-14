@@ -137,7 +137,7 @@ def extract_cve_from_item(item: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     en_text = next(
       (item['value'] for item in item['cve']['description']['description_data'] 
          if item['lang'] == 'en'), None)
-    if en_text is None
+    if en_text is None:
       return None
   
     return {
