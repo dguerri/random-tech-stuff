@@ -413,8 +413,6 @@ Wow, another one bites the dust :)
 
 75%, for the worst case, might not be enough in some scenarios. And, in general, we might want to improve that 83%+ too, to avoid a false sense of security (or insecurity) while calculating the overall vulnerability management risk for your domain.
 
-Also keep in mind that the overall "probability" of getting a correct vector is the product of the probabilities of getting each of its dimensions right (this is a naive assumption, and it is a lower bound, as some of these dimensions are correlated).
-
 There are several ways to improve the model. To name some:
 
 1. Add more unstructured/structured data from the CVE when calculating the embeddings.
