@@ -3,7 +3,7 @@ layout: post
 description: Predicting CVSS Vectors with text embeddings and random forests
 comments: true
 date: 2024-08-13
-last-update: 22024-08-14
+last-update: 22024-08-17
 ---
 
 Tired of hearing/reading only about generative AI models? This post explores how Artificial Intelligence and Machine Learning can help with a very real cybersecurity problem.
@@ -77,6 +77,8 @@ To assign a CVSS vector to a CVE, a security analyst would carefully read and un
 Can AI do that? It certainly can, to some extent.
 
 You probably cannot just feed the description to a large language model and hope to get a super accurate CVSS vector. At least in 2024.
+
+One reason is that LLMs produce sequences of tokens based on previously seen (or generated) tokens, so the initial part of the CVSS vector could influence the following parts. Of course, that heavily depends on the data the specific model in use has been trained on.
 
 But fear not, AI is not just LLMs and sharks.
 
@@ -294,7 +296,7 @@ Not bad for a quick and dirty model!
 
 To summarise, "just" looking at the CVE description we are able to predict
 
-- the attack vector, attack complexity, need of user interaction, scope with an accuracy of over 90%
+- the attack vector, attack complexity, need for user interaction, scope with an accuracy of over 90%
 - the impacts with an accuracy of over 83%
 - the need of privileges with an accuracy of 75%
 
