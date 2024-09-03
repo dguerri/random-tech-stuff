@@ -97,7 +97,7 @@ Identifying the core issue with one-byte was relatively easy. The name kind of g
 
 With the help of GDB, I noticed that option number 3 allows us to write `0x59` bytes of memory in a chunk, while the memory available to the user is only `0x58` bytes (out of a chunk with a total of `0x60` bytes).
 
-On a big endian architecture, such as x86_64, this capability enables us to manipulate the least significant byte of the chunk size that follows.
+On a big endian architecture, such as x86_64, this capability enables us to manipulate the least significant byte of the size of chunk that follows.
 
 ![Image.png]({{ '/' | absolute_url }}assets/images/one-byte/0_0-01.png)
 
@@ -194,7 +194,7 @@ chunk_03 = malloc() # Spacer chunk
 chunk_vt = malloc() # This will be our fake vtable.
 ```
 
-Leveraging the off-by-one bug, we resize `chunk_01` from `0x60` to `0xc0` bytes (`0xc0,` as we need to account for the `prev_inuse` flag).
+Leveraging the off-by-one bug, we resize `chunk_01` from `0x60` to `0xc0` bytes (`0xc1`, as we need to account for the `prev_inuse` flag).
 
 ```python
 # Create a fake 0xc0 bytes chunk
