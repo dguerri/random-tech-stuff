@@ -97,7 +97,7 @@ Identifying the core issue with one-byte was relatively easy. The name kind of g
 
 With the help of GDB, I noticed that option number 3 allows us to write `0x59` bytes of memory in a chunk, while the memory available to the user is only `0x58` bytes (out of a chunk with a total of `0x60` bytes).
 
-On a big endian architecture, such as x86_64, this capability enables us to manipulate the least significant byte of the size of chunk that follows.
+On a little endian architecture, such as x86_64, this capability enables us to manipulate the least significant byte of the size of chunk that follows.
 
 ![Image.png]({{ '/' | absolute_url }}assets/images/one-byte/0_0-01.png)
 
