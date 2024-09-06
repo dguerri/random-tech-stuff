@@ -18,7 +18,7 @@ This incident brought to mind the challenges I encountered while delving into th
   - [The bug](#the-bug)
 - [Exploiting one\_byte and GLibC 2.23](#exploiting-one_byte-and-glibc-223)
 - [The complete step-by-step exploit](#the-complete-step-by-step-exploit)
-  - [Step 1, leak GLibC and heap addresses](#step-1-leak-glibc-and-heap-addresses)
+  - [Step 1 - Leak GLibC and heap addresses](#step-1-leak-glibc-and-heap-addresses)
   - [Step 2 - Configure the heap for the House of Orange](#step-2---configure-the-heap-for-the-house-of-orange)
   - [Step 3 - Trigger the exploit!](#step-3---trigger-the-exploit)
 - [Other things that I have tried](#other-things-that-i-have-tried)
@@ -182,7 +182,7 @@ There are 3 main steps for this exploit.
 
 > ***Note:*** My exploitation of the one-byte challenge differs from the one presented as the "official" solution for the challenge. This is due to the approach used for leaking the GLibC and heap address.
 
-## Step 1, leak GLibC and heap addresses
+## Step 1 - Leak GLibC and heap addresses
 
 We allocate a total of 5 chunks. The first 3 are used to leak GLibC and heap addresses. We would need an additional one to prevent consolidation with the top chunk, but here we add 2 more. The need for them will be clear later.
 
