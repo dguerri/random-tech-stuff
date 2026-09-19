@@ -21,7 +21,7 @@ As it turns out, [tpm2-tools](https://github.com/01org/tpm2.0-tools) (the only T
 
 This is very annoying, as you can't directly use a TPM for useful stuff if the other party can not load those TPM data structures (e.g., using a tpm2-tools).
 
-After spending quite a bit of time on the [TPM2.0 specs](http://www.trustedcomputinggroup.org/resources/tpm_library_specification) (a reading that I would recommend to anyone with a lot of time and masochistic personality) I came up with some procedures to convert RSA public keys and signatures.
+After spending quite a bit of time on the [TPM2.0 specs](https://www.trustedcomputinggroup.org/resources/tpm_library_specification) (a reading that I would recommend to anyone with a lot of time and masochistic personality) I came up with some procedures to convert RSA public keys and signatures.
 
 In this article, I am going to generate an RSA key that we can use to identify a particular device using a TPM that implements TPM2.0 specification. The easiest way to achieve that is using an AIK.
 
@@ -53,7 +53,7 @@ RSA is the default algorithm. The AIK is defined in the endorsement hierarchy, s
 
 `ak.pub` is a TPMT_PUBLIC structure which, among other things, contains the RSA modulus. As we generated a 2048 bits key (default), the modulus is exactly 256 bytes.
 
-It is important to note that `ak.pub` doesn't contain the RSA exponent (actually that field is present, but it is set to 0). For RSA, TPM2.0 assumes that the exponent is always $2^{16}+1 = 65537$ ([for good reasons](http://crypto.stackexchange.com/questions/3110/impacts-of-not-using-rsa-exponent-of-65537)).
+It is important to note that `ak.pub` doesn't contain the RSA exponent (actually that field is present, but it is set to 0). For RSA, TPM2.0 assumes that the exponent is always $2^{16}+1 = 65537$ ([for good reasons](https://crypto.stackexchange.com/questions/3110/impacts-of-not-using-rsa-exponent-of-65537)).
 
 All that being said, we can convert the key to an ASN.1 DER and/or PEM format.
 
@@ -163,4 +163,4 @@ This is just an example of what we can do with a TPM. In one of the next article
 
 ## References
 
-[1] To create a custom version of the UEFI firmware for the MBM and enable the fTPM I suggest you to read this excellent article: [Minnowboard Max: Enable the firmware (TXE) TPM 2.0](http://prosauce.org/blog/2016/1/11/minnowboard-max-enable-and-test-the-firmware-txe-tpm-20)
+[1] To create a custom version of the UEFI firmware for the MBM and enable the fTPM I suggest you to read this excellent article: [Minnowboard Max: Enable the firmware (TXE) TPM 2.0](https://prosauce.org/blog/2016/1/11/minnowboard-max-enable-and-test-the-firmware-txe-tpm-20)
