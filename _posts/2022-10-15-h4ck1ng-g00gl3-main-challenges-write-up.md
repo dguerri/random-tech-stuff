@@ -1,13 +1,16 @@
 ---
-layout: post
-description: H4CK1NG G00GL3 - Main challenges write-up
-comments: true
+title: 'H4CK1NG G00GL3 - Main challenges write-up'
+date: 2022-10-15 12:00:00 +0200
+categories: ['CTF Write-ups', 'Reverse Engineering']
+tags: ['ctf', 'google', 'reverse-engineering', 'web-security', 'pwn']
+description: 'Comprehensive write-up for all main challenges in the Google H4CK1NG G00GL3 CTF competition.'
+image:
+  path: /assets/images/google-ctf/cover.jpg
+  alt: 'H4CK1NG G00GL3 - Main challenges write-up'
+math: true
 redirect_from:
   - /H4CK1NG%20G00GL3%20Main%20challenges%20write-up/
-date: 2022-10-15
-last-update: 2022-10-26
 ---
-
 This is my write-up of H4CK1NG G00GL3's main challenges. [Hacking Google](https://h4ck1ng.google/home) is a _sui generis_ CTF and, hands down, my favourite CTF so far.
 
 According to the authors:
@@ -24,54 +27,7 @@ Where applicable, I provide the source code of the scripts I have been using.
 
 Note: the reader should keep in mind that there are multiple ways to crack each challenge. Sometimes probably more efficient and elegant than what I am showing here :)
 
-## Table Of Contents
 
-- [H4CK1NG G00GL3 - Main challenges write-up](#h4ck1ng-g00gl3---main-challenges-write-up)
-  - [EP000 - Operation Aurora](#ep000---operation-aurora)
-    - [CHALLENGE 01](#challenge-01)
-      - [Solution](#solution)
-    - [CHALLENGE 02](#challenge-02)
-      - [Solution](#solution-1)
-  - [EP001 - T.A.G](#ep001---tag)
-    - [CHALLENGE 01](#challenge-01-1)
-      - [Solution](#solution-2)
-    - [CHALLENGE 02](#challenge-02-1)
-      - [Solution](#solution-3)
-      - [Random ideas on how to so solve this challenge in a more elegant way](#random-ideas-on-how-to-so-solve-this-challenge-in-a-more-elegant-way)
-    - [CHALLENGE 03](#challenge-03)
-      - [Solution](#solution-4)
-  - [EP002 - Detection and Response](#ep002---detection-and-response)
-    - [CHALLENGE 01](#challenge-01-2)
-      - [Solution](#solution-5)
-    - [CHALLENGE 02](#challenge-02-2)
-      - [Solution](#solution-6)
-    - [CHALLENGE 03](#challenge-03-1)
-      - [Solution](#solution-7)
-  - [EP003 - Red Team](#ep003---red-team)
-    - [CHALLENGE 01](#challenge-01-3)
-      - [Solution](#solution-8)
-    - [CHALLENGE 02](#challenge-02-3)
-      - [Solution](#solution-9)
-    - [CHALLENGE 03](#challenge-03-2)
-      - [Solution](#solution-10)
-  - [EP004 - Bug Hunters](#ep004---bug-hunters)
-    - [CHALLENGE 01](#challenge-01-4)
-      - [Solution](#solution-11)
-    - [CHALLENGE 02](#challenge-02-4)
-      - [Solution](#solution-12)
-    - [CHALLENGE 03](#challenge-03-3)
-      - [Solution](#solution-13)
-  - [EP005 - Project Zero](#ep005---project-zero)
-    - [CHALLENGE 01](#challenge-01-5)
-      - [Solution](#solution-14)
-    - [CHALLENGE 02](#challenge-02-5)
-      - [Solution](#solution-15)
-    - [CHALLENGE 03](#challenge-03-4)
-      - [Solution](#solution-16)
-
----
-
-# H4CK1NG G00GL3 - Main challenges write-up
 
 ## EP000 - Operation Aurora
 
@@ -2341,4 +2297,4 @@ EOF
 
 [Go to the Home Page]({{ '/' | absolute_url }})
 
-![thats-all-folks.png]({{ '/' | absolute_url }}assets/images/thats-all-folks.png)
+![thats-all-folks.png](/assets/images/thats-all-folks.png)

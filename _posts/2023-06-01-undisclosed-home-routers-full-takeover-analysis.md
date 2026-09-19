@@ -1,34 +1,18 @@
 ---
-layout: post
-description: Undisclosed Home Routers Full Takeover
-comments: true
-date: 2023-06-01
-last-update: 2023-06-01
+title: 'Undisclosed Home Routers Full Takeover'
+date: 2023-06-01 12:00:00 +0200
+categories: ['Vulnerability Research', 'Embedded']
+tags: ['embedded', 'firmware', 'mips', 'router', 'rce']
+description: 'Vulnerability analysis of an unauthenticated remote code execution flaw in customer premises equipment (CPE) home routers.'
+image:
+  path: /assets/images/router-takeover/cover.jpg
+  alt: 'Undisclosed Home Routers Full Takeover'
 ---
-
 Recently, I came to own some Customer Premises Equipment (CPEs). You might wonder why. Well, occasionally, when I'm feeling bored, I enjoy testing the vulnerabilities of embedded devices, while staying within ethical and righteous boundaries.
 
 In this article, and perhaps in future articles, I will discuss a complete and unauthenticated remote takeover that can be performed on these devices via the embedded management web interface. It should be noted that the management interface of these devices is accessible from the Internet by default.
 
-## Table of Contents
 
-- [Undisclosed Home Routers Full Takeover](#undisclosed-home-routers-full-takeover)
-  - [The story](#the-story)
-  - [Let’s get started](#lets-get-started)
-  - [Router 1](#router-1)
-    - [Using the source](#using-the-source)
-      - [What is all this XML?](#what-is-all-this-xml)
-      - [Back to the blacklist upload](#back-to-the-blacklist-upload)
-      - [A dead end?](#a-dead-end)
-    - [Injecting commands with no authentication, at last](#injecting-commands-with-no-authentication-at-last)
-    - [Recap](#recap)
-  - [Router 2](#router-2)
-    - [Exploit](#exploit)
-  - [Router 3](#router-3)
-    - [Exploit](#exploit-1)
-  - [How the vendor should fix these issues](#how-the-vendor-should-fix-these-issues)
-
-# Undisclosed Home Routers Full Takeover
 
 The purpose of this article is to raise awareness about vulnerabilities present in cheap modems and routers, especially those provided by telcos.
 

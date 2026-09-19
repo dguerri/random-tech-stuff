@@ -1,33 +1,20 @@
 ---
-layout: post
-description: Backups with Bup
-comments: true
-date: 2022-11-26
-last-update: 2022-11-26
+title: 'Backups with Bup'
+date: 2022-11-25 12:00:00 +0200
+categories: ['Systems & Tools', 'Linux']
+tags: ['backup', 'bup', 'linux', 'macos', 'sysadmin']
+description: 'Setting up fast, deduplicated, Git-based network backups across Mac and Linux systems using Bup and Docker.'
+image:
+  path: /assets/images/bup/cover.jpg
+  alt: 'Backups with Bup'
 ---
-
 Time Machine never really worked for me. Network backups were slow and unreliable, and to make matters worse, my Apple TimeCapsule broke when I needed it the most, causing me to lose many photos and other documents.
 Moreover, at some point I needed to do backups for multiple computer, Mac and Linux, so I started to look for an alternative solution.
 
 I found [Bup](https://github.com/bup/bup), slightly more than 2 years ago.
 Since then, I have been happy with it, to the point I would like to share my experience and the setup I am using.
 
-## Table of Contents
 
-- [Backups with Bup](#backups-with-bup)
-  - [Installing Bup](#installing-bup)
-  - [Setting up network storage and Bup server](#setting-up-network-storage-and-bup-server)
-    - [Dockerfile](#dockerfile)
-    - [Running the container](#running-the-container)
-  - [Clients setup](#clients-setup)
-    - [First backup](#first-backup)
-    - [Restoring data](#restoring-data)
-    - [Making recurring backups](#making-recurring-backups)
-      - [macOS backup script](#macos-backup-script)
-  - [Cleaning up](#cleaning-up)
-  - [Off-site data synchronization (disaster recovery)](#off-site-data-synchronization-disaster-recovery)
-
-# Backups with Bup
 
 Bup is a
 > "Very efficient backup system based on the git packfile format, providing fast incremental saves and global deduplication (among and within files, including virtual machine images)."

@@ -1,32 +1,16 @@
 ---
-layout: post
-description: Predicting CVSS Vectors with text embeddings and random forests
-comments: true
-date: 2024-08-13
-last-update: 22024-08-17
+title: 'Predicting CVSS Vectors with text embeddings and random forests'
+date: 2024-08-13 12:00:00 +0200
+categories: ['AI & Cybersecurity', 'Machine Learning']
+tags: ['machine-learning', 'embeddings', 'cvss', 'nlp', 'vulnerability-analysis']
+description: 'Exploring how text embeddings and Random Forest classifiers can predict CVSS vectors from CVE descriptions to alleviate NVD backlogs.'
+image:
+  path: /assets/images/cvss/cover.jpg
+  alt: 'Predicting CVSS Vectors with text embeddings and random forests'
 ---
-
 Tired of hearing/reading only about generative AI models? This post explores how Artificial Intelligence and Machine Learning can help with a very real cybersecurity problem.
 
-## Table of Contents
 
-- [Predicting CVSS Vectors with text embeddings and random forests](#predicting-cvss-vectors-with-text-embeddings-and-random-forests)
-  - [The problem](#the-problem)
-  - [What are text embeddings?](#what-are-text-embeddings)
-  - [What are random forests?](#what-are-random-forests)
-  - [Okay, cool, but what does all this have to do with CVEs?](#okay-cool-but-what-does-all-this-have-to-do-with-cves)
-  - [The juicy part](#the-juicy-part)
-    - [Step 1. Getting the data](#step-1-getting-the-data)
-    - [Step 2. Getting the embeddings](#step-2-getting-the-embeddings)
-    - [Step 3. Training the model](#step-3-training-the-model)
-  - ['nuff test data, how do we perform on 2024 data?](#nuff-test-data-how-do-we-perform-on-2024-data)
-    - [CVE-2024-39243](#cve-2024-39243)
-    - [CVE-2024-27981](#cve-2024-27981)
-    - [CVE-2024-4764](#cve-2024-4764)
-  - [How can we improve?](#how-can-we-improve)
-  - [Conclusion (written by AI!)](#conclusion-written-by-ai)
-
-# Predicting CVSS Vectors with text embeddings and random forests
 
 ## The problem
 

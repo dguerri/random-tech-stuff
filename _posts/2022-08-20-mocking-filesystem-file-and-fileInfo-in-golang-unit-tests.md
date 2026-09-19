@@ -1,13 +1,15 @@
 ---
-layout: post
-description: Mocking Filesystem, File and FileInfo in Golang unit tests
-comments: true
+title: 'Mocking Filesystem, File and FileInfo in Golang unit tests'
+date: 2022-08-20 12:00:00 +0200
+categories: ['Software Engineering', 'Golang']
+tags: ['golang', 'testing', 'mocking', 'unit-tests']
+description: 'Techniques and patterns for effectively mocking the filesystem, os.File, and os.FileInfo in Go unit tests.'
+image:
+  path: /assets/images/mockingfs-header.jpeg
+  alt: 'Mocking Filesystem, File and FileInfo in Golang unit tests'
 redirect_from:
   - /Mocking%20Filesystem%20File%20and%20FileInfo%20in%20Golang%20unit%20tests/
-date: 2022-08-20
-last-update: 2022-10-26
 ---
-
 As a beginner, I found it difficult to write unit tests in GoLang for anything that use actual production resources, like filesystems, APIs, or databases. In this post, I put together my findings in the hope I will save you some time.
 
 I will show you how to abstract calls to functions using the filesystem through the Go `os` core library, which (at least up to Go version 1.19) is not particularly test-friendly. We will also see how to define unit tests on the relative mock functions.
@@ -19,20 +21,6 @@ Note that the concepts and strategies used here apply to other scenarios. This i
 3. Write mock implementation for those interfaces not using the actual calls, and use them in your testing.
 
 The code I am using below is taken from a project I am working on [here](https://github.com/dguerri/dockerfuse).
-
-## Table of contents
-
-- [Mocking Filesystem, File and FileInfo in Golang unit tests](#mocking-filesystem-file-and-fileinfo-in-golang-unit-tests)
-  - [Abstract your code and make it testable](#abstract-your-code-and-make-it-testable)
-  - [Write unit tests](#write-unit-tests)
-    - [Define the mock filesystem](#define-the-mock-filesystem)
-- [That's all](#thats-all)
-
----
-
-# Mocking Filesystem, File and FileInfo in Golang unit tests
-
-![mockingfs-header.jpeg]({{ '/' | absolute_url }}assets/images/mockingfs-header.jpeg)
 
 ## Abstract your code and make it testable
 
@@ -234,4 +222,4 @@ Thanks for reading
 
 [Go to the Home Page]({{ '/' | absolute_url }})
 
-![thats-all-folks.png]({{ '/' | absolute_url }}assets/images/thats-all-folks.png)
+![thats-all-folks.png](/assets/images/thats-all-folks.png)

@@ -1,31 +1,13 @@
 ---
-layout: post
-description: One-byte challenge post
-comments: true
-date: 2024-09-02
-last-update: 22024-09-02
+title: 'Exploiting heap-based buffer overflow - The One-Byte challenge'
+date: 2024-09-02 12:00:00 +0200
+categories: ['Binary Exploitation', 'Heap']
+tags: ['glibc', 'heap', 'house-of-orange', 'pwn', 'buffer-overflow']
+description: 'Deep-dive into GLibC 2.23 heap exploitation: leveraging a single-byte overflow with House of Orange.'
+image:
+  path: /assets/images/one-byte/cover.jpg
+  alt: 'Exploiting heap-based buffer overflow - The One-Byte challenge'
 ---
-
-One of my students, after reviewing their graded exam, expressed disagreement with a slightly lower mark. The deduction stemmed from an imprecise calculation and rough approach, in a stack-based buffer overflow exploit.
-This incident brought to mind the challenges I encountered while delving into the complexities of GLibC exploitation. To illustrate this point further, I've decided to showcase a particularly intricate exploit known as "House of Orange.
-
-## Table of content
-
-- [Exploiting heap-based buffer overflow - The One-Byte challenge](#exploiting-heap-based-buffer-overflow---the-one-byte-challenge)
-  - [Acknowledgement](#acknowledgement)
-- [The challenge](#the-challenge)
-  - [Examining the binary](#examining-the-binary)
-  - [The bug](#the-bug)
-- [Exploiting one\_byte and GLibC 2.23](#exploiting-one_byte-and-glibc-223)
-- [The complete step-by-step exploit](#the-complete-step-by-step-exploit)
-  - [Step 1 - Leak GLibC and heap addresses](#step-1-leak-glibc-and-heap-addresses)
-  - [Step 2 - Configure the heap for the House of Orange](#step-2---configure-the-heap-for-the-house-of-orange)
-  - [Step 3 - Trigger the exploit!](#step-3---trigger-the-exploit)
-- [Other things that I have tried](#other-things-that-i-have-tried)
-  - [Attacking Fastbins](#attacking-fastbins)
-
-# Exploiting heap-based buffer overflow - The One-Byte challenge
-
 One of my students, after reviewing their graded exam, expressed disagreement with a slightly lower mark. The deduction stemmed from an imprecise calculation and rough approach, in a stack-based buffer overflow exploit.
 
 This experience underscored a potential disconnect between my expectations and the student's understanding. I believe that my emphasis on precision in exploit development might not have been adequately communicated, leading the student to underestimate its importance. It's a reminder that I need to be more explicit in explaining why meticulousness is crucial, especially when it comes to learning and demonstrating proficiency in binary exploitation techniques: ***I only teach the basics of binary exploitation, and students who want to pursue some careers in cybersecurity might have to learn much more to be effective at researching vulnerabilities and using or developing exploits.*** So it's important to deeply understand the foundational concept and the importance of being precise.
@@ -99,7 +81,7 @@ With the help of GDB, I noticed that option number 3 allows us to write `0x59` b
 
 On a little endian architecture, such as x86_64, this capability enables us to manipulate the least significant byte of the size of chunk that follows.
 
-![Image.png]({{ '/' | absolute_url }}assets/images/one-byte/0_0-01.png)
+![Image.png](/assets/images/one-byte/0_0-01.png)
 
 > ***Note:*** The bug allows us to tamper with the top chunk size, but since we can only change the least significant byte this won’t lead us anywhere.
 
@@ -203,7 +185,7 @@ edit(chunk_00, b"\x00"*0x58 + p8(0xc1))
 
 After the above operations, the heap will look like in the following picture:
 
-![Image.png]({{ '/' | absolute_url }}assets/images/one-byte/0_0-02.png)
+![Image.png](/assets/images/one-byte/0_0-02.png)
 
 Now we free `chunk_01`, to get a `0xc0` chunk in the unsortedbin.
 
@@ -214,7 +196,7 @@ free(chunk_01)
 
 Note that `chunk_02` is still accessible:
 
-![Image.png]({{ '/' | absolute_url }}assets/images/one-byte/0_0-03.png)
+![Image.png](/assets/images/one-byte/0_0-03.png)
 
 Allocating a new `0x60` bytes chunk, causes `chunk_01` to be sorted in the `0xc0` smallbin and, since no exact fit exists anywhere, it is also remaindered. The bottom half (a `0x60` bytes chunk) is linked in the unsortedbin list, while the top half is returned to the user. As per following snippet, we store its index in `chunk_04`.
 
@@ -225,7 +207,7 @@ chunk_04 = malloc()
 
 The heap configuration we obtain, as you can see below, allows us to read from `chunk_02` the unsortedbin list pointers to the `main_arena`:
 
-![Image.png]({{ '/' | absolute_url }}assets/images/one-byte/0_0-04.png)
+![Image.png](/assets/images/one-byte/0_0-04.png)
 
 The following snipped shows how we can get the base address of GLibC.
 
@@ -252,7 +234,7 @@ edit(chunk_00, b"\x00"*0x58 + p8(0xc1))
 
 The above snippet leads us to the following configuration:
 
-![Image.png]({{ '/' | absolute_url }}assets/images/one-byte/0_0-05.png)
+![Image.png](/assets/images/one-byte/0_0-05.png)
 
 To replicate the same mechanism we used before to get a chunk in the unsortedbin, we need to fix the flags for `chunk_03`. In fact, at this point, `chunk_03` thinks that the previous chunk is free, and that would lead to a double free malloc error when we release `chunk_04`.
 
@@ -265,7 +247,7 @@ To avoid that, we simply leverage once again the off-by-one bug, carefully rewri
 edit(chunk_02, p64(unsortedbin) + p64(unsortedbin) + b"\x02"*0x48 + p8(0x61))
 ```
 
-![Image.png]({{ '/' | absolute_url }}assets/images/one-byte/0_0-06.png)
+![Image.png](/assets/images/one-byte/0_0-06.png)
 
 Freeing `chunk_04` now produces the desired effect:
 
@@ -277,7 +259,7 @@ free(chunk_04)
 
 The following picture shows the configuration of our heap after freeing `chunk_04`:
 
-![Image.png]({{ '/' | absolute_url }}assets/images/one-byte/0_0-07.png)
+![Image.png](/assets/images/one-byte/0_0-07.png)
 
 We now have 2 chunks in the unsortedbin. The `bk` pointer we can read from `chunk_02` (aka `unsortedbin[1]`) holds the address of `unsortedbin[0]` which is on the heap and for which we know the offset from the beginning of the heap.
 
@@ -304,7 +286,7 @@ chunk_05 = malloc()
 chunk_06 = malloc()
 ```
 
-![Image.png]({{ '/' | absolute_url }}assets/images/one-byte/0_0-08.png)
+![Image.png](/assets/images/one-byte/0_0-08.png)
 
 We can now focus on preparing the fake filestream.
 
@@ -378,7 +360,7 @@ Note that while the pointer to the vtable must be `0x18` bytes from the beginnin
 
 The following picture shows the heap configuration we achieved. Our fake filestream starts at the beginning of the `"/bin/sh"` string.
 
-![Image.png]({{ '/' | absolute_url }}assets/images/one-byte/0_0-09.png)
+![Image.png](/assets/images/one-byte/0_0-09.png)
 
 Next, we prepare for the unsortedbin attack, by replacing the `bk` pointer of the `0xb0` chunk in the unsortedbin with the address of `_IO_list_all`. In the process we also make sure that `_IO_write_base` and `_IO_write_ptr` get values that will cause the `__overflow` function to be called. Since `_IO_write_base` should be less than `_IO_write_ptr` we use, respectively, `0x0` and `0x1`
 
@@ -394,7 +376,7 @@ edit(chunk_02, p64(0xcafebabe) + p64(libc.sym._IO_list_all - 0x10) + p64(0x0)
 
 Right before triggering the exploit, our heap should look like in the following diagram:
 
-![Image.png]({{ '/' | absolute_url }}assets/images/one-byte/0_0-10.png)
+![Image.png](/assets/images/one-byte/0_0-10.png)
 
 ## Step 3 - Trigger the exploit!
 

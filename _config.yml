@@ -1,41 +1,151 @@
+# The Site Configuration
+
+# Import the theme
+theme: jekyll-theme-chirpy
+
+# The language of the webpage
+lang: en
+
+# Change to your timezone
+timezone: Europe/Rome
+
+# jekyll-seo-tag settings
 title: Random Tech Stuff
-author: Davide Guerri
-description: Hi. This is my blog with random technical (and sometimes non-technical) stuff.
+tagline: Vulnerability Research, Systems & Security
+
+description: >-
+  Hi. This is my blog with random technical (and sometimes non-technical) stuff.
+
+# Protocol & hostname
+url: "https://dguerri.github.io"
+baseurl: "/random-tech-stuff"
+
+github:
+  username: dguerri
 
 twitter:
   username: dguerri
 
-baseurl: "/random-tech-stuff"
-url: "https://dguerri.github.io"
+social:
+  name: Davide Guerri
+  email: davide.guerri@gmail.com
+  fediverse_handle: "@dguerri@infosec.exchange"
+  links:
+    - https://github.com/dguerri
+    - https://twitter.com/dguerri
+    - https://www.linkedin.com/in/dguerri
+    - https://infosec.exchange/@dguerri
 
-giscus:
-  category-id: "DIC_kwDOH2jvhM4CSROQ"
-  category: "General"
-  crossorigin: "anonymous"
-  lang: "en"
-  mapping: "og:title"
-  reaction-enabled: "1"
-  repo-id: "R_kgDOH2jvhA"
-  repo: "dguerri/random-tech-stuff"
-  theme: "dark_dimmed"
+# The avatar on sidebar, support local or CORS resources
+avatar: /assets/images/avatar.png
 
-new_google_analytics: G-M9Z323FVQ2
+# The URL of the site-wide social preview image used in SEO `og:image` meta tag.
+social_preview_image: /assets/images/avatar.png
 
-remote_theme: pages-themes/cayman@v0.2.0
+# Web Analytics Settings
+analytics:
+  google:
+    id: "G-M9Z323FVQ2"
+
+# Comments Settings
+comments:
+  provider: giscus
+  giscus:
+    repo: "dguerri/random-tech-stuff"
+    repo_id: "R_kgDOH2jvhA"
+    category: "General"
+    category_id: "DIC_kwDOH2jvhM4CSROQ"
+    mapping: "og:title"
+    strict: "0"
+    input_position: "top"
+    lang: "en"
+    reactions_enabled: "1"
+
+# Global switch for TOC in posts
+toc: true
+
+actions:
+  edit_post:
+    enabled: false
+
+pwa:
+  enabled: true
+  cache:
+    enabled: true
+
+paginate: 10
+
+# ------------ The following options are not recommended to be modified ------------------
+
+kramdown:
+  footnote_backlink: "&#8617;&#xfe0e;"
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+collections:
+  tabs:
+    output: true
+    sort_by: order
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: true
+      toc: true
+      permalink: /posts/:title/
+  - scope:
+      path: _drafts
+    values:
+      comments: false
+  - scope:
+      path: ""
+      type: tabs
+    values:
+      layout: page
+      permalink: /:title/
+
+sass:
+  style: compressed
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: false
+  blanklines: false
+  ignore:
+    envs: [development]
+
+exclude:
+  - "*.gem"
+  - "*.gemspec"
+  - docs
+  - tools
+  - README.md
+  - LICENSE
+  - purgecss.js
+  - "*.config.js"
+  - "package*.json"
+
+jekyll-archives:
+  enabled: [categories, tags]
+  layouts:
+    category: category
+    tag: tag
+  permalinks:
+    tag: /tags/:name/
+    category: /categories/:name/
 
 plugins:
-  - jekyll-remote-theme
-  - jekyll-target-blank
   - jekyll-redirect-from
-  - jekyll-seo-tag
-
-target-blank:
-  rel: nofollow
-
-header_page_refs: ["about", "contact"]
-
-cayman-blog:
-  date_format: "%Y-%m-%d"
-
-whitelist:
-  - jekyll-redirect-from
+  - jekyll-paginate
+  - jekyll-sitemap

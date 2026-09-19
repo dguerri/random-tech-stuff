@@ -1,29 +1,19 @@
 ---
-layout: post
-description: RSA signatures with TPM2.0 and OpenSSL
-comments: true
+title: 'RSA signatures with TPM2.0 and OpenSSL'
+date: 2016-03-10 12:00:00 +0200
+categories: ['Hardware & Firmware', 'TPM']
+tags: ['tpm', 'cryptography', 'openssl', 'embedded']
+description: 'How to use TPM2.0 and OpenSSL to generate Endorsement and Attestation Identity Keys and verify RSA signatures.'
+image:
+  path: /assets/images/tpm2/cover.jpg
+  alt: 'RSA signatures with TPM2.0 and OpenSSL'
+math: true
 redirect_from:
   - /RSA%20Signatures%20with%20TPM2.0/
-date: 2016-03-10
-last-update: 2022-10-26
 ---
-
 What I am going to show applies to any Trusted Platform Module (TPM) implementing TPM2.0 specs. However, I wrote this article after spending two days trying to use the Minnowboard MAX firmware TPM (fTPM) for something useful in real life... I hope I can save you some time and many troubles [1].
 
-## Table of contents
 
-- [RSA signatures with TPM2.0 and OpenSSL](#rsa-signatures-with-tpm20-and-openssl)
-  - [The problem](#the-problem)
-  - [Generating an Endorsement Key (EK)](#generating-an-endorsement-key-ek)
-  - [Generate an Attestation Identity Key (AIK)](#generate-an-attestation-identity-key-aik)
-  - [Signing a document](#signing-a-document)
-  - [Verifying a TPM2.0 RSA signature](#verifying-a-tpm20-rsa-signature)
-  - [Conclusion](#conclusion)
-  - [References](#references)
-
----
-
-# RSA signatures with TPM2.0 and OpenSSL
 
 ## The problem
 

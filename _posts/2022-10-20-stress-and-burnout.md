@@ -1,13 +1,15 @@
 ---
-layout: post
-description: Stress and Burnout
-comments: true
+title: 'Stress and Burnout'
+date: 2022-10-20 12:00:00 +0200
+categories: ['Career & Leadership', 'Reflections']
+tags: ['burnout', 'mental-health', 'management', 'leadership']
+description: 'Reflections on recognizing, managing, and preventing stress and burnout in tech engineering and management.'
+image:
+  path: /assets/images/burnout/cover.jpg
+  alt: 'Stress and Burnout'
 redirect_from:
   - /Stress%20and%20burnout/
-date: 2022-10-20
-last-update: 2022-10-26
 ---
-
 I have been thinking about writing this note for a long time.
 I went through busy times, writer's block, and some sort of impostor syndrome which told me "why would people read it and would they consider it useful?".
 
@@ -25,22 +27,7 @@ I have also discovered that thinking rationally about stress, stressors, and way
 
 With this note, I would like to share some of my learnings, in the humblest possible way. With the hope that they will be useful in these challenging times and later, when things will get back to the "normal", challenging, life.
 
-## Table of contents
 
-- [Stress and burnout](#stress-and-burnout)
-  - [Stressors vs stress](#stressors-vs-stress)
-  - [First, deal with stress itself](#first-deal-with-stress-itself)
-    - [Physical activity is the most effective way](#physical-activity-is-the-most-effective-way)
-    - [When physical activity doesn't cut it](#when-physical-activity-doesnt-cut-it)
-    - [How do I know when to stop?](#how-do-i-know-when-to-stop)
-  - [Dealing with stressors](#dealing-with-stressors)
-    - [Dealing with stressor you can control: Planful Problem-Solving](#dealing-with-stressor-you-can-control-planful-problem-solving)
-    - [Dealing with stressor you can't control: Positive Reframing](#dealing-with-stressor-you-cant-control-positive-reframing)
-  - [References](#references)
-
----
-
-# Stress and burnout
 
 ## Stressors vs stress
 

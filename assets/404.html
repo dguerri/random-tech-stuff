@@ -1,0 +1,299 @@
+---
+layout: page
+title: "404: SIGSEGV (core dumped)"
+permalink: /404.html
+---
+
+<style>
+  .terminal-window {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    font-family: var(--font-family-monospace, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    color: #c9d1d9;
+    overflow: hidden;
+    margin: 2rem 0;
+  }
+
+  .terminal-header {
+    background: #161b22;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #30363d;
+  }
+
+  .terminal-dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #ff5f56; }
+  .dot-yellow { background: #ffbd2e; }
+  .dot-green { background: #27c93f; }
+
+  .terminal-title {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.82rem;
+    color: #8b949e;
+    font-weight: 500;
+  }
+
+  .terminal-body {
+    padding: 1.5rem;
+    line-height: 1.6;
+    font-size: 0.9rem;
+    overflow-x: auto;
+  }
+
+  .term-alert {
+    color: #f85149;
+    font-weight: bold;
+  }
+  .term-warning {
+    color: #e3b341;
+  }
+  .term-cyan {
+    color: #58a6ff;
+  }
+  .term-green {
+    color: #3fb950;
+  }
+  .term-dim {
+    color: #8b949e;
+  }
+
+  .registers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 4px 16px;
+    margin: 1rem 0;
+    padding: 0.8rem;
+    background: #161b22;
+    border-radius: 6px;
+    border: 1px solid #21262d;
+    font-size: 0.82rem;
+  }
+
+  .terminal-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 1.5rem;
+  }
+
+  .term-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: #21262d;
+    color: #58a6ff !important;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    text-decoration: none !important;
+    font-size: 0.85rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .term-btn:hover {
+    background: #30363d;
+    border-color: #58a6ff;
+    color: #fff !important;
+    transform: translateY(-1px);
+  }
+
+  .cli-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #30363d;
+  }
+
+  .cli-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #3fb950;
+    font-family: inherit;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  #cli-output {
+    margin-top: 0.5rem;
+    color: #e3b341;
+  }
+</style>
+
+<div class="terminal-window">
+  <div class="terminal-header">
+    <div class="terminal-dots">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-yellow"></span>
+      <span class="dot dot-green"></span>
+    </div>
+    <span class="terminal-title">gdb -q /usr/bin/random-tech-stuff --core /var/crash/core.404</span>
+  </div>
+
+  <div class="terminal-body">
+    <div class="term-alert">
+      [!] CRITICAL: EXCEPTION_ACCESS_VIOLATION / SIGSEGV
+    </div>
+    <div class="term-dim">
+      Program terminated with signal SIGSEGV, Segmentation fault.
+    </div>
+    <div style="margin-top: 0.5rem;">
+      <span class="term-warning">Reason:</span> NULL pointer dereference or jump to unmapped virtual address.
+      <br>
+      <span class="term-warning">Faulting URI:</span> <code class="term-cyan" id="faulting-url">/404.html</code>
+    </div>
+
+    <div class="registers-grid">
+      <div><span class="term-dim">RAX:</span> <span class="term-cyan">0x0000000000000000</span></div>
+      <div><span class="term-dim">RBX:</span> <span class="term-cyan">0xdeadbeefcafe4040</span></div>
+      <div><span class="term-dim">RCX:</span> <span class="term-cyan">0x00007ffff7fbc404</span></div>
+      <div><span class="term-dim">RDX:</span> <span class="term-cyan">0x0000000000000404</span></div>
+      <div><span class="term-dim">RSI:</span> <span class="term-cyan">0x6e6f7420646e756f</span> <span class="term-dim">("not found")</span></div>
+      <div><span class="term-dim">RDI:</span> <span class="term-cyan">0x0000000000000000</span></div>
+      <div><span class="term-dim">RBP:</span> <span class="term-cyan">0x00007fffffffe420</span></div>
+      <div><span class="term-dim">RSP:</span> <span class="term-cyan">0x00007fffffffe408</span></div>
+      <div style="grid-column: 1 / -1;"><span class="term-dim">RIP:</span> <span class="term-alert">0x0000555555554404</span> &lt;get_post_or_die+0x404&gt;: <span class="term-dim">ud2 ; undefined instruction</span></div>
+    </div>
+
+    <div class="term-dim">
+      #0  0x0000555555554404 in route_dispatcher () at router.c:404<br>
+      #1  0x00007ffff7a05c87 in __libc_start_main () from /lib/x86_64-linux-gnu/libc.so.6<br>
+      #2  0x000055555555402a in _start ()
+    </div>
+
+    <div style="margin-top: 1.2rem; padding: 10px; background: rgba(248, 81, 73, 0.1); border-left: 3px solid #f85149; border-radius: 4px;">
+      <strong>Diagnosis:</strong> Looks like you followed a dangling pointer, hit an unallocated heap chunk, or got caught off-guard by ASLR. The page you are looking for has either been freed into a tcache bin or never existed.
+    </div>
+
+    <div style="margin-top: 1.5rem;">
+      <span class="term-dim">// Recommended recovery payloads:</span>
+      <div class="terminal-nav">
+        <a href="{{ '/' | relative_url }}" class="term-btn">
+          <i class="fas fa-home"></i> cd ~ (Return Home)
+        </a>
+        <a href="{{ '/archives/' | relative_url }}" class="term-btn">
+          <i class="fas fa-archive"></i> ls -la /posts (Archives)
+        </a>
+        <a href="{{ '/categories/' | relative_url }}" class="term-btn">
+          <i class="fas fa-folder-open"></i> find /categories
+        </a>
+        <button onclick="triggerSearch();" class="term-btn">
+          <i class="fas fa-search"></i> grep -r (Search Site)
+        </button>
+        <button onclick="history.back();" class="term-btn">
+          <i class="fas fa-undo"></i> pop rip (Go Back)
+        </button>
+      </div>
+    </div>
+
+    <div class="cli-input-wrapper">
+      <span class="term-green">davide@random-tech-stuff</span>:<span class="term-cyan">~</span>$&nbsp;
+      <input type="text" id="cli-input" class="cli-input" placeholder="type 'help', 'whoami', 'cat flag', 'ls'..." autocomplete="off" spellcheck="false">
+    </div>
+    <div id="cli-output"></div>
+  </div>
+</div>
+
+<script>
+  // Display current URL
+  document.addEventListener("DOMContentLoaded", function() {
+    var path = window.location.pathname;
+    if (path) {
+      var el = document.getElementById("faulting-url");
+      if (el) el.textContent = path;
+    }
+
+    var input = document.getElementById("cli-input");
+    var output = document.getElementById("cli-output");
+
+    if (input) {
+      input.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+          var cmd = input.value.trim().toLowerCase();
+          input.value = "";
+          handleCommand(cmd);
+        }
+      });
+    }
+
+    function handleCommand(cmd) {
+      switch(cmd) {
+        case "help":
+          output.innerHTML = "Available commands: <code>home</code>, <code>posts</code>, <code>tags</code>, <code>categories</code>, <code>whoami</code>, <code>cat flag</code>, <code>clear</code>";
+          break;
+        case "whoami":
+          output.innerHTML = "uid=1000(guest) gid=1000(guest) groups=1000(guest),27(sudo-denied) [Privilege Escalation Required]";
+          break;
+        case "id":
+          output.innerHTML = "uid=1000(guest) gid=1000(guest)";
+          break;
+        case "cat flag":
+        case "cat flag.txt":
+        case "flag":
+          output.innerHTML = "<span style='color: #3fb950;'>FLAG{404_s1gsegv_h0use_0f_0range_pwned}</span> &mdash; Nice try! Now go read some write-ups!";
+          break;
+        case "home":
+        case "cd ~":
+        case "cd":
+          window.location.href = "{{ '/' | relative_url }}";
+          break;
+        case "posts":
+        case "ls":
+        case "ls -la":
+          window.location.href = "{{ '/archives/' | relative_url }}";
+          break;
+        case "tags":
+          window.location.href = "{{ '/tags/' | relative_url }}";
+          break;
+        case "categories":
+          window.location.href = "{{ '/categories/' | relative_url }}";
+          break;
+        case "clear":
+          output.innerHTML = "";
+          break;
+        case "pwn":
+        case "exploit":
+          output.innerHTML = "[*] Overwriting return address with 0x4141414141414141... Segmentation fault (core dumped).";
+          break;
+        default:
+          output.innerHTML = "bash: " + escapeHtml(cmd) + ": command not found. Type <code>help</code> for options.";
+          break;
+      }
+    }
+
+    function escapeHtml(str) {
+      var div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+  });
+
+  function triggerSearch() {
+    var searchTrigger = document.querySelector("#sidebar-trigger") || document.querySelector(".nav-link[href*='search']") || document.getElementById("search-input");
+    if (searchTrigger) {
+      searchTrigger.click();
+      if (document.getElementById("search-input")) {
+        document.getElementById("search-input").focus();
+      }
+    } else {
+      window.location.href = "{{ '/' | relative_url }}";
+    }
+  }
+</script>
